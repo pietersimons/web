@@ -1,0 +1,50 @@
+import { HeroBlock } from "@/components/blocks/HeroBlock";
+import { ItineraryGridBlock } from "@/components/blocks/ItineraryGridBlock";
+import { DestinationGridBlock } from "@/components/blocks/DestinationGridBlock";
+import { ProcessStepsBlock } from "@/components/blocks/ProcessStepsBlock";
+import { RichTextBlock } from "@/components/blocks/RichTextBlock";
+import { GalleryBlock } from "@/components/blocks/GalleryBlock";
+import { FAQBlock } from "@/components/blocks/FAQBlock";
+import { TestimonialsBlock } from "@/components/blocks/TestimonialsBlock";
+import { CTABlock } from "@/components/blocks/CTABlock";
+
+interface PageBuilderProps {
+  blocks?: any[];
+}
+
+export function PageBuilder({ blocks }: PageBuilderProps) {
+  if (!blocks || !Array.isArray(blocks) || blocks.length === 0) {
+    return null;
+  }
+
+  return (
+    <>
+      {blocks.map((block) => {
+        const key = block._key || block._type;
+
+        switch (block._type) {
+          case "hero":
+            return <HeroBlock key={key} {...block} />;
+          case "itineraryGrid":
+            return <ItineraryGridBlock key={key} {...block} />;
+          case "destinationGrid":
+            return <DestinationGridBlock key={key} {...block} />;
+          case "processStepsBlock":
+            return <ProcessStepsBlock key={key} {...block} />;
+          case "richTextBlock":
+            return <RichTextBlock key={key} {...block} />;
+          case "galleryBlock":
+            return <GalleryBlock key={key} {...block} />;
+          case "faqBlock":
+            return <FAQBlock key={key} {...block} />;
+          case "testimonialsBlock":
+            return <TestimonialsBlock key={key} {...block} />;
+          case "ctaBlock":
+            return <CTABlock key={key} {...block} />;
+          default:
+            return null;
+        }
+      })}
+    </>
+  );
+}
