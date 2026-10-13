@@ -28,10 +28,10 @@ export function TravelWildLogo({
         className
       )}
     >
-      {/* Mountain Ridge Icon */}
+      {/* Mountain Monogram Icon (T-Mountain-W) */}
       <svg
-        viewBox="0 0 120 42"
-        fill="none"
+        viewBox="0 0 545 240"
+        fill="currentColor"
         xmlns="http://www.w3.org/2000/svg"
         className={cn(
           "w-12 sm:w-14 h-auto transition-transform duration-300 group-hover:scale-105",
@@ -39,54 +39,7 @@ export function TravelWildLogo({
         )}
         aria-hidden="true"
       >
-        {/* Left Peak */}
-        <path
-          d="M18 32 L36 17 L46 26"
-          stroke="currentColor"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M23 34 L36 22 L44 29"
-          stroke="currentColor"
-          strokeWidth="1.8"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-
-        {/* Center Main Peak */}
-        <path
-          d="M46 26 L63 7 L84 27"
-          stroke="currentColor"
-          strokeWidth="2.8"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        {/* Center Ridge & Snowcap */}
-        <path
-          d="M63 7 L65 19 L63 24"
-          stroke="currentColor"
-          strokeWidth="1.8"
-          strokeLinecap="round"
-        />
-        <polygon points="63,8 67,16 64,18" fill="currentColor" stroke="none" />
-
-        {/* Right Peak */}
-        <path
-          d="M78 27 L88 18 L101 31"
-          stroke="currentColor"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M81 31 L88 23 L96 31"
-          stroke="currentColor"
-          strokeWidth="1.8"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
+        <path d="M272 1L315 81L319 81L334 71L388 203L431 111L475 202L528 73L543 73L475 239L432 146L387 238L329 95L327 93L311 103L298 81L287 101L294 125L267 173L278 127L265 106L271 30L189 155L176 142L172 145L113 235L73 235L73 73L2 72L2 58L195 58L186 72L87 72L87 220L104 220L173 117L186 130L190 127Z" />
       </svg>
 
       {/* Typography: TRAVEL WILD */}
