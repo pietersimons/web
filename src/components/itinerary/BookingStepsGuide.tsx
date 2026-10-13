@@ -17,7 +17,7 @@ export function BookingStepsGuide({ steps = [] }: BookingStepsGuideProps) {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-foreground">
+        <h2 className="font-hero text-3xl sm:text-4xl font-bold uppercase tracking-wide text-foreground">
           How to Prepare & Book
         </h2>
         <p className="text-sm text-muted-foreground mt-1">

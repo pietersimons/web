@@ -36,22 +36,40 @@ export function Header({
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
 
-  const defaultNav = [
-    { label: "BESTEMMINGEN", url: "/destinations" },
-    { label: "REIZEN OP MAAT", url: "/travel-on-demand" },
-    { label: "GROEPSREIZEN", url: "/group-travel" },
-    {
-      label: "ACTIVITEITEN",
-      url: "#",
-      children: [
-        { label: "Wandelreizen", url: "/destinations?activity=hiking" },
-        { label: "Duikreizen", url: "/destinations?activity=diving" },
-        { label: "Alpinisme", url: "/destinations?activity=mountaineering" },
-      ],
-    },
-    { label: "OVER ONS", url: "/over-ons" },
-    { label: "BLOG", url: "/blog" },
-  ];
+  const defaultNav =
+    currentLocale === "en"
+      ? [
+          { label: "DESTINATIONS", url: "/destinations" },
+          { label: "CUSTOM TRIPS", url: "/travel-on-demand" },
+          { label: "GROUP TRAVEL", url: "/group-travel" },
+          {
+            label: "ACTIVITIES",
+            url: "#",
+            children: [
+              { label: "Hiking & Trekking", url: "/destinations?activity=hiking" },
+              { label: "Diving Expeditions", url: "/destinations?activity=diving" },
+              { label: "Mountaineering", url: "/destinations?activity=mountaineering" },
+            ],
+          },
+          { label: "ABOUT US", url: "/about-us" },
+          { label: "BLOG", url: "/blog" },
+        ]
+      : [
+          { label: "BESTEMMINGEN", url: "/destinations" },
+          { label: "REIZEN OP MAAT", url: "/travel-on-demand" },
+          { label: "GROEPSREIZEN", url: "/group-travel" },
+          {
+            label: "ACTIVITEITEN",
+            url: "#",
+            children: [
+              { label: "Wandelreizen", url: "/destinations?activity=hiking" },
+              { label: "Duikreizen", url: "/destinations?activity=diving" },
+              { label: "Alpinisme", url: "/destinations?activity=mountaineering" },
+            ],
+          },
+          { label: "OVER ONS", url: "/over-ons" },
+          { label: "BLOG", url: "/blog" },
+        ];
 
   const navItems = navigation && navigation.length > 0 ? navigation : defaultNav;
 

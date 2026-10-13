@@ -11,7 +11,7 @@ export default function NotFound() {
       <span className="text-xs font-bold uppercase tracking-widest text-accent mb-2">
         Error 404
       </span>
-      <h1 className="font-heading text-4xl sm:text-6xl font-extrabold text-foreground mb-4">
+      <h1 className="font-hero text-4xl sm:text-6xl font-bold uppercase tracking-wide text-foreground mb-4">
         Off The Beaten Track
       </h1>
       <p className="text-base sm:text-lg text-muted-foreground max-w-md mx-auto mb-8">

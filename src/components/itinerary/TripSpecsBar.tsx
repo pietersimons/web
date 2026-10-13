@@ -4,8 +4,8 @@ import {
   Mountain,
   Users,
   MapPin,
-  Sparkles,
 } from "lucide-react";
+import { Locale, defaultLocale } from "@/lib/i18n/config";
 
 interface TripSpecsBarProps {
   durationDays?: number;
@@ -15,6 +15,7 @@ interface TripSpecsBarProps {
   startLocation?: string;
   endLocation?: string;
   minimumAge?: number;
+  locale?: Locale;
 }
 
 export function TripSpecsBar({
@@ -24,8 +25,10 @@ export function TripSpecsBar({
   groupSize,
   startLocation,
   endLocation,
-  minimumAge,
+  locale = defaultLocale,
 }: TripSpecsBarProps) {
+  const isNl = locale === "nl";
+
   const difficultyVariant =
     difficulty === "easy"
       ? "difficultyEasy"
@@ -33,9 +36,21 @@ export function TripSpecsBar({
         ? "difficultyChallenging"
         : "difficultyModerate";
 
+  const difficultyLabels: Record<string, { nl: string; en: string }> = {
+    easy: { nl: "Eenvoudig", en: "Easy" },
+    moderate: { nl: "Gemiddeld", en: "Moderate" },
+    challenging: { nl: "Uitdagend", en: "Challenging" },
+    expert: { nl: "Zwaar", en: "Expert" },
+    strenuous: { nl: "Zwaar", en: "Strenuous" },
+  };
+
+  const difficultyText = difficulty
+    ? difficultyLabels[difficulty.toLowerCase()]?.[isNl ? "nl" : "en"] || difficulty
+    : "";
+
   return (
     <div className="relative -mt-8 z-20 container mx-auto px-4 max-w-7xl">
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 bg-card rounded-2xl p-6 sm:p-7 border border-border/80 shadow-xl">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 bg-card rounded-2xl p-5 sm:p-7 border border-border/80 shadow-xl">
         {/* 1. Duration */}
         {durationDays && (
           <div className="flex items-center gap-3.5">
@@ -43,11 +58,11 @@ export function TripSpecsBar({
               <Clock className="h-5 w-5 text-accent" />
             </div>
             <div>
-              <span className="text-[11px] uppercase tracking-wider font-bold text-muted-foreground block">
-                Duration
+              <span className="text-[11px] sm:text-xs uppercase tracking-wider font-bold text-muted-foreground block mb-0.5">
+                {isNl ? "Duur" : "Duration"}
               </span>
-              <span className="font-heading font-extrabold text-base sm:text-lg text-foreground">
-                {durationDays} Days {durationNights ? `(${durationNights} N)` : ""}
+              <span className="font-semibold text-base sm:text-lg text-foreground leading-tight block">
+                {durationDays} {isNl ? "Dagen" : "Days"} {durationNights ? `(${durationNights} ${isNl ? "nachten" : "N"})` : ""}
               </span>
             </div>
           </div>
@@ -60,11 +75,11 @@ export function TripSpecsBar({
               <Mountain className="h-5 w-5 text-primary" />
             </div>
             <div>
-              <span className="text-[11px] uppercase tracking-wider font-bold text-muted-foreground block mb-0.5">
-                Physical Level
+              <span className="text-[11px] sm:text-xs uppercase tracking-wider font-bold text-muted-foreground block mb-0.5">
+                {isNl ? "Niveau" : "Physical Level"}
               </span>
-              <Badge variant={difficultyVariant} className="text-xs">
-                {difficulty}
+              <Badge variant={difficultyVariant} className="text-xs sm:text-sm font-semibold px-2.5 py-0.5">
+                {difficultyText}
               </Badge>
             </div>
           </div>
@@ -77,10 +92,10 @@ export function TripSpecsBar({
               <Users className="h-5 w-5 text-secondary" />
             </div>
             <div>
-              <span className="text-[11px] uppercase tracking-wider font-bold text-muted-foreground block">
-                Group Size
+              <span className="text-[11px] sm:text-xs uppercase tracking-wider font-bold text-muted-foreground block mb-0.5">
+                {isNl ? "Groepsgrootte" : "Group Size"}
               </span>
-              <span className="font-heading font-bold text-sm sm:text-base text-foreground">
+              <span className="font-semibold text-sm sm:text-base text-foreground leading-tight block">
                 {groupSize}
               </span>
             </div>
@@ -94,10 +109,10 @@ export function TripSpecsBar({
               <MapPin className="h-5 w-5 text-emerald-600" />
             </div>
             <div>
-              <span className="text-[11px] uppercase tracking-wider font-bold text-muted-foreground block">
+              <span className="text-[11px] sm:text-xs uppercase tracking-wider font-bold text-muted-foreground block mb-0.5">
                 Route
               </span>
-              <span className="font-heading font-bold text-xs sm:text-sm text-foreground line-clamp-1">
+              <span className="font-semibold text-xs sm:text-sm text-foreground leading-tight block">
                 {startLocation || "Start"} → {endLocation || "Finish"}
               </span>
             </div>

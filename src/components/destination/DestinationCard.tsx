@@ -1,10 +1,9 @@
 import { LocalizedLink } from "@/components/shared/LocalizedLink";
-import { Badge } from "@/components/ui/badge";
 import { SanityImage } from "@/components/shared/SanityImage";
-import { MapPin, Compass } from "lucide-react";
+import { Mountain } from "lucide-react";
 
 export interface DestinationCardProps {
-  _id: string;
+  _id?: string;
   title: string;
   slug: string;
   tagline?: string;
@@ -18,64 +17,46 @@ export interface DestinationCardProps {
 export function DestinationCard({
   title,
   slug,
-  tagline,
-  region,
   featuredImage,
-  tripCount = 0,
   className,
 }: DestinationCardProps) {
   return (
     <LocalizedLink
       href={`/destinations/${slug}`}
-      className={`group relative overflow-hidden rounded-2xl block border border-border/60 shadow-sm transition-all duration-300 hover:shadow-xl hover:border-primary/50 ${className || ""}`}
+      className={`group relative overflow-hidden rounded-md sm:rounded-lg block shadow-sm transition-all duration-300 hover:shadow-2xl border border-black/5 dark:border-white/10 ${className || ""}`}
     >
-      <div className="relative h-full min-h-[300px] w-full overflow-hidden bg-primary">
+      <div className="relative h-full w-full aspect-[3/4] overflow-hidden bg-primary">
         {featuredImage?.asset ? (
           <SanityImage
             image={featuredImage}
             alt={title}
-            width={800}
-            height={600}
+            width={600}
+            height={800}
+            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+          />
+        ) : featuredImage?.url ? (
+          <img
+            src={featuredImage.url}
+            alt={title}
             className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
           />
         ) : (
-          <div className="h-full w-full bg-muted" />
+          <div className="h-full w-full bg-gradient-to-b from-[#1C382E] to-[#122B22] flex flex-col items-center justify-center p-6 text-center">
+            <Mountain className="h-12 w-12 text-white/20 mb-2 transition-transform duration-500 group-hover:scale-110" />
+          </div>
         )}
 
-        {/* Gradient Overlay for Text Readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/10 transition-opacity duration-300 group-hover:via-black/40" />
+        {/* Smooth Dark Gradient Overlay at the bottom */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 via-35% to-transparent pointer-events-none transition-opacity duration-300 group-hover:from-black/90" />
 
-        {/* Top Badges */}
-        <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
-          {region && (
-            <Badge variant="outline" className="bg-black/40 backdrop-blur-md border-white/20 text-white font-medium text-[11px]">
-              <MapPin className="h-3 w-3 mr-1 text-accent" />
-              {region}
-            </Badge>
-          )}
-          {tripCount > 0 && (
-            <Badge variant="accent" className="font-semibold shadow-xs">
-              {tripCount} {tripCount === 1 ? "Trip" : "Trips"}
-            </Badge>
-          )}
-        </div>
-
-        {/* Bottom Details */}
-        <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-          <h3 className="font-heading text-2xl font-bold tracking-tight leading-tight group-hover:text-amber-300 transition-colors">
+        {/* Bottom Details - Clean Centered Destination Name */}
+        <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5 text-center flex flex-col items-center justify-end z-10">
+          <h3 className="font-hero text-2xl sm:text-3xl lg:text-[28px] uppercase tracking-wider text-white drop-shadow-md group-hover:text-amber-300 transition-colors duration-300 line-clamp-1">
             {title}
           </h3>
-          {tagline && (
-            <p className="mt-1.5 text-xs sm:text-sm text-white/80 line-clamp-2 leading-relaxed">
-              {tagline}
-            </p>
-          )}
-          <div className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-accent tracking-wide uppercase">
-            <span>Explore Guide & Trips</span>
-            <Compass className="h-3.5 w-3.5 transition-transform group-hover:rotate-45" />
-          </div>
         </div>
       </div>
     </LocalizedLink>
   );
 }
+

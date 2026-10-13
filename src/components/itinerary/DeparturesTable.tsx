@@ -50,7 +50,7 @@ export function DeparturesTable({
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-foreground">
+        <h2 className="font-hero text-3xl sm:text-4xl font-bold uppercase tracking-wide text-foreground">
           Upcoming Group Departures
         </h2>
         <p className="text-sm text-muted-foreground mt-1">

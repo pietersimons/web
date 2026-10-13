@@ -109,7 +109,7 @@ export default async function DestinationDetailPage({
               {dest.region}
             </Badge>
           )}
-          <h1 className="font-heading text-4xl sm:text-6xl font-extrabold tracking-tight">
+          <h1 className="font-hero text-4xl sm:text-6xl lg:text-7xl font-bold uppercase tracking-wide text-white">
             {title}
           </h1>
           {tagline && (
@@ -139,7 +139,7 @@ export default async function DestinationDetailPage({
         {/* Overview & Description */}
         {dest.overview && (
           <div className="max-w-4xl mx-auto space-y-6">
-            <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-foreground">
+            <h2 className="font-hero text-3xl sm:text-4xl font-bold uppercase tracking-wide text-foreground">
               {isNl ? `Over reizen in ${title}` : `About Traveling in ${title}`}
             </h2>
             <div className="prose prose-lg dark:prose-invert max-w-none">
@@ -155,7 +155,7 @@ export default async function DestinationDetailPage({
               <Badge variant="accent" className="mb-2">
                 {isNl ? "Beschikbare Rondreizen" : "Available Expeditions"}
               </Badge>
-              <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-foreground">
+              <h2 className="font-hero text-3xl sm:text-4xl font-bold uppercase tracking-wide text-foreground">
                 {isNl ? `Rondreizen in ${title}` : `Trips in ${title}`}
               </h2>
             </div>

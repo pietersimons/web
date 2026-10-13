@@ -50,9 +50,9 @@ export function DestinationsClientView({
       />
 
       {filtered.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3.5 sm:gap-5">
           {filtered.map((dest) => (
-            <DestinationCard key={dest._id} {...dest} className="min-h-[340px]" />
+            <DestinationCard key={dest._id} {...dest} />
           ))}
         </div>
       ) : (

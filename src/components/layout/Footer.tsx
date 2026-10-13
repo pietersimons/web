@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Compass, Mail, Phone } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
+import { TravelWildLogo } from "./TravelWildLogo";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { Locale, defaultLocale } from "@/lib/i18n/config";
 import { localizePath } from "@/lib/i18n/navigation";
@@ -65,13 +66,12 @@ export function Footer({
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-12 pb-12 border-b border-white/10">
           {/* Brand Col */}
           <div className="lg:col-span-2 space-y-4">
-            <Link href={localizePath("/", currentLocale)} className="inline-flex items-center gap-2.5">
-              <div className="h-9 w-9 rounded-xl bg-accent text-accent-foreground flex items-center justify-center font-bold">
-                <Compass className="h-5 w-5 text-white" />
-              </div>
-              <span className="font-heading text-2xl font-extrabold tracking-tight text-white">
-                {siteName}
-              </span>
+            <Link
+              href={localizePath("/", currentLocale)}
+              className="inline-block focus:outline-hidden group"
+              aria-label={siteName}
+            >
+              <TravelWildLogo theme="light" />
             </Link>
 
             <p className="text-sm text-primary-foreground/75 leading-relaxed max-w-sm">
@@ -171,6 +171,9 @@ export function Footer({
 
           <div className="flex items-center gap-6">
             <LanguageSwitcher currentLocale={currentLocale} variant="footer" />
+            <Link href={localizePath("/brand", currentLocale)} className="hover:text-accent font-medium transition-colors">
+              {currentLocale === "nl" ? "Merkboek" : "Brand Guide"}
+            </Link>
             <Link href={localizePath("/privacy", currentLocale)} className="hover:text-white transition-colors">
               Privacy Policy
             </Link>

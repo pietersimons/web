@@ -2,6 +2,9 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { SanityImage } from "@/components/shared/SanityImage";
 import { ChevronRight, MapPin } from "lucide-react";
+import { Locale, defaultLocale } from "@/lib/i18n/config";
+import { localizePath } from "@/lib/i18n/navigation";
+import { dictionaries } from "@/lib/i18n/dictionaries";
 
 interface TripHeroSectionProps {
   title: string;
@@ -18,6 +21,7 @@ interface TripHeroSectionProps {
     currency?: string;
     priceNote?: string;
   };
+  locale?: Locale;
 }
 
 export function TripHeroSection({
@@ -27,9 +31,14 @@ export function TripHeroSection({
   featuredImage,
   travelStyle,
   pricing,
+  locale = defaultLocale,
 }: TripHeroSectionProps) {
+  const isNl = locale === "nl";
+  const homeLabel = dictionaries[locale]?.nav?.home || (isNl ? "Home" : "Home");
+  const destinationsLabel = dictionaries[locale]?.nav?.destinations || (isNl ? "Bestemmingen" : "Destinations");
+
   return (
-    <section className="relative overflow-hidden bg-primary text-primary-foreground pt-12 pb-20 lg:pt-16 lg:pb-28">
+    <section className="relative overflow-hidden bg-primary text-primary-foreground pt-32 sm:pt-36 lg:pt-40 pb-16 lg:pb-24">
       {/* Background Media with Dark Overlay */}
       {featuredImage?.asset && (
         <div className="absolute inset-0 z-0 opacity-40">
@@ -45,29 +54,43 @@ export function TripHeroSection({
         </div>
       )}
 
+      {/* Top subtle scrim for header contrast and breadcrumb legibility */}
+      <div className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-black/80 via-black/40 to-transparent z-0 pointer-events-none" />
+
       <div className="container relative z-10 mx-auto px-4 max-w-7xl">
         {/* Breadcrumbs */}
-        <nav className="flex items-center gap-2 text-xs sm:text-sm text-primary-foreground/70 mb-6 font-medium">
-          <Link href="/" className="hover:text-accent transition-colors">
-            Home
+        <nav
+          aria-label="Breadcrumb"
+          className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-primary-foreground/75 mb-6 sm:mb-8 font-medium"
+        >
+          <Link
+            href={localizePath("/", locale)}
+            className="hover:text-accent transition-colors shrink-0"
+          >
+            {homeLabel}
           </Link>
-          <ChevronRight className="h-3.5 w-3.5" />
-          <Link href="/destinations" className="hover:text-accent transition-colors">
-            Destinations
+          <ChevronRight className="h-3.5 w-3.5 text-primary-foreground/50 shrink-0" aria-hidden="true" />
+          <Link
+            href={localizePath("/destinations", locale)}
+            className="hover:text-accent transition-colors shrink-0"
+          >
+            {destinationsLabel}
           </Link>
           {destination?.title && (
             <>
-              <ChevronRight className="h-3.5 w-3.5" />
+              <ChevronRight className="h-3.5 w-3.5 text-primary-foreground/50 shrink-0" aria-hidden="true" />
               <Link
-                href={`/destinations/${destination.slug}`}
-                className="hover:text-accent transition-colors"
+                href={localizePath(`/destinations/${destination.slug}`, locale)}
+                className="hover:text-accent transition-colors shrink-0"
               >
                 {destination.title}
               </Link>
             </>
           )}
-          <ChevronRight className="h-3.5 w-3.5" />
-          <span className="text-white truncate max-w-[200px] sm:max-w-none">{title}</span>
+          <ChevronRight className="h-3.5 w-3.5 text-primary-foreground/50 shrink-0" aria-hidden="true" />
+          <span className="text-white font-medium truncate max-w-[200px] sm:max-w-md lg:max-w-none" aria-current="page">
+            {title}
+          </span>
         </nav>
 
         {/* Header Content */}
@@ -81,22 +104,22 @@ export function TripHeroSection({
             )}
             {travelStyle === "group" && (
               <Badge variant="secondary" className="bg-secondary text-secondary-foreground font-semibold">
-                Group Expedition
+                {isNl ? "Groepsreis" : "Group Expedition"}
               </Badge>
             )}
             {travelStyle === "on-demand" && (
               <Badge variant="sand" className="bg-white/90 text-primary font-semibold">
-                Tailor-Made
+                {isNl ? "Maatwerkreis" : "Tailor-Made"}
               </Badge>
             )}
             {travelStyle === "both" && (
               <Badge variant="secondary" className="font-semibold">
-                Group & Tailor-Made Available
+                {isNl ? "Groepsreis & Maatwerk" : "Group & Tailor-Made Available"}
               </Badge>
             )}
           </div>
 
-          <h1 className="font-heading text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.15] text-white">
+          <h1 className="font-hero text-4xl sm:text-6xl lg:text-7xl font-bold uppercase tracking-wide leading-[1.0] text-white">
             {title}
           </h1>
 
@@ -109,7 +132,9 @@ export function TripHeroSection({
           {/* Pricing Highlight */}
           {pricing?.priceFrom && (
             <div className="mt-6 inline-flex items-baseline gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-xl border border-white/15">
-              <span className="text-xs uppercase tracking-wider text-white/70">From</span>
+              <span className="text-xs uppercase tracking-wider text-white/70">
+                {isNl ? "Vanaf" : "From"}
+              </span>
               <span className="text-2xl sm:text-3xl font-extrabold text-accent">
                 {pricing.currency === "USD" ? "$" : "€"}
                 {pricing.priceFrom.toLocaleString()}

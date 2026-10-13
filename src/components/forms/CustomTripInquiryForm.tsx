@@ -67,7 +67,7 @@ export function CustomTripInquiryForm({
           <Badge variant="accent" className="mb-3">
             Custom Travel Inquiry
           </Badge>
-          <h2 className="font-heading text-3xl sm:text-5xl font-extrabold tracking-tight text-foreground">
+          <h2 className="font-hero text-3xl sm:text-5xl font-bold uppercase tracking-wide text-foreground">
             {heading}
           </h2>
           {subheading && (
@@ -103,7 +103,7 @@ export function CustomTripInquiryForm({
           {submitted ? (
             <div className="py-12 text-center space-y-4">
               <CheckCircle2 className="h-16 w-16 text-emerald-600 mx-auto animate-in zoom-in-75 duration-300" />
-              <h3 className="font-heading text-3xl font-extrabold text-foreground">
+              <h3 className="font-hero text-3xl font-bold uppercase tracking-wide text-foreground">
                 Adventure Proposal Requested!
               </h3>
               <p className="text-base text-muted-foreground max-w-md mx-auto leading-relaxed">

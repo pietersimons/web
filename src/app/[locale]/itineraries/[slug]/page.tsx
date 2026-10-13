@@ -98,6 +98,7 @@ export default async function ItineraryDetailPage({
         featuredImage={trip.featuredImage ?? undefined}
         travelStyle={trip.travelStyle ?? undefined}
         pricing={trip.pricing ?? undefined}
+        locale={activeLocale}
       />
 
       {/* 2. Specs Bar */}
@@ -109,6 +110,7 @@ export default async function ItineraryDetailPage({
         startLocation={trip.tripSpecs?.startLocation ?? undefined}
         endLocation={trip.tripSpecs?.endLocation ?? undefined}
         minimumAge={trip.tripSpecs?.minimumAge ?? undefined}
+        locale={activeLocale}
       />
 
       {/* 3. Overview & Highlights */}
@@ -119,7 +121,7 @@ export default async function ItineraryDetailPage({
             {/* Overview Summary */}
             {trip.summary && (
               <div className="space-y-4">
-                <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-foreground">
+                <h2 className="font-hero text-3xl sm:text-4xl font-bold uppercase tracking-wide text-foreground">
                   {isNl ? "Overzicht van de Reis" : "Overview"}
                 </h2>
                 <p className="text-base sm:text-lg text-foreground/85 leading-relaxed">
@@ -194,7 +196,7 @@ export default async function ItineraryDetailPage({
               <Badge variant="accent" className="mb-2">
                 {isNl ? `Meer in ${trip.destination?.title || "deze regio"}` : `More in ${trip.destination?.title || "this region"}`}
               </Badge>
-              <h2 className="font-heading text-3xl font-extrabold text-foreground">
+              <h2 className="font-hero text-3xl sm:text-4xl font-bold uppercase tracking-wide text-foreground">
                 {isNl ? "Vergelijkbare Rondreizen" : "Similar Expeditions"}
               </h2>
             </div>

@@ -83,7 +83,7 @@ export default async function GroupTravelPage({
             <Badge variant="accent" className="mb-3">
               {isNl ? "Aankomende Seizoenen" : "Upcoming Seasons"}
             </Badge>
-            <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground">
+            <h2 className="font-hero text-3xl sm:text-4xl lg:text-5xl font-bold uppercase tracking-wide text-foreground">
               {isNl ? "Onze Groepsrondreizen" : "Small Group Itineraries"}
             </h2>
             <p className="mt-3 text-base sm:text-lg text-muted-foreground leading-relaxed">

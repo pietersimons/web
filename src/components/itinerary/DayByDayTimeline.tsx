@@ -62,7 +62,7 @@ export function DayByDayTimeline({ days = [] }: DayByDayTimelineProps) {
       {/* Header with expand/collapse all button */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-foreground">
+          <h2 className="font-hero text-3xl sm:text-4xl font-bold uppercase tracking-wide text-foreground">
             Day-by-Day Expedition
           </h2>
           <p className="text-sm text-muted-foreground mt-1">

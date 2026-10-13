@@ -5,7 +5,7 @@ import { SanityImage } from "./SanityImage";
 const customComponents: PortableTextComponents = {
   block: {
     h1: ({ children }) => (
-      <h1 className="font-heading text-3xl sm:text-4xl font-bold tracking-tight text-foreground mt-8 mb-4">
+      <h1 className="font-hero text-4xl sm:text-5xl font-bold uppercase tracking-wide text-foreground mt-8 mb-4">
         {children}
       </h1>
     ),

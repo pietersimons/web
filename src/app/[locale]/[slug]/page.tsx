@@ -82,7 +82,7 @@ export default async function GenericCustomPage({
           <Badge variant="accent" className="mb-4">
             Travelwild
           </Badge>
-          <h1 className="font-heading text-4xl sm:text-5xl font-extrabold text-foreground mb-6">
+          <h1 className="font-hero text-4xl sm:text-5xl lg:text-6xl font-bold uppercase tracking-wide text-foreground mb-6">
             {typeof page.title === "string" ? page.title : "Untitled Page"}
           </h1>
           <p className="text-muted-foreground text-base">

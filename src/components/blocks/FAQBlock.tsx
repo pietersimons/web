@@ -36,7 +36,7 @@ export function FAQBlock({
               {badge}
             </Badge>
           )}
-          <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground">
+          <h2 className="font-hero text-3xl sm:text-4xl lg:text-5xl font-bold uppercase tracking-wide text-foreground">
             {heading}
           </h2>
           {subheading && (
