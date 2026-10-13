@@ -2,6 +2,7 @@ import { client } from "@/sanity/client";
 import { HOME_PAGE_QUERY } from "@/sanity/queries/pages.queries";
 import { PageBuilder } from "@/components/page-builder";
 import { HeroBlock } from "@/components/blocks/HeroBlock";
+import { FeaturesBlock } from "@/components/blocks/FeaturesBlock";
 import { DestinationGridBlock } from "@/components/blocks/DestinationGridBlock";
 import { ProcessStepsBlock } from "@/components/blocks/ProcessStepsBlock";
 import { CTABlock } from "@/components/blocks/CTABlock";
@@ -38,16 +39,47 @@ export default async function HomePage({
   return (
     <div>
       <HeroBlock
-        badge={isNl ? "Kleinschalige & Duurzame Expedities" : "Authentic Small-Group & Custom Expeditions"}
-        heading={isNl ? "Trek diep de meest ongerepte wildernis in" : "Venture Deep Into Earth's Wildest Corners"}
+        heading={isNl ? "AVONTUUR.\nECHT. PUUR.\nOP JOUW MAAT." : "ADVENTURE.\nAUTHENTIC. PURE.\nTAILORED TO YOU."}
         subheading={
           isNl
-            ? "Sluit je aan bij kleinschalige groepsavonturen onder leiding van experts of ontwerp een 100% op maat gemaakte reis door nevelwouden, arctische fjorden en vulkaanlandschappen."
-            : "Join expert-led small group adventures or design a 100% tailor-made journey through untouched rainforests, arctic fjords, and volcanic trails."
+            ? "Unieke wandel-, duik- en alpinismereizen naar de meest indrukwekkende plekken ter wereld. Kleinschalig. Authentiek. Avontuurlijk."
+            : "Unique hiking, diving and mountaineering expeditions to the most awe-inspiring places on Earth. Small-scale. Authentic. Adventurous."
         }
-        primaryCta={{ label: dict.common.allDestinations, url: localizePath("/destinations", activeLocale) }}
-        secondaryCta={{ label: dict.common.groupTravel, url: localizePath("/group-travel", activeLocale) }}
+        primaryCta={{ label: isNl ? "ONTDEK ONZE REIZEN" : "DISCOVER OUR EXPEDITIONS", url: localizePath("/destinations", activeLocale) }}
+        secondaryCta={{ label: isNl ? "REIZEN OP MAAT" : "TAILOR-MADE EXPEDITIONS", url: localizePath("/travel-on-demand", activeLocale) }}
         layoutStyle="fullscreen"
+      />
+
+      <FeaturesBlock
+        layoutStyle="bar"
+        backgroundColor="subtle"
+        items={[
+          {
+            title: isNl ? "KLEINE GROEPEN" : "SMALL GROUPS",
+            description: isNl ? "Max. 12 personen" : "Max. 12 travelers",
+            icon: "users",
+          },
+          {
+            title: isNl ? "EXPERT BEGELEIDING" : "EXPERT GUIDANCE",
+            description: isNl ? "Ervaren gidsen" : "Experienced guides",
+            icon: "mountain",
+          },
+          {
+            title: isNl ? "REIZEN OP MAAT" : "TAILOR-MADE TRIPS",
+            description: isNl ? "100% afgestemd op jou" : "100% tailored to you",
+            icon: "compass",
+          },
+          {
+            title: isNl ? "LOKALE PARTNERS" : "LOCAL PARTNERS",
+            description: isNl ? "Duurzaam & authentiek" : "Sustainable & authentic",
+            icon: "leaf",
+          },
+          {
+            title: isNl ? "AVONTUUR & VEILIGHEID" : "ADVENTURE & SAFETY",
+            description: isNl ? "Jouw ervaring, onze zorg" : "Your journey, our care",
+            icon: "shield",
+          },
+        ]}
       />
 
       <DestinationGridBlock

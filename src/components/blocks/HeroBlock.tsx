@@ -118,57 +118,66 @@ export function HeroBlock({
 
   // Fullscreen Hero (Default)
   return (
-    <section className="relative min-h-[85vh] lg:min-h-[92vh] flex items-center justify-center overflow-hidden bg-primary text-primary-foreground">
-      {/* Background Image with Dark Forest Overlay */}
-      {backgroundImage?.asset && (
-        <div className="absolute inset-0 z-0">
+    <section className="relative min-h-[90vh] lg:min-h-screen flex items-center overflow-hidden bg-primary text-primary-foreground">
+      {/* Background Image with Directional Atmospheric Overlay */}
+      <div className="absolute inset-0 z-0">
+        {backgroundImage?.asset ? (
           <SanityImage
             image={backgroundImage}
             alt={heading}
-            width={2000}
-            height={1200}
+            width={2200}
+            height={1300}
             priority
-            className="h-full w-full object-cover brightness-75 scale-105 animate-in fade-in zoom-in-95 duration-1000"
+            className="h-full w-full object-cover object-center scale-100 animate-in fade-in duration-1000"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-primary/40 to-black/30" />
-        </div>
-      )}
+        ) : (
+          <img
+            src="/images/hero-wilderness-hiker.jpg"
+            alt={heading}
+            className="h-full w-full object-cover object-center scale-100 animate-in fade-in duration-1000"
+          />
+        )}
+        {/* Left-to-right vignette: darker behind text on the left, clear on the right for the summit hiker */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/45 to-black/10" />
+        {/* Top subtle scrim for header contrast */}
+        <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/60 to-transparent" />
+        {/* Bottom subtle blend */}
+        <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/50 to-transparent" />
+      </div>
 
-      <div className="container relative z-10 mx-auto px-4 py-24 sm:py-32 max-w-5xl text-center flex flex-col items-center">
+      <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8 py-32 sm:py-40 lg:py-48 max-w-7xl flex flex-col items-start justify-center text-left">
         {badge && (
           <Badge
             variant="accent"
-            className="mb-6 px-4 py-1.5 text-xs sm:text-sm tracking-wider shadow-lg uppercase"
+            className="mb-5 px-3.5 py-1 text-xs sm:text-[13px] tracking-wider shadow-lg uppercase font-semibold"
           >
             {badge}
           </Badge>
         )}
-        <h1 className="font-heading text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] drop-shadow-md max-w-4xl">
+        <h1 className="font-hero text-5xl sm:text-7xl md:text-8xl lg:text-[5.5rem] xl:text-[6.2rem] font-bold tracking-tight leading-[0.93] text-white drop-shadow-md whitespace-pre-line max-w-4xl uppercase">
           {heading}
         </h1>
         {subheading && (
-          <p className="mt-6 text-lg sm:text-2xl text-primary-foreground/90 max-w-2xl font-light leading-relaxed drop-shadow-sm">
+          <p className="mt-6 text-base sm:text-lg lg:text-xl text-white/95 max-w-xl font-normal leading-relaxed drop-shadow-sm">
             {subheading}
           </p>
         )}
-        <div className="mt-10 flex flex-wrap justify-center gap-4">
+        <div className="mt-8 sm:mt-10 flex flex-wrap gap-4 items-center">
           {primaryCta?.label && primaryCta?.url && (
-            <Button asChild variant="accent" size="lg">
-              <Link href={primaryCta.url} className="flex items-center gap-2">
-                {primaryCta.label}
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </Button>
+            <Link
+              href={primaryCta.url}
+              className="inline-flex items-center justify-center bg-[#2d4a3e] hover:bg-[#385b4d] text-white font-bold uppercase tracking-wider text-xs sm:text-sm px-7 py-3.5 rounded-sm transition-all shadow-md active:scale-[0.98]"
+            >
+              {primaryCta.label}
+            </Link>
           )}
           {secondaryCta?.label && secondaryCta?.url && (
-            <Button
-              asChild
-              variant="outline"
-              size="lg"
-              className="bg-white/10 backdrop-blur-md border-white/30 text-white hover:bg-white/20"
+            <Link
+              href={secondaryCta.url}
+              className="inline-flex items-center justify-center border border-[#c59b6d] hover:border-[#dfb689] bg-black/25 hover:bg-[#c59b6d]/20 text-white font-bold uppercase tracking-wider text-xs sm:text-sm px-7 py-3.5 rounded-sm transition-all backdrop-blur-xs active:scale-[0.98]"
             >
-              <Link href={secondaryCta.url}>{secondaryCta.label}</Link>
-            </Button>
+              {secondaryCta.label}
+            </Link>
           )}
         </div>
       </div>

@@ -1,10 +1,30 @@
 import type { Metadata } from "next";
+import { Bebas_Neue, Plus_Jakarta_Sans, Cinzel } from "next/font/google";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { client } from "@/sanity/client";
 import { SITE_SETTINGS_QUERY } from "@/sanity/queries/pages.queries";
 import { locales, defaultLocale, Locale, isValidLocale } from "@/lib/i18n/config";
 import "../globals.css";
+
+const bebasNeue = Bebas_Neue({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-hero-display",
+  display: "swap",
+});
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+});
+
+const cinzel = Cinzel({
+  subsets: ["latin"],
+  variable: "--font-brand",
+  display: "swap",
+});
 
 export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -60,7 +80,7 @@ export default async function LocaleLayout({
 
   return (
     <html lang={activeLocale}>
-      <body className="min-h-screen flex flex-col font-sans antialiased bg-background text-foreground selection:bg-accent selection:text-white">
+      <body className={`${plusJakartaSans.variable} ${bebasNeue.variable} ${cinzel.variable} min-h-screen flex flex-col font-sans antialiased bg-background text-foreground selection:bg-accent selection:text-white`}>
         <Header
           siteName={settings?.siteName || "Travelwild"}
           logo={settings?.logo}
@@ -68,7 +88,7 @@ export default async function LocaleLayout({
           navigation={settings?.navigation}
           currentLocale={activeLocale}
         />
-        <main className="flex-1 pt-20">{children}</main>
+        <main className="flex-1">{children}</main>
         <Footer
           siteName={settings?.siteName || "Travelwild"}
           footer={settings?.footer}

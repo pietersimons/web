@@ -89,8 +89,13 @@
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
   --font-sans: var(--font-sans, system-ui, sans-serif);
+  --font-heading: var(--font-hero-display, var(--font-sans));
+  --font-hero: var(--font-hero-display, sans-serif);
+  --font-brand: var(--font-brand, serif);
+  --color-pine: #2d4a3e;
+  --color-pine-hover: #36594b;
+  --color-gold-border: #c59b6d;
 }
 
 body {

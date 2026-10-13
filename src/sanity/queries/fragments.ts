@@ -81,6 +81,25 @@ export const PAGE_BUILDER_PROJECTION = `
       },
       layoutStyle
     },
+    // Features & USPs Bar Block
+    _type == "featuresBlock" => {
+      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),
+      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),
+      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),
+      layoutStyle,
+      backgroundColor,
+      items[] {
+        _key,
+        "title": coalesce(title[$language], title.nl, title.en, title),
+        "description": coalesce(description[$language], description.nl, description.en, description),
+        iconType,
+        icon,
+        image {
+          ${IMAGE_PROJECTION}
+        },
+        link
+      }
+    },
     // Itinerary Grid Block
     _type == "itineraryGrid" => {
       "badge": coalesce(badge[$language], badge.nl, badge.en, badge),

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 110" fill="none">
+  <!-- Mountain Peaks Icon -->
+  <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Main Center Mountain Silhouette -->
+    <path d="M80 8 L54 36 L44 48" stroke-width="3" />
+    <path d="M80 8 L104 36 L118 48" stroke-width="3" />
+    <!-- Center Ridge Line -->
+    <path d="M80 8 L82 22 L88 38 L94 48" stroke-width="2.2" />
+    <!-- Snowcap facets on center peak -->
+    <path d="M80 8 L83 18 L76 21 Z" fill="currentColor" stroke-width="0.5" />
+    
+    <!-- Left Mountain Peak -->
+    <path d="M48 24 L32 38 L22 48" stroke-width="3" />
+    <path d="M48 24 L56 32" stroke-width="2.5" />
+    <path d="M48 24 L45 34" stroke-width="2" />
+    <!-- Snow highlight left peak -->
+    <path d="M48 24 L50 31 L44 32 Z" fill="currentColor" stroke-width="0.5" />
+    
+    <!-- Right Mountain Peak -->
+    <path d="M98 25 L112 37 L126 48" stroke-width="3" />
+    <path d="M98 25 L92 31" stroke-width="2.5" />
+    <path d="M98 25 L102 34" stroke-width="2" />
+    <!-- Snow highlight right peak -->
+    <path d="M98 25 L101 32 L95 33 Z" fill="currentColor" stroke-width="0.5" />
+
+    <!-- Mountain base ground accents -->
+    <path d="M38 48 L46 44 L54 48" stroke-width="2" />
+    <path d="M74 48 L80 44 L86 48" stroke-width="2" />
+  </g>
+</svg>

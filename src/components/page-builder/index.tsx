@@ -1,4 +1,5 @@
 import { HeroBlock } from "@/components/blocks/HeroBlock";
+import { FeaturesBlock } from "@/components/blocks/FeaturesBlock";
 import { ItineraryGridBlock } from "@/components/blocks/ItineraryGridBlock";
 import { DestinationGridBlock } from "@/components/blocks/DestinationGridBlock";
 import { ProcessStepsBlock } from "@/components/blocks/ProcessStepsBlock";
@@ -25,6 +26,8 @@ export function PageBuilder({ blocks }: PageBuilderProps) {
         switch (block._type) {
           case "hero":
             return <HeroBlock key={key} {...block} />;
+          case "featuresBlock":
+            return <FeaturesBlock key={key} {...block} />;
           case "itineraryGrid":
             return <ItineraryGridBlock key={key} {...block} />;
           case "destinationGrid":
