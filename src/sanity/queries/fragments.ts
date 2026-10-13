@@ -107,7 +107,10 @@ export const PAGE_BUILDER_PROJECTION = `
       "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),
       displayMode,
       layout,
-      viewAllLink,
+      viewAllLink {
+        "label": coalesce(label[$language], label.nl, label.en, label),
+        url
+      },
       displayMode == "manual" => {
         selectedItineraries[]->{
           ${ITINERARY_CARD_PROJECTION}
@@ -176,7 +179,10 @@ export const PAGE_BUILDER_PROJECTION = `
           ${IMAGE_PROJECTION}
         }
       },
-      cta
+      cta {
+        "label": coalesce(label[$language], label.nl, label.en, label),
+        url
+      }
     },
     // Rich Text Block
     _type == "richTextBlock" => {
@@ -194,7 +200,8 @@ export const PAGE_BUILDER_PROJECTION = `
       layout,
       images[] {
         ${IMAGE_PROJECTION},
-        location
+        location,
+        "caption": coalesce(caption[$language], caption.nl, caption.en, caption)
       }
     },
     // FAQ Block
@@ -215,7 +222,7 @@ export const PAGE_BUILDER_PROJECTION = `
       testimonials[] {
         author,
         location,
-        tripTaken,
+        "tripTaken": coalesce(tripTaken[$language], tripTaken.nl, tripTaken.en, tripTaken),
         rating,
         "quote": coalesce(quote[$language], quote.nl, quote.en, quote),
         avatar {
