@@ -23,11 +23,21 @@ export async function generateMetadata({
   const activeLocale = isValidLocale(locale) ? locale : defaultLocale;
   const isNl = activeLocale === "nl";
 
+  let pageData: any = null;
+  try {
+    pageData = await client.fetch(GROUP_TRAVEL_PAGE_QUERY, { language: activeLocale });
+  } catch {
+    // fallback
+  }
+
+  const title = pageData?.seo?.metaTitle || pageData?.title || (isNl ? "Kleinschalige Groepsreizen & Vertrekdata" : "Small Group Expeditions & Departures");
+  const description = pageData?.seo?.metaDescription || (isNl
+    ? "Reis in kleine groepen (max 12 reizigers) onder leiding van lokale natuurgidsen. Gegarandeerde vertrekdata en solo-reiziger vriendelijk."
+    : "Join small groups (max 12 travelers) led by native expert naturalists. Guaranteed departure dates and solo traveler friendly.");
+
   return {
-    title: isNl ? "Kleinschalige Groepsreizen & Vertrekdata" : "Small Group Expeditions & Departures",
-    description: isNl
-      ? "Reis in kleine groepen (max 12 reizigers) onder leiding van lokale natuurgidsen. Gegarandeerde vertrekdata en solo-reiziger vriendelijk."
-      : "Join small groups (max 12 travelers) led by native expert naturalists. Guaranteed departure dates and solo traveler friendly.",
+    title,
+    description,
     alternates: {
       canonical: `/${activeLocale}/group-travel`,
       languages: {
@@ -67,36 +77,95 @@ export default async function GroupTravelPage({
     ? "Reis samen met gelijkgestemde avonturiers onder leiding van lokale natuurgidsen, met overnachtingen in unieke eco-lodges."
     : "Travel alongside like-minded adventurers with native naturalist guides, hand-picked eco-lodges, and intimate wildlife encounters.");
 
+  const fallbackSteps = [
+    {
+      stepNumber: 1,
+      title: isNl ? "Maximaal 12 Deelnemers" : "Strictly Max 12 People",
+      description: isNl
+        ? "Kleine voetafdruk zorgt voor diepere wildlife-ontmoetingen, flexibel tempo en toegang tot kleinschalige lodges."
+        : "Small footprints allow deeper wildlife encounters, flexible pacing, and access to boutique lodges.",
+      icon: "users",
+    },
+    {
+      stepNumber: 2,
+      title: isNl ? "Solo Reizigers Welkom" : "Solo Traveler Welcoming",
+      description: isNl
+        ? "Reis solo zonder verplichte eenpersoonstoeslag wanneer je een kamer deelt met een reiziger van hetzelfde geslacht."
+        : "Join as a solo adventurer without mandatory single supplements when paired with same-gender roommates.",
+      icon: "compass",
+    },
+    {
+      stepNumber: 3,
+      title: isNl ? "Gegarandeerd Vertrek" : "Guaranteed Departures",
+      description: isNl
+        ? "Zodra het minimum aantal reizigers is bereikt, is je vertrek gegarandeerd zonder zorgen over annuleringen."
+        : "Once minimum numbers are reached, your departure is locked in with zero cancellation worries.",
+      icon: "calendar",
+    },
+    {
+      stepNumber: 4,
+      title: isNl ? "Lokale Natuurgidsen" : "Expert Local Naturalists",
+      description: isNl
+        ? "Elke groep wordt geleid door gepassioneerde lokale specialisten met hart voor natuurbescherming."
+        : "Every group is led by local specialists passionate about conservation and regional culture.",
+      icon: "shieldCheck",
+    },
+  ];
+
+  const introBadge = pageData?.introPhilosophy?.badge || (isNl ? "Waarom Travelwild Groepen?" : "Why Travelwild Groups?");
+  const introHeading = pageData?.introPhilosophy?.heading || (isNl ? "Het Verschil van Reizen in Kleine Groepen" : "The Small Group Difference");
+  const introSubheading = pageData?.introPhilosophy?.subheading || (isNl
+    ? "Ervaar ongerepte natuur met échte connectie en zonder enig massatoerisme-gevoel."
+    : "Experience wild destinations with authentic connection and zero mass-tourism feel.");
+  const introSteps = pageData?.introPhilosophy?.benefits?.length > 0 ? pageData.introPhilosophy.benefits : fallbackSteps;
+
+  const tripsBadge = typeof pageData?.tripsSection?.badge === "string"
+    ? pageData.tripsSection.badge
+    : (isNl ? "Aankomende Seizoenen" : "Upcoming Seasons");
+  const tripsHeading = typeof pageData?.tripsSection?.heading === "string"
+    ? pageData.tripsSection.heading
+    : (isNl ? "Onze Groepsrondreizen" : "Small Group Itineraries");
+  const tripsSubheading = typeof pageData?.tripsSection?.subheading === "string"
+    ? pageData.tripsSection.subheading
+    : (isNl
+        ? "Bekijk geplande groepsvertrekken met gegarandeerde vertrekdata. Solo-reizigers zijn altijd van harte welkom."
+        : "Explore scheduled group departures with guaranteed dates. Solo travelers are always welcome.");
+
   return (
     <div>
       <HeroBlock
         badge={heroBadge}
         heading={heroHeading}
         subheading={heroSubheading}
-        layoutStyle="compact"
+        backgroundImage={pageData?.hero?.backgroundImage}
+        layoutStyle={pageData?.hero?.layoutStyle || "compact"}
+        primaryCta={pageData?.hero?.primaryCta?.label ? pageData.hero.primaryCta : { label: isNl ? "Bekijk Groepsreizen" : "Explore Group Trips", url: "#trips-grid" }}
+        secondaryCta={pageData?.hero?.secondaryCta}
       />
 
       {/* Group Trips Grid */}
-      <section className="py-16 sm:py-24 bg-background">
+      <section id="trips-grid" className="py-16 sm:py-24 bg-background">
         <div className="container mx-auto px-4 max-w-7xl space-y-12">
           <div className="max-w-2xl">
-            <Badge variant="accent" className="mb-3">
-              {isNl ? "Aankomende Seizoenen" : "Upcoming Seasons"}
-            </Badge>
+            {tripsBadge && (
+              <Badge variant="accent" className="mb-3">
+                {tripsBadge}
+              </Badge>
+            )}
             <h2 className="font-hero text-3xl sm:text-4xl lg:text-5xl font-bold uppercase tracking-wide text-foreground">
-              {isNl ? "Onze Groepsrondreizen" : "Small Group Itineraries"}
+              {tripsHeading}
             </h2>
-            <p className="mt-3 text-base sm:text-lg text-muted-foreground leading-relaxed">
-              {isNl
-                ? "Bekijk geplande groepsvertrekken met gegarandeerde vertrekdata. Solo-reizigers zijn altijd van harte welkom."
-                : "Explore scheduled group departures with guaranteed dates. Solo travelers are always welcome."}
-            </p>
+            {tripsSubheading && (
+              <p className="mt-3 text-base sm:text-lg text-muted-foreground leading-relaxed">
+                {tripsSubheading}
+              </p>
+            )}
           </div>
 
           {groupTrips && groupTrips.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
               {groupTrips.map((trip: any) => (
-                <ItineraryCard key={trip._id} {...trip} />
+                <ItineraryCard key={trip._id} {...trip} locale={activeLocale} />
               ))}
             </div>
           ) : (
@@ -109,50 +178,13 @@ export default async function GroupTravelPage({
 
       {/* Group Philosophy / Benefits */}
       <ProcessStepsBlock
-        badge={isNl ? "Waarom Travelwild Groepen?" : "Why Travelwild Groups?"}
-        heading={isNl ? "Het Verschil van Reizen in Kleine Groepen" : "The Small Group Difference"}
-        subheading={
-          isNl
-            ? "Ervaar ongerepte natuur met échte connectie en zonder enig massatoerisme-gevoel."
-            : "Experience wild destinations with authentic connection and zero mass-tourism feel."
-        }
-        steps={[
-          {
-            stepNumber: 1,
-            title: isNl ? "Maximaal 12 Deelnemers" : "Strictly Max 12 People",
-            description: isNl
-              ? "Kleine voetafdruk zorgt voor diepere wildlife-ontmoetingen, flexibel tempo en toegang tot kleinschalige lodges."
-              : "Small footprints allow deeper wildlife encounters, flexible pacing, and access to boutique lodges.",
-            icon: "users",
-          },
-          {
-            stepNumber: 2,
-            title: isNl ? "Solo Reizigers Welkom" : "Solo Traveler Welcoming",
-            description: isNl
-              ? "Reis solo zonder verplichte eenpersoonstoeslag wanneer je een kamer deelt met een reiziger van hetzelfde geslacht."
-              : "Join as a solo adventurer without mandatory single supplements when paired with same-gender roommates.",
-            icon: "compass",
-          },
-          {
-            stepNumber: 3,
-            title: isNl ? "Gegarandeerd Vertrek" : "Guaranteed Departures",
-            description: isNl
-              ? "Zodra het minimum aantal reizigers is bereikt, is je vertrek gegarandeerd zonder zorgen over annuleringen."
-              : "Once minimum numbers are reached, your departure is locked in with zero cancellation worries.",
-            icon: "calendar",
-          },
-          {
-            stepNumber: 4,
-            title: isNl ? "Lokale Natuurgidsen" : "Expert Local Naturalists",
-            description: isNl
-              ? "Elke groep wordt geleid door gepassioneerde lokale specialisten met hart voor natuurbescherming."
-              : "Every group is led by local specialists passionate about conservation and regional culture.",
-            icon: "shieldCheck",
-          },
-        ]}
+        badge={introBadge}
+        heading={introHeading}
+        subheading={introSubheading}
+        steps={introSteps}
       />
 
-      {pageData?.pageBuilder && <PageBuilder blocks={pageData.pageBuilder} />}
+      {pageData?.pageBuilder && <PageBuilder blocks={pageData.pageBuilder} locale={activeLocale} />}
 
       <CTABlock
         badge={isNl ? "Eigen Reisperiode?" : "Custom Dates Available"}

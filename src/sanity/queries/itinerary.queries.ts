@@ -19,8 +19,6 @@ export const ITINERARY_DETAIL_QUERY = defineQuery(`
       durationNights,
       difficulty,
       "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize),
-      startLocation,
-      endLocation,
       minimumAge
     },
     pricing {
@@ -36,7 +34,7 @@ export const ITINERARY_DETAIL_QUERY = defineQuery(`
       "caption": coalesce(caption[$language], caption.nl, caption.en, caption)
     },
     "summary": coalesce(summary[$language], summary.nl, summary.en, summary),
-    "highlights": highlights[][coalesce(@[$language], @.nl, @.en, @)],
+    "highlights": highlights[] { "val": coalesce(@[$language], nl, en, @) }.val,
     dayByDay[] {
       _key,
       dayNumber,
@@ -49,8 +47,8 @@ export const ITINERARY_DETAIL_QUERY = defineQuery(`
         type,
         "notes": coalesce(notes[$language], notes.nl, notes.en, notes)
       },
-      "includedActivities": includedActivities[][coalesce(@[$language], @.nl, @.en, @)],
-      "optionalActivities": optionalActivities[][coalesce(@[$language], @.nl, @.en, @)],
+      "includedActivities": includedActivities[] { "val": coalesce(@[$language], nl, en, @) }.val,
+      "optionalActivities": optionalActivities[] { "val": coalesce(@[$language], nl, en, @) }.val,
       gallery[] {
         ${IMAGE_PROJECTION}
       }
@@ -66,8 +64,8 @@ export const ITINERARY_DETAIL_QUERY = defineQuery(`
       }
     },
     inclusionsExclusions {
-      "included": included[][coalesce(@[$language], @.nl, @.en, @)],
-      "excluded": excluded[][coalesce(@[$language], @.nl, @.en, @)]
+      "included": included[] { "val": coalesce(@[$language], nl, en, @) }.val,
+      "excluded": excluded[] { "val": coalesce(@[$language], nl, en, @) }.val
     },
     departures[] {
       _key,

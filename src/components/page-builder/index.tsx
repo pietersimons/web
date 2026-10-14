@@ -8,12 +8,14 @@ import { GalleryBlock } from "@/components/blocks/GalleryBlock";
 import { FAQBlock } from "@/components/blocks/FAQBlock";
 import { TestimonialsBlock } from "@/components/blocks/TestimonialsBlock";
 import { CTABlock } from "@/components/blocks/CTABlock";
+import { Locale } from "@/lib/i18n/config";
 
 interface PageBuilderProps {
   blocks?: any[];
+  locale?: Locale;
 }
 
-export function PageBuilder({ blocks }: PageBuilderProps) {
+export function PageBuilder({ blocks, locale }: PageBuilderProps) {
   if (!blocks || !Array.isArray(blocks) || blocks.length === 0) {
     return null;
   }
@@ -29,7 +31,7 @@ export function PageBuilder({ blocks }: PageBuilderProps) {
           case "featuresBlock":
             return <FeaturesBlock key={key} {...block} />;
           case "itineraryGrid":
-            return <ItineraryGridBlock key={key} {...block} />;
+            return <ItineraryGridBlock key={key} {...block} locale={locale} />;
           case "destinationGrid":
             return <DestinationGridBlock key={key} {...block} />;
           case "processStepsBlock":

@@ -1,10 +1,4 @@
-import { Badge } from "@/components/ui/badge";
-import {
-  Clock,
-  Mountain,
-  Users,
-  MapPin,
-} from "lucide-react";
+import { Clock, Mountain, Users } from "lucide-react";
 import { Locale, defaultLocale } from "@/lib/i18n/config";
 
 interface TripSpecsBarProps {
@@ -12,8 +6,6 @@ interface TripSpecsBarProps {
   durationNights?: number;
   difficulty?: string;
   groupSize?: string;
-  startLocation?: string;
-  endLocation?: string;
   minimumAge?: number;
   locale?: Locale;
 }
@@ -23,18 +15,9 @@ export function TripSpecsBar({
   durationNights,
   difficulty,
   groupSize,
-  startLocation,
-  endLocation,
   locale = defaultLocale,
 }: TripSpecsBarProps) {
   const isNl = locale === "nl";
-
-  const difficultyVariant =
-    difficulty === "easy"
-      ? "difficultyEasy"
-      : difficulty === "challenging" || difficulty === "expert"
-        ? "difficultyChallenging"
-        : "difficultyModerate";
 
   const difficultyLabels: Record<string, { nl: string; en: string }> = {
     easy: { nl: "Eenvoudig", en: "Easy" },
@@ -49,19 +32,17 @@ export function TripSpecsBar({
     : "";
 
   return (
-    <div className="relative -mt-8 z-20 container mx-auto px-4 max-w-7xl">
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 bg-card rounded-2xl p-5 sm:p-7 border border-border/80 shadow-xl">
+    <div className="relative -mt-7 z-20 container mx-auto px-4 max-w-7xl">
+      <div className="bg-card/95 backdrop-blur-sm rounded-xl border border-border/80 shadow-md p-4 sm:p-5 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-0 sm:divide-x sm:divide-border/60">
         {/* 1. Duration */}
         {durationDays && (
-          <div className="flex items-center gap-3.5">
-            <div className="h-11 w-11 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
-              <Clock className="h-5 w-5 text-accent" />
-            </div>
+          <div className="flex items-center gap-3 sm:px-6">
+            <Clock className="h-4 w-4 text-accent shrink-0" />
             <div>
-              <span className="text-[11px] sm:text-xs uppercase tracking-wider font-bold text-muted-foreground block mb-0.5">
+              <span className="text-[11px] uppercase tracking-wider font-semibold text-muted-foreground block leading-none mb-1">
                 {isNl ? "Duur" : "Duration"}
               </span>
-              <span className="font-semibold text-base sm:text-lg text-foreground leading-tight block">
+              <span className="font-heading font-semibold text-sm sm:text-base text-foreground leading-tight block">
                 {durationDays} {isNl ? "Dagen" : "Days"} {durationNights ? `(${durationNights} ${isNl ? "nachten" : "N"})` : ""}
               </span>
             </div>
@@ -70,50 +51,29 @@ export function TripSpecsBar({
 
         {/* 2. Physical Level */}
         {difficulty && (
-          <div className="flex items-center gap-3.5">
-            <div className="h-11 w-11 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
-              <Mountain className="h-5 w-5 text-primary" />
-            </div>
+          <div className="flex items-center gap-3 sm:px-6">
+            <Mountain className="h-4 w-4 text-primary shrink-0" />
             <div>
-              <span className="text-[11px] sm:text-xs uppercase tracking-wider font-bold text-muted-foreground block mb-0.5">
+              <span className="text-[11px] uppercase tracking-wider font-semibold text-muted-foreground block leading-none mb-1">
                 {isNl ? "Niveau" : "Physical Level"}
               </span>
-              <Badge variant={difficultyVariant} className="text-xs sm:text-sm font-semibold px-2.5 py-0.5">
+              <span className="font-heading font-semibold text-sm sm:text-base text-foreground leading-tight block">
                 {difficultyText}
-              </Badge>
+              </span>
             </div>
           </div>
         )}
 
         {/* 3. Group Size */}
         {groupSize && (
-          <div className="flex items-center gap-3.5">
-            <div className="h-11 w-11 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
-              <Users className="h-5 w-5 text-secondary" />
-            </div>
+          <div className="flex items-center gap-3 sm:px-6">
+            <Users className="h-4 w-4 text-primary/80 shrink-0" />
             <div>
-              <span className="text-[11px] sm:text-xs uppercase tracking-wider font-bold text-muted-foreground block mb-0.5">
+              <span className="text-[11px] uppercase tracking-wider font-semibold text-muted-foreground block leading-none mb-1">
                 {isNl ? "Groepsgrootte" : "Group Size"}
               </span>
-              <span className="font-semibold text-sm sm:text-base text-foreground leading-tight block">
+              <span className="font-heading font-semibold text-sm sm:text-base text-foreground leading-tight block">
                 {groupSize}
-              </span>
-            </div>
-          </div>
-        )}
-
-        {/* 4. Route Start/End */}
-        {(startLocation || endLocation) && (
-          <div className="flex items-center gap-3.5">
-            <div className="h-11 w-11 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
-              <MapPin className="h-5 w-5 text-emerald-600" />
-            </div>
-            <div>
-              <span className="text-[11px] sm:text-xs uppercase tracking-wider font-bold text-muted-foreground block mb-0.5">
-                Route
-              </span>
-              <span className="font-semibold text-xs sm:text-sm text-foreground leading-tight block">
-                {startLocation || "Start"} → {endLocation || "Finish"}
               </span>
             </div>
           </div>

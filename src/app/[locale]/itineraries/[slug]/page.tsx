@@ -12,10 +12,10 @@ import { InclusionsExclusionsBox } from "@/components/itinerary/InclusionsExclus
 import { DeparturesTable } from "@/components/itinerary/DeparturesTable";
 import { BookingStepsGuide } from "@/components/itinerary/BookingStepsGuide";
 import { StickyBookingBar } from "@/components/itinerary/StickyBookingBar";
+import { TripBookingSidebar } from "@/components/itinerary/TripBookingSidebar";
 import { FAQBlock } from "@/components/blocks/FAQBlock";
 import { ItineraryCard } from "@/components/itinerary/ItineraryCard";
 import { Badge } from "@/components/ui/badge";
-import { Check } from "lucide-react";
 import { locales, Locale, defaultLocale, isValidLocale } from "@/lib/i18n/config";
 
 export const revalidate = 60;
@@ -107,8 +107,6 @@ export default async function ItineraryDetailPage({
         durationNights={trip.tripSpecs?.durationNights ?? undefined}
         difficulty={trip.tripSpecs?.difficulty ?? undefined}
         groupSize={typeof trip.tripSpecs?.groupSize === "string" ? trip.tripSpecs.groupSize : undefined}
-        startLocation={trip.tripSpecs?.startLocation ?? undefined}
-        endLocation={trip.tripSpecs?.endLocation ?? undefined}
         minimumAge={trip.tripSpecs?.minimumAge ?? undefined}
         locale={activeLocale}
       />
@@ -131,13 +129,16 @@ export default async function ItineraryDetailPage({
             )}
 
             {/* Day-by-Day Program */}
-            {trip.dayByDay && <DayByDayTimeline days={trip.dayByDay} />}
+            {trip.dayByDay && (
+              <DayByDayTimeline days={trip.dayByDay} locale={activeLocale} />
+            )}
 
             {/* Inclusions / Exclusions */}
             {trip.inclusionsExclusions && (
               <InclusionsExclusionsBox
                 included={trip.inclusionsExclusions.included ?? undefined}
                 excluded={trip.inclusionsExclusions.excluded ?? undefined}
+                locale={activeLocale}
               />
             )}
 
@@ -147,34 +148,25 @@ export default async function ItineraryDetailPage({
                 departures={trip.departures}
                 tripTitle={title}
                 currency={trip.pricing?.currency ?? undefined}
+                locale={activeLocale}
               />
             )}
 
-            {/* Preparation Steps */}
+            {/* Optional Preparation Steps */}
             {trip.stepByStepGuide && (
-              <BookingStepsGuide steps={trip.stepByStepGuide} />
+              <BookingStepsGuide steps={trip.stepByStepGuide} locale={activeLocale} />
             )}
           </div>
 
-          {/* Right Sticky Highlights Box */}
-          <div className="lg:col-span-4 space-y-8">
-            {trip.highlights && trip.highlights.length > 0 && (
-              <div className="bg-card rounded-2xl p-6 sm:p-7 border border-border/80 shadow-md sticky top-28">
-                <h3 className="font-heading text-lg font-bold text-foreground mb-4 pb-3 border-b border-border/60">
-                  {isNl ? "Hoogtepunten van deze Reis" : "Expedition Highlights"}
-                </h3>
-                <ul className="space-y-3">
-                  {trip.highlights.map((hl: string, idx: number) => (
-                    <li key={idx} className="flex items-start gap-3 text-xs sm:text-sm text-foreground/90">
-                      <div className="h-5 w-5 rounded-full bg-accent/15 text-accent flex items-center justify-center shrink-0 mt-0.5">
-                        <Check className="h-3 w-3 stroke-[3]" />
-                      </div>
-                      <span>{typeof hl === "string" ? hl : ""}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
+          {/* Right Sticky Booking & Highlights Sidebar */}
+          <div className="lg:col-span-4">
+            <TripBookingSidebar
+              tripTitle={title}
+              pricing={trip.pricing ?? undefined}
+              highlights={trip.highlights ?? []}
+              departures={trip.departures ?? []}
+              locale={activeLocale}
+            />
           </div>
         </div>
       </div>
@@ -202,7 +194,7 @@ export default async function ItineraryDetailPage({
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {trip.relatedItineraries.map((rTrip: any) => (
-                <ItineraryCard key={rTrip._id} {...rTrip} />
+                <ItineraryCard key={rTrip._id} {...rTrip} locale={activeLocale} />
               ))}
             </div>
           </div>
@@ -214,6 +206,7 @@ export default async function ItineraryDetailPage({
         title={title}
         priceFrom={trip.pricing?.priceFrom ?? undefined}
         currency={trip.pricing?.currency ?? undefined}
+        locale={activeLocale}
       />
     </div>
   );

@@ -1,5 +1,6 @@
 import { Card } from "@/components/ui/card";
-import { Compass, Check } from "lucide-react";
+import { Check } from "lucide-react";
+import { Locale, defaultLocale } from "@/lib/i18n/config";
 
 interface Step {
   stepNumber?: number;
@@ -9,19 +10,26 @@ interface Step {
 
 interface BookingStepsGuideProps {
   steps?: Step[];
+  locale?: Locale;
 }
 
-export function BookingStepsGuide({ steps = [] }: BookingStepsGuideProps) {
+export function BookingStepsGuide({
+  steps = [],
+  locale = defaultLocale,
+}: BookingStepsGuideProps) {
   if (!steps || steps.length === 0) return null;
+  const isNl = locale === "nl";
 
   return (
     <div className="space-y-6">
       <div>
         <h2 className="font-hero text-3xl sm:text-4xl font-bold uppercase tracking-wide text-foreground">
-          How to Prepare & Book
+          {isNl ? "Hoe Werkt het Boeken?" : "How to Prepare & Book"}
         </h2>
         <p className="text-sm text-muted-foreground mt-1">
-          Simple step-by-step guidance from inquiry to departure
+          {isNl
+            ? "In duidelijke stappen van je eerste vraag tot een onvergetelijke expeditie"
+            : "Simple step-by-step guidance from inquiry to departure"}
         </p>
       </div>
 

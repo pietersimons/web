@@ -22,9 +22,37 @@ export const GROUP_TRAVEL_PAGE_QUERY = defineQuery(`
       "badge": coalesce(badge[$language], badge.nl, badge.en, badge),
       "heading": coalesce(heading[$language], heading.nl, heading.en, heading),
       "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),
-      backgroundImage { ${IMAGE_PROJECTION} }
+      layoutStyle,
+      backgroundImage { ${IMAGE_PROJECTION} },
+      primaryCta {
+        "label": coalesce(label[$language], label.nl, label.en, label),
+        url
+      },
+      secondaryCta {
+        "label": coalesce(label[$language], label.nl, label.en, label),
+        url
+      }
     },
-    "introPhilosophy": coalesce(introPhilosophy[$language], introPhilosophy.nl, introPhilosophy.en, introPhilosophy),
+    tripsSection {
+      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),
+      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),
+      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading)
+    },
+    introPhilosophy {
+      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),
+      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),
+      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),
+      description,
+      benefits[] {
+        stepNumber,
+        "title": coalesce(title[$language], title.nl, title.en, title),
+        "description": coalesce(description[$language], description.nl, description.en, description),
+        icon,
+        image {
+          ${IMAGE_PROJECTION}
+        }
+      }
+    },
     ${PAGE_BUILDER_PROJECTION},
     ${SEO_PROJECTION}
   }
@@ -38,9 +66,35 @@ export const TRAVEL_ON_DEMAND_PAGE_QUERY = defineQuery(`
       "badge": coalesce(badge[$language], badge.nl, badge.en, badge),
       "heading": coalesce(heading[$language], heading.nl, heading.en, heading),
       "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),
-      backgroundImage { ${IMAGE_PROJECTION} }
+      layoutStyle,
+      backgroundImage { ${IMAGE_PROJECTION} },
+      primaryCta {
+        "label": coalesce(label[$language], label.nl, label.en, label),
+        url
+      },
+      secondaryCta {
+        "label": coalesce(label[$language], label.nl, label.en, label),
+        url
+      }
     },
-    processSection,
+    processSection {
+      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),
+      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),
+      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),
+      steps[] {
+        stepNumber,
+        "title": coalesce(title[$language], title.nl, title.en, title),
+        "description": coalesce(description[$language], description.nl, description.en, description),
+        icon,
+        image {
+          ${IMAGE_PROJECTION}
+        }
+      },
+      cta {
+        "label": coalesce(label[$language], label.nl, label.en, label),
+        url
+      }
+    },
     themes[] {
       "title": coalesce(title[$language], title.nl, title.en, title),
       "description": coalesce(description[$language], description.nl, description.en, description),

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Accordion,
@@ -20,6 +19,7 @@ import {
   Expand,
   Shrink,
 } from "lucide-react";
+import { Locale, defaultLocale } from "@/lib/i18n/config";
 
 export interface ItineraryDay {
   _key?: string;
@@ -40,10 +40,14 @@ export interface ItineraryDay {
 
 interface DayByDayTimelineProps {
   days: ItineraryDay[];
+  locale?: Locale;
 }
 
-export function DayByDayTimeline({ days = [] }: DayByDayTimelineProps) {
-  // Allow expanding / collapsing all days
+export function DayByDayTimeline({
+  days = [],
+  locale = defaultLocale,
+}: DayByDayTimelineProps) {
+  const isNl = locale === "nl";
   const allKeys = days.map((_, i) => `day-${i}`);
   const [openItems, setOpenItems] = useState<string[]>(["day-0"]);
 
@@ -60,13 +64,13 @@ export function DayByDayTimeline({ days = [] }: DayByDayTimelineProps) {
   return (
     <div className="space-y-6">
       {/* Header with expand/collapse all button */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between pb-2 border-b border-border/40">
         <div>
           <h2 className="font-hero text-3xl sm:text-4xl font-bold uppercase tracking-wide text-foreground">
-            Day-by-Day Expedition
+            {isNl ? "Dag-tot-dag Programma" : "Day-by-Day Expedition"}
           </h2>
           <p className="text-sm text-muted-foreground mt-1">
-            {days.length} Days of detailed adventure steps
+            {days.length} {isNl ? "dagen vol ongerepte ontdekkingen" : "days of detailed wilderness itinerary"}
           </p>
         </div>
 
@@ -78,11 +82,13 @@ export function DayByDayTimeline({ days = [] }: DayByDayTimelineProps) {
         >
           {openItems.length === days.length ? (
             <>
-              <Shrink className="h-3.5 w-3.5 mr-1" /> Collapse All
+              <Shrink className="h-3.5 w-3.5 mr-1" />
+              {isNl ? "Alles inklappen" : "Collapse All"}
             </>
           ) : (
             <>
-              <Expand className="h-3.5 w-3.5 mr-1" /> Expand All
+              <Expand className="h-3.5 w-3.5 mr-1" />
+              {isNl ? "Alles uitklappen" : "Expand All"}
             </>
           )}
         </Button>
@@ -93,7 +99,7 @@ export function DayByDayTimeline({ days = [] }: DayByDayTimelineProps) {
         type="multiple"
         value={openItems}
         onValueChange={setOpenItems}
-        className="space-y-4"
+        className="space-y-3.5"
       >
         {days.map((day, idx) => {
           const itemKey = `day-${idx}`;
@@ -102,17 +108,14 @@ export function DayByDayTimeline({ days = [] }: DayByDayTimelineProps) {
             <AccordionItem
               key={day._key || idx}
               value={itemKey}
-              className="border border-border/80 rounded-2xl bg-card overflow-hidden shadow-xs data-[state=open]:border-primary/40 data-[state=open]:shadow-md transition-all"
+              className="border border-border/80 rounded-2xl bg-card overflow-hidden shadow-xs data-[state=open]:border-primary/40 data-[state=open]:shadow-sm transition-all"
             >
-              <AccordionTrigger className="px-6 py-5 hover:no-underline text-left">
+              <AccordionTrigger className="px-5 sm:px-6 py-4 sm:py-5 hover:no-underline text-left">
                 <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 w-full pr-4">
-                  {/* Day Number Pill */}
-                  <Badge
-                    variant="accent"
-                    className="w-fit text-xs font-extrabold tracking-wider py-1 px-3"
-                  >
-                    {day.dayNumber}
-                  </Badge>
+                  {/* Understated Day Number Pill */}
+                  <span className="w-fit text-xs font-heading font-extrabold tracking-wider py-1 px-2.5 rounded-md bg-primary/10 text-primary">
+                    {day.dayNumber || (isNl ? `Dag ${idx + 1}` : `Day ${idx + 1}`)}
+                  </span>
 
                   {/* Day Title */}
                   <span className="font-heading text-base sm:text-lg font-bold text-foreground">
@@ -129,56 +132,42 @@ export function DayByDayTimeline({ days = [] }: DayByDayTimelineProps) {
                 </div>
               </AccordionTrigger>
 
-              <AccordionContent className="px-6 pt-2 pb-6 border-t border-border/40">
-                {/* Meta Highlights Row: Meals & Accommodation */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6 bg-muted/40 p-4 rounded-xl">
-                  {/* Meals */}
-                  <div className="flex items-center gap-2.5">
-                    <Utensils className="h-4 w-4 text-accent shrink-0" />
-                    <div>
-                      <span className="text-[11px] uppercase font-bold text-muted-foreground block leading-none mb-1">
-                        Meals Included
-                      </span>
-                      <span className="text-xs font-semibold text-foreground">
-                        {day.meals && day.meals.length > 0
-                          ? day.meals
-                              .map((m) =>
-                                m === "breakfast"
-                                  ? "Breakfast (B)"
-                                  : m === "lunch"
-                                    ? "Lunch (L)"
-                                    : "Dinner (D)"
-                              )
-                              .join(", ")
-                          : "No meals included on this day"}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Accommodation */}
-                  {day.accommodation && (
-                    <div className="flex items-center gap-2.5">
-                      <Hotel className="h-4 w-4 text-secondary shrink-0" />
-                      <div>
-                        <span className="text-[11px] uppercase font-bold text-muted-foreground block leading-none mb-1">
-                          Accommodation
-                        </span>
-                        <span className="text-xs font-semibold text-foreground">
-                          {day.accommodation.name || "Designated wild lodge/stay"}
-                          {day.accommodation.type && (
-                            <span className="text-muted-foreground ml-1">
-                              ({day.accommodation.type})
-                            </span>
-                          )}
+              <AccordionContent className="px-5 sm:px-6 pt-2 pb-6 border-t border-border/40">
+                {/* Clean inline meta line for Meals & Lodging */}
+                {(day.meals?.length || day.accommodation?.name || day.accommodation?.type) && (
+                  <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-muted-foreground py-2.5 mb-4 border-b border-border/40">
+                    {day.accommodation && (
+                      <div className="flex items-center gap-1.5">
+                        <Hotel className="h-3.5 w-3.5 text-primary/80 shrink-0" />
+                        <span className="text-foreground/90 font-medium">
+                          {day.accommodation.name || (isNl ? "Wildernis lodge / hotel" : "Lodge / hotel")}
+                          {day.accommodation.type ? ` (${day.accommodation.type})` : ""}
                         </span>
                       </div>
-                    </div>
-                  )}
-                </div>
+                    )}
 
-                {/* Day Description */}
+                    {day.meals && day.meals.length > 0 && (
+                      <div className="flex items-center gap-1.5">
+                        <Utensils className="h-3.5 w-3.5 text-accent shrink-0" />
+                        <span className="text-foreground/90">
+                          {day.meals
+                            .map((m) =>
+                              m === "breakfast"
+                                ? (isNl ? "Ontbijt (O)" : "Breakfast (B)")
+                                : m === "lunch"
+                                  ? (isNl ? "Lunch (L)" : "Lunch (L)")
+                                  : (isNl ? "Diner (D)" : "Dinner (D)")
+                            )
+                            .join(", ")}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* Day Description Narrative */}
                 {day.description && (
-                  <div className="prose prose-sm dark:prose-invert max-w-none mb-6">
+                  <div className="prose prose-sm dark:prose-invert max-w-none text-foreground/85 leading-relaxed mb-5">
                     <PortableTextRenderer value={day.description} />
                   </div>
                 )}
@@ -190,7 +179,7 @@ export function DayByDayTimeline({ days = [] }: DayByDayTimelineProps) {
                       <div className="space-y-2">
                         <h4 className="text-xs uppercase font-bold text-primary tracking-wider flex items-center gap-1.5">
                           <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" />
-                          Included Activities
+                          {isNl ? "Inbegrepen Activiteiten" : "Included Activities"}
                         </h4>
                         <ul className="space-y-1.5 text-xs text-foreground/90 pl-1">
                           {day.includedActivities.map((act, aIdx) => (
@@ -207,7 +196,7 @@ export function DayByDayTimeline({ days = [] }: DayByDayTimelineProps) {
                       <div className="space-y-2">
                         <h4 className="text-xs uppercase font-bold text-muted-foreground tracking-wider flex items-center gap-1.5">
                           <PlusCircle className="h-3.5 w-3.5 text-accent" />
-                          Optional Activities (Extra)
+                          {isNl ? "Optionele Activiteiten" : "Optional Activities"}
                         </h4>
                         <ul className="space-y-1.5 text-xs text-muted-foreground pl-1">
                           {day.optionalActivities.map((opt, oIdx) => (
@@ -224,7 +213,7 @@ export function DayByDayTimeline({ days = [] }: DayByDayTimelineProps) {
 
                 {/* Day Gallery */}
                 {day.gallery && day.gallery.length > 0 && (
-                  <div className="mt-6 pt-4 border-t border-border/40">
+                  <div className="mt-5 pt-4 border-t border-border/40">
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                       {day.gallery.map((gImg, gIdx) => (
                         <div

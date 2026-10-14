@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import { client } from "@/sanity/client";
 import { HOME_PAGE_QUERY } from "@/sanity/queries/pages.queries";
 import { PageBuilder } from "@/components/page-builder";
@@ -11,6 +12,47 @@ import { getDictionary } from "@/lib/i18n/dictionaries";
 import { localizePath } from "@/lib/i18n/navigation";
 
 export const revalidate = 60;
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const activeLocale = isValidLocale(locale) ? locale : defaultLocale;
+  const isNl = activeLocale === "nl";
+
+  let homeData: any = null;
+  try {
+    homeData = await client.fetch(HOME_PAGE_QUERY, { language: activeLocale });
+  } catch {
+    // fallback
+  }
+
+  const title =
+    homeData?.seo?.metaTitle ||
+    (isNl
+      ? "Travelwild — Kleinschalige & Duurzame Avontuurlijke Reizen"
+      : "Travelwild — Authentic Small-Group & Custom Expeditions");
+  const description =
+    homeData?.seo?.metaDescription ||
+    (isNl
+      ? "Duurzame groepsreizen en op maat gemaakte wildernisexpedities naar de mooiste plekken ter wereld."
+      : "Immersive, sustainable small group tours and bespoke tailor-made wilderness adventures across the globe.");
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `/${activeLocale}`,
+      languages: {
+        "nl-NL": "/nl",
+        "en-US": "/en",
+        "x-default": "/nl",
+      },
+    },
+  };
+}
 
 export default async function HomePage({
   params,
@@ -30,7 +72,7 @@ export default async function HomePage({
 
   // If editor has added sections in Sanity, render with PageBuilder
   if (homeData?.pageBuilder && homeData.pageBuilder.length > 0) {
-    return <PageBuilder blocks={homeData.pageBuilder} />;
+    return <PageBuilder blocks={homeData.pageBuilder} locale={activeLocale} />;
   }
 
   // Localized default showcase

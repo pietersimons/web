@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ItineraryCard } from "@/components/itinerary/ItineraryCard";
 import { ArrowRight } from "lucide-react";
+import { Locale } from "@/lib/i18n/config";
 
 interface ItineraryGridBlockProps {
   badge?: string;
@@ -13,6 +14,7 @@ interface ItineraryGridBlockProps {
   viewAllLink?: { label?: string; url?: string };
   selectedItineraries?: any[];
   itineraries?: any[];
+  locale?: Locale;
 }
 
 export function ItineraryGridBlock({
@@ -23,6 +25,7 @@ export function ItineraryGridBlock({
   viewAllLink,
   selectedItineraries,
   itineraries,
+  locale,
 }: ItineraryGridBlockProps) {
   const tripList = selectedItineraries || itineraries || [];
 
@@ -66,7 +69,7 @@ export function ItineraryGridBlock({
         {tripList.length > 0 ? (
           <div className={`grid ${gridColsClass} gap-6 sm:gap-8`}>
             {tripList.map((trip: any) => (
-              <ItineraryCard key={trip._id} {...trip} />
+              <ItineraryCard key={trip._id} {...trip} locale={locale} />
             ))}
           </div>
         ) : (

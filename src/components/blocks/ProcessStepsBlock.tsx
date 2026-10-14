@@ -10,6 +10,7 @@ import {
   Users,
   ShieldCheck,
   Send,
+  Plane,
   ArrowRight,
 } from "lucide-react";
 
@@ -22,6 +23,7 @@ const ICON_MAP: Record<string, any> = {
   shield: ShieldCheck,
   shieldCheck: ShieldCheck,
   send: Send,
+  plane: Plane,
 };
 
 interface StepItem {

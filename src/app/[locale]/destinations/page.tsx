@@ -17,11 +17,26 @@ export async function generateMetadata({
   const activeLocale = isValidLocale(locale) ? locale : defaultLocale;
   const isNl = activeLocale === "nl";
 
-  return {
-    title: isNl ? "Alle Bestemmingen & Expedities" : "All Destinations & Expeditions",
-    description: isNl
+  let pageData: any = null;
+  try {
+    pageData = await client.fetch(DESTINATIONS_PAGE_QUERY, { language: activeLocale });
+  } catch {
+    // fallback
+  }
+
+  const title =
+    pageData?.seo?.metaTitle ||
+    pageData?.title ||
+    (isNl ? "Alle Bestemmingen & Expedities" : "All Destinations & Expeditions");
+  const description =
+    pageData?.seo?.metaDescription ||
+    (isNl
       ? "Ontdek onze unieke wildernisbestemmingen in Midden-Amerika, Afrika, Europa en Azië."
-      : "Explore our complete collection of wilderness destinations across Central America, Africa, Europe, and Asia.",
+      : "Explore our complete collection of wilderness destinations across Central America, Africa, Europe, and Asia.");
+
+  return {
+    title,
+    description,
     alternates: {
       canonical: `/${activeLocale}/destinations`,
       languages: {

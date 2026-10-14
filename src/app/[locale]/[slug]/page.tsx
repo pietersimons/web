@@ -76,7 +76,7 @@ export default async function GenericCustomPage({
   return (
     <div>
       {page.pageBuilder && page.pageBuilder.length > 0 ? (
-        <PageBuilder blocks={page.pageBuilder} />
+        <PageBuilder blocks={page.pageBuilder} locale={activeLocale} />
       ) : (
         <div className="container mx-auto px-4 max-w-4xl py-24 text-center">
           <Badge variant="accent" className="mb-4">

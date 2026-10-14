@@ -39,9 +39,7 @@ export const ITINERARY_CARD_PROJECTION = `
     durationDays,
     durationNights,
     difficulty,
-    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize),
-    startLocation,
-    endLocation
+    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize)
   },
   pricing {
     priceFrom,

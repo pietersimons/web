@@ -3,9 +3,9 @@
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { BookingModalDialog, type DepartureSelection } from "@/components/forms/BookingModalDialog";
 import { Calendar, User, CheckCircle2, AlertCircle } from "lucide-react";
+import { Locale, defaultLocale } from "@/lib/i18n/config";
 
 export interface DepartureItem {
   _key?: string;
@@ -21,16 +21,19 @@ interface DeparturesTableProps {
   departures?: DepartureItem[];
   tripTitle: string;
   currency?: string;
+  locale?: Locale;
 }
 
 export function DeparturesTable({
   departures = [],
   tripTitle,
   currency = "EUR",
+  locale = defaultLocale,
 }: DeparturesTableProps) {
   const [selectedDeparture, setSelectedDeparture] =
     useState<DepartureSelection | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const isNl = locale === "nl";
 
   if (!departures || departures.length === 0) {
     return null;
@@ -51,10 +54,12 @@ export function DeparturesTable({
     <div className="space-y-6">
       <div>
         <h2 className="font-hero text-3xl sm:text-4xl font-bold uppercase tracking-wide text-foreground">
-          Upcoming Group Departures
+          {isNl ? "Vertrekdata & Beschikbaarheid" : "Upcoming Departures"}
         </h2>
         <p className="text-sm text-muted-foreground mt-1">
-          Guaranteed small groups (Max 12 travelers). Reserve your spot online.
+          {isNl
+            ? "Gegarandeerde kleinschalige groepsreizen. Reserveer direct online."
+            : "Guaranteed small groups. Reserve your expedition spot online."}
         </p>
       </div>
 
@@ -66,29 +71,31 @@ export function DeparturesTable({
 
           const statusBadge = isGuaranteed ? (
             <Badge variant="success" className="gap-1 text-[10px]">
-              <CheckCircle2 className="h-3 w-3" /> Guaranteed Departure
+              <CheckCircle2 className="h-3 w-3" />
+              {isNl ? "Gegarandeerd Vertrek" : "Guaranteed Departure"}
             </Badge>
           ) : isAlmostFull ? (
             <Badge variant="warning" className="gap-1 text-[10px]">
-              <AlertCircle className="h-3 w-3" /> Few Spots Left
+              <AlertCircle className="h-3 w-3" />
+              {isNl ? "Laatste Plekken" : "Few Spots Left"}
             </Badge>
           ) : isSoldOut ? (
             <Badge variant="outline" className="text-muted-foreground text-[10px]">
-              Sold Out
+              {isNl ? "Volgeboekt" : "Sold Out"}
             </Badge>
           ) : (
             <Badge variant="secondary" className="text-[10px]">
-              Available
+              {isNl ? "Beschikbaar" : "Available"}
             </Badge>
           );
 
           return (
-            <Card
+            <div
               key={dep._key || idx}
               className={`p-4 sm:p-5 rounded-2xl border transition-all duration-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${
                 isSoldOut
                   ? "opacity-60 bg-muted/20 border-border/40"
-                  : "bg-card hover:border-primary/40 hover:shadow-md"
+                  : "bg-card border-border/80 hover:border-primary/40 hover:shadow-sm"
               }`}
             >
               {/* Date & Leader Info */}
@@ -107,12 +114,14 @@ export function DeparturesTable({
                   {dep.guideName && (
                     <span className="inline-flex items-center gap-1">
                       <User className="h-3 w-3 text-secondary" />
-                      Leader: {dep.guideName}
+                      {isNl ? "Reisleider" : "Leader"}: {dep.guideName}
                     </span>
                   )}
                   {dep.spotsLeft && !isSoldOut && (
-                    <span className="font-semibold text-amber-700 dark:text-amber-400">
-                      Only {dep.spotsLeft} spot{dep.spotsLeft === 1 ? "" : "s"} remaining
+                    <span className="font-semibold text-accent">
+                      {isNl
+                        ? `Nog ${dep.spotsLeft} plekken beschikbaar`
+                        : `Only ${dep.spotsLeft} spot${dep.spotsLeft === 1 ? "" : "s"} remaining`}
                     </span>
                   )}
                 </div>
@@ -123,7 +132,7 @@ export function DeparturesTable({
                 {dep.price && (
                   <div className="text-left sm:text-right">
                     <span className="text-[10px] uppercase font-bold text-muted-foreground block leading-none">
-                      Price / Person
+                      {isNl ? "Prijs per persoon" : "Price / Person"}
                     </span>
                     <span className="font-heading text-lg sm:text-xl font-extrabold text-foreground">
                       {currency === "USD" ? "$" : "€"}
@@ -139,10 +148,12 @@ export function DeparturesTable({
                   onClick={() => handleBookClick(dep)}
                   className="font-bold shrink-0"
                 >
-                  {isSoldOut ? "Sold Out" : "Book Departure"}
+                  {isSoldOut
+                    ? (isNl ? "Volgeboekt" : "Sold Out")
+                    : (isNl ? "Boek Vertrek" : "Book Departure")}
                 </Button>
               </div>
-            </Card>
+            </div>
           );
         })}
       </div>

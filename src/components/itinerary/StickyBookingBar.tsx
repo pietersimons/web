@@ -4,20 +4,24 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { BookingModalDialog } from "@/components/forms/BookingModalDialog";
 import { ArrowRight, Calendar } from "lucide-react";
+import { Locale, defaultLocale } from "@/lib/i18n/config";
 
 interface StickyBookingBarProps {
   title: string;
   priceFrom?: number;
   currency?: string;
+  locale?: Locale;
 }
 
 export function StickyBookingBar({
   title,
   priceFrom,
   currency = "EUR",
+  locale = defaultLocale,
 }: StickyBookingBarProps) {
   const [visible, setVisible] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const isNl = locale === "nl";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,7 +47,7 @@ export function StickyBookingBar({
               {title}
             </h4>
             <span className="text-xs text-muted-foreground">
-              Small group departures & custom dates
+              {isNl ? "Kleinschalige groepsreis & maatwerk" : "Small group departures & custom dates"}
             </span>
           </div>
 
@@ -51,7 +55,7 @@ export function StickyBookingBar({
             {priceFrom && (
               <div className="text-right">
                 <span className="text-[10px] uppercase font-bold text-muted-foreground block leading-none">
-                  From
+                  {isNl ? "Vanaf" : "From"}
                 </span>
                 <span className="font-heading font-extrabold text-base sm:text-lg text-foreground">
                   {currency === "USD" ? "$" : "€"}
@@ -66,7 +70,7 @@ export function StickyBookingBar({
               onClick={() => setIsModalOpen(true)}
               className="font-bold flex items-center gap-1.5 shadow-md"
             >
-              <span>Book / Inquire</span>
+              <span>{isNl ? "Boek / Vraag aan" : "Book / Inquire"}</span>
               <ArrowRight className="h-4 w-4" />
             </Button>
           </div>
