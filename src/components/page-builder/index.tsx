@@ -22,7 +22,7 @@ export function PageBuilder({ blocks, locale }: PageBuilderProps) {
 
   return (
     <>
-      {blocks.map((block) => {
+      {blocks.map((block, index) => {
         const key = block._key || block._type;
 
         switch (block._type) {
@@ -37,7 +37,13 @@ export function PageBuilder({ blocks, locale }: PageBuilderProps) {
           case "processStepsBlock":
             return <ProcessStepsBlock key={key} {...block} />;
           case "richTextBlock":
-            return <RichTextBlock key={key} {...block} />;
+            return (
+              <RichTextBlock
+                key={key}
+                {...block}
+                asH1={index === 0 && blocks[0]?._type === "richTextBlock"}
+              />
+            );
           case "galleryBlock":
             return <GalleryBlock key={key} {...block} />;
           case "faqBlock":

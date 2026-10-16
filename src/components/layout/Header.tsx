@@ -25,12 +25,17 @@ interface HeaderProps {
     url?: string | null;
     children?: Array<{ label: string | null; url?: string | null }> | null;
   }> | null;
+  contactInfo?: {
+    email?: string | null;
+    phone?: string | null;
+  } | null;
 }
 
 export function Header({
   siteName = "Travelwild",
   currentLocale = defaultLocale,
   navigation,
+  contactInfo,
 }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -243,7 +248,12 @@ export function Header({
                 <div className="text-xs text-white/70 space-y-1.5 pt-1">
                   <div className="flex items-center gap-2">
                     <Mail className="h-3.5 w-3.5 text-[#c59b6d]" />
-                    <span>hello@travelwild.com</span>
+                    <a
+                      href={`mailto:${contactInfo?.email || "hello@travelwild.be"}`}
+                      className="hover:text-[#c59b6d] transition-colors"
+                    >
+                      {contactInfo?.email || "hello@travelwild.be"}
+                    </a>
                   </div>
                 </div>
               </div>

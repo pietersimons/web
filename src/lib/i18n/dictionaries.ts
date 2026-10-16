@@ -39,6 +39,7 @@ export const dictionaries = {
       bookTrip: 'Direct boeken',
       languageSelect: 'Taal',
       switchLanguage: 'Wissel van taal',
+      cookieSettings: 'Cookie-instellingen',
     },
     nav: {
       home: 'Home',
@@ -97,6 +98,38 @@ export const dictionaries = {
       subscribe: 'Aanmelden',
       allRightsReserved: 'Alle rechten voorbehouden.',
     },
+    cookieBanner: {
+      title: 'Wij respecteren je privacy',
+      description: 'Travelwild gebruikt noodzakelijke cookies om de website betrouwbaar en veilig te laten werken. Met jouw toestemming gebruiken we ook analytische cookies (zoals Google Analytics) om bezoekersstatistieken te analyseren en onze expedities te verbeteren. Je kunt zelf kiezen welke cookies je toestaat.',
+      acceptAll: 'Alles accepteren',
+      rejectNonEssential: 'Alleen noodzakelijk',
+      customize: 'Voorkeuren aanpassen',
+      privacyPolicy: 'Privacybeleid',
+      cookiePolicy: 'Cookiebeleid',
+      manageTitle: 'Cookievoorkeuren beheren',
+      manageDescription: 'Pas hieronder aan welke cookies je wilt toestaan. Noodzakelijke cookies zijn altijd ingeschakeld omdat de website anders niet naar behoren kan functioneren.',
+      savePreferences: 'Voorkeuren opslaan',
+      alwaysActive: 'Altijd actief',
+      categories: {
+        necessary: {
+          title: 'Noodzakelijke cookies',
+          description: 'Essentieel voor de basiswerking van de website, zoals beveiliging, taalkeuze (NL/EN) en het onthouden van je cookievoorkeuren. Deze kunnen niet worden uitgeschakeld.',
+        },
+        analytics: {
+          title: 'Analytische cookies',
+          description: 'Helpen ons inzicht te krijgen in hoe bezoekers Travelwild ervaren via Google Analytics. Gegevens worden vertrouwelijk en geanonimiseerd verwerkt om onze expedities en routes te optimaliseren.',
+        },
+        marketing: {
+          title: 'Marketing- en advertentiecookies',
+          description: 'Worden gebruikt om relevante reisinspiratie en advertenties aan te bieden op externe platforms en sociale media.',
+        },
+        functional: {
+          title: 'Functionele cookies',
+          description: 'Verbeteren je gebruikservaring door gepersonaliseerde voorkeuren, interactieve kaarten en video-instellingen te onthouden.',
+        },
+      },
+      floatingBadge: 'Cookie-instellingen',
+    },
   },
   en: {
     common: {
@@ -136,6 +169,7 @@ export const dictionaries = {
       bookTrip: 'Book now',
       languageSelect: 'Language',
       switchLanguage: 'Switch language',
+      cookieSettings: 'Cookie Settings',
     },
     nav: {
       home: 'Home',
@@ -193,6 +227,38 @@ export const dictionaries = {
       newsletterPlaceholder: 'Your email address',
       subscribe: 'Subscribe',
       allRightsReserved: 'All rights reserved.',
+    },
+    cookieBanner: {
+      title: 'We respect your privacy',
+      description: 'Travelwild uses strictly necessary cookies to ensure our site operates reliably and securely. With your consent, we also use analytical cookies (such as Google Analytics) to understand how you explore our expeditions and improve your experience. You can choose which cookies you accept.',
+      acceptAll: 'Accept all',
+      rejectNonEssential: 'Reject non-essential',
+      customize: 'Customize preferences',
+      privacyPolicy: 'Privacy Policy',
+      cookiePolicy: 'Cookie Policy',
+      manageTitle: 'Manage Cookie Preferences',
+      manageDescription: 'Adjust which cookies you allow below. Necessary cookies are always enabled to ensure core website features function properly.',
+      savePreferences: 'Save preferences',
+      alwaysActive: 'Always active',
+      categories: {
+        necessary: {
+          title: 'Strictly Necessary Cookies',
+          description: 'Essential for the website to function properly, including security, language routing (NL/EN), and storing your cookie consent. These cannot be disabled.',
+        },
+        analytics: {
+          title: 'Analytics & Performance',
+          description: 'Enables Google Analytics to collect aggregated, anonymized insights on page interactions and expedition views so we can refine our travel offerings.',
+        },
+        marketing: {
+          title: 'Marketing & Advertising',
+          description: 'Used to deliver relevant travel promotions and customized offers across external platforms and social channels.',
+        },
+        functional: {
+          title: 'Functional Preferences',
+          description: 'Enables enriched functionality, such as interactive map state, embedded media, and personalized user choices.',
+        },
+      },
+      floatingBadge: 'Cookie Settings',
     },
   },
 } as const;

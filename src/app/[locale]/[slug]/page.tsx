@@ -73,8 +73,14 @@ export default async function GenericCustomPage({
     notFound();
   }
 
+  const hasHeroFirst = Boolean(
+    page.pageBuilder &&
+      page.pageBuilder.length > 0 &&
+      page.pageBuilder[0]?._type === "hero"
+  );
+
   return (
-    <div>
+    <div className={hasHeroFirst ? "" : "pt-24 sm:pt-32 lg:pt-36"}>
       {page.pageBuilder && page.pageBuilder.length > 0 ? (
         <PageBuilder blocks={page.pageBuilder} locale={activeLocale} />
       ) : (

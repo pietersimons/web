@@ -5,6 +5,14 @@ import { Footer } from "@/components/layout/Footer";
 import { client } from "@/sanity/client";
 import { SITE_SETTINGS_QUERY } from "@/sanity/queries/pages.queries";
 import { locales, defaultLocale, Locale, isValidLocale } from "@/lib/i18n/config";
+import { GoogleConsentMode } from "@/components/analytics/GoogleConsentMode";
+import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
+import {
+  CookieConsentProvider,
+  CookieBanner,
+  CookiePreferencesDialog,
+  CookieConsentTrigger,
+} from "@/components/cookies";
 import "../globals.css";
 
 const bebasNeue = Bebas_Neue({
@@ -90,22 +98,32 @@ export default async function LocaleLayout({
 
   return (
     <html lang={activeLocale}>
+      <head>
+        <GoogleConsentMode />
+      </head>
       <body className={`${plusJakartaSans.variable} ${bebasNeue.variable} ${cinzel.variable} min-h-screen flex flex-col font-sans antialiased bg-background text-foreground selection:bg-accent selection:text-white`}>
-        <Header
-          siteName={settings?.siteName || "Travelwild"}
-          logo={settings?.logo}
-          logoLight={settings?.logoLight}
-          navigation={settings?.navigation}
-          currentLocale={activeLocale}
-        />
-        <main className="flex-1">{children}</main>
-        <Footer
-          siteName={settings?.siteName || "Travelwild"}
-          footer={settings?.footer}
-          contactInfo={settings?.contactInfo}
-          socialLinks={settings?.socialLinks}
-          currentLocale={activeLocale}
-        />
+        <CookieConsentProvider locale={activeLocale}>
+          <GoogleAnalytics measurementId={settings?.analytics?.googleAnalyticsId} />
+          <Header
+            siteName={settings?.siteName || "Travelwild"}
+            logo={settings?.logo}
+            logoLight={settings?.logoLight}
+            navigation={settings?.navigation}
+            contactInfo={settings?.contactInfo}
+            currentLocale={activeLocale}
+          />
+          <main className="flex-1">{children}</main>
+          <Footer
+            siteName={settings?.siteName || "Travelwild"}
+            footer={settings?.footer}
+            contactInfo={settings?.contactInfo}
+            socialLinks={settings?.socialLinks}
+            currentLocale={activeLocale}
+          />
+          <CookieBanner />
+          <CookiePreferencesDialog />
+          <CookieConsentTrigger />
+        </CookieConsentProvider>
       </body>
     </html>
   );

@@ -7,6 +7,7 @@ interface RichTextBlockProps {
   content: any;
   maxWidth?: "prose" | "wide" | "full";
   align?: "left" | "center";
+  asH1?: boolean;
 }
 
 export function RichTextBlock({
@@ -15,6 +16,7 @@ export function RichTextBlock({
   content,
   maxWidth = "prose",
   align = "left",
+  asH1 = false,
 }: RichTextBlockProps) {
   const maxWidthClass =
     maxWidth === "wide"
@@ -33,11 +35,16 @@ export function RichTextBlock({
             {badge}
           </Badge>
         )}
-        {heading && (
-          <h2 className="font-heading text-2xl sm:text-4xl font-extrabold tracking-tight text-foreground mb-6">
-            {heading}
-          </h2>
-        )}
+        {heading &&
+          (asH1 ? (
+            <h1 className="font-heading text-3xl sm:text-5xl font-extrabold tracking-tight text-foreground mb-6">
+              {heading}
+            </h1>
+          ) : (
+            <h2 className="font-heading text-2xl sm:text-4xl font-extrabold tracking-tight text-foreground mb-6">
+              {heading}
+            </h2>
+          ))}
         <PortableTextRenderer value={content} />
       </div>
     </section>

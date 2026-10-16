@@ -26,12 +26,12 @@ export type SecondaryCta = {
 };
 
 export type ViewAllLink = {
-  label?: string;
+  label?: LocaleString;
   url?: string;
 };
 
 export type Cta = {
-  label?: string;
+  label?: LocaleString;
   url?: string;
 };
 
@@ -108,15 +108,15 @@ export type PageBuilder = Array<
 
 export type TestimonialsBlock = {
   _type: "testimonialsBlock";
-  badge?: string;
-  heading?: string;
-  subheading?: string;
+  badge?: LocaleString;
+  heading?: LocaleString;
+  subheading?: LocaleText;
   testimonials?: Array<{
     author?: string;
     location?: string;
-    tripTaken?: string;
+    tripTaken?: LocaleString;
     rating?: number;
-    quote?: string;
+    quote?: LocaleText;
     avatar?: Avatar;
     _key: string;
   }>;
@@ -141,28 +141,28 @@ export type CtaBlock = {
 
 export type FaqBlock = {
   _type: "faqBlock";
-  badge?: string;
-  heading?: string;
-  subheading?: string;
+  badge?: LocaleString;
+  heading?: LocaleString;
+  subheading?: LocaleText;
   items?: Array<{
-    question?: string;
-    answer?: PortableText;
+    question?: LocaleString;
+    answer?: LocalePortableText;
     _key: string;
   }>;
 };
 
 export type GalleryBlock = {
   _type: "galleryBlock";
-  badge?: string;
-  heading?: string;
-  subheading?: string;
+  badge?: LocaleString;
+  heading?: LocaleString;
+  subheading?: LocaleText;
   images?: Array<{
     asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
-    caption?: string;
+    caption?: LocaleString;
     location?: string;
     _type: "image";
     _key: string;
@@ -172,9 +172,9 @@ export type GalleryBlock = {
 
 export type ProcessStepsBlock = {
   _type: "processStepsBlock";
-  badge?: string;
-  heading?: string;
-  subheading?: string;
+  badge?: LocaleString;
+  heading?: LocaleString;
+  subheading?: LocaleText;
   steps?: Array<
     {
       _key: string;
@@ -185,9 +185,9 @@ export type ProcessStepsBlock = {
 
 export type RichTextBlock = {
   _type: "richTextBlock";
-  badge?: string;
-  heading?: string;
-  content?: PortableText;
+  badge?: LocaleString;
+  heading?: LocaleString;
+  content?: LocalePortableText;
   maxWidth?: "prose" | "wide" | "full";
   align?: "left" | "center";
 };
@@ -201,9 +201,9 @@ export type DestinationReference = {
 
 export type DestinationGrid = {
   _type: "destinationGrid";
-  badge?: string;
-  heading?: string;
-  subheading?: string;
+  badge?: LocaleString;
+  heading?: LocaleString;
+  subheading?: LocaleText;
   destinations?: Array<
     {
       _key: string;
@@ -221,9 +221,9 @@ export type ItineraryReference = {
 
 export type ItineraryGrid = {
   _type: "itineraryGrid";
-  badge?: string;
-  heading?: string;
-  subheading?: string;
+  badge?: LocaleString;
+  heading?: LocaleString;
+  subheading?: LocaleText;
   displayMode?: "manual" | "group" | "on-demand" | "by-destination";
   selectedItineraries?: Array<
     {
@@ -426,10 +426,10 @@ export type SiteSettings = {
     _type: "image";
   };
   navigation?: Array<{
-    label?: string;
+    label?: LocaleString;
     url?: string;
     children?: Array<{
-      label?: string;
+      label?: LocaleString;
       url?: string;
       _key: string;
     }>;
@@ -453,12 +453,12 @@ export type SiteSettings = {
     _key: string;
   }>;
   footer?: {
-    tagline?: string;
-    copyrightText?: string;
+    tagline?: LocaleString;
+    copyrightText?: LocaleString;
     columns?: Array<{
-      title?: string;
+      title?: LocaleString;
       links?: Array<{
-        label?: string;
+        label?: LocaleString;
         url?: string;
         _key: string;
       }>;
@@ -466,8 +466,8 @@ export type SiteSettings = {
     }>;
   };
   defaultSeo?: {
-    metaTitle?: string;
-    metaDescription?: string;
+    metaTitle?: LocaleString;
+    metaDescription?: LocaleText;
     shareImage?: {
       asset?: SanityImageAssetReference;
       media?: unknown;
@@ -475,6 +475,9 @@ export type SiteSettings = {
       crop?: SanityImageCrop;
       _type: "image";
     };
+  };
+  analytics?: {
+    googleAnalyticsId?: string;
   };
 };
 
@@ -500,12 +503,12 @@ export type Page = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title?: string;
+  title?: LocaleString;
   slug?: Slug;
   pageBuilder?: PageBuilder;
   seo?: {
-    metaTitle?: string;
-    metaDescription?: string;
+    metaTitle?: LocaleString;
+    metaDescription?: LocaleText;
     shareImage?: {
       asset?: SanityImageAssetReference;
       media?: unknown;
@@ -528,7 +531,7 @@ export type TravelOnDemandPage = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title?: string;
+  title?: LocaleString;
   slug?: Slug;
   hero?: Hero;
   processSection?: ProcessStepsBlock;
@@ -550,8 +553,8 @@ export type TravelOnDemandPage = {
   };
   pageBuilder?: PageBuilder;
   seo?: {
-    metaTitle?: string;
-    metaDescription?: string;
+    metaTitle?: LocaleString;
+    metaDescription?: LocaleText;
     shareImage?: {
       asset?: SanityImageAssetReference;
       media?: unknown;
@@ -568,11 +571,18 @@ export type GroupTravelPage = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title?: string;
+  title?: LocaleString;
   slug?: Slug;
   hero?: Hero;
+  tripsSection?: {
+    badge?: LocaleString;
+    heading?: LocaleString;
+    subheading?: LocaleText;
+  };
   introPhilosophy?: {
+    badge?: LocaleString;
     heading?: string;
+    subheading?: LocaleText;
     description?: PortableText;
     benefits?: Array<
       {
@@ -582,8 +592,8 @@ export type GroupTravelPage = {
   };
   pageBuilder?: PageBuilder;
   seo?: {
-    metaTitle?: string;
-    metaDescription?: string;
+    metaTitle?: LocaleString;
+    metaDescription?: LocaleText;
     shareImage?: {
       asset?: SanityImageAssetReference;
       media?: unknown;
@@ -600,11 +610,11 @@ export type HomePage = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title?: string;
+  title?: LocaleString;
   pageBuilder?: PageBuilder;
   seo?: {
-    metaTitle?: string;
-    metaDescription?: string;
+    metaTitle?: LocaleString;
+    metaDescription?: LocaleText;
     shareImage?: {
       asset?: SanityImageAssetReference;
       media?: unknown;
@@ -631,8 +641,6 @@ export type Itinerary = {
     durationNights?: number;
     difficulty?: "easy" | "moderate" | "challenging" | "expert";
     groupSize?: LocaleString;
-    startLocation?: string;
-    endLocation?: string;
     minimumAge?: number;
   };
   pricing?: {
@@ -714,7 +722,7 @@ export type DestinationsPage = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title?: string;
+  title?: LocaleString;
   slug?: Slug;
   hero?: Hero;
   featuredDestinations?: Array<
@@ -729,8 +737,8 @@ export type DestinationsPage = {
   };
   pageBuilder?: PageBuilder;
   seo?: {
-    metaTitle?: string;
-    metaDescription?: string;
+    metaTitle?: LocaleString;
+    metaDescription?: LocaleText;
     shareImage?: {
       asset?: SanityImageAssetReference;
       media?: unknown;
@@ -951,7 +959,15 @@ export type AllSanitySchemaTypes =
 // Query: *[_type == "destinationsPage"][0] {    _id,    "title": coalesce(title[$language], title.nl, title.en, title),    hero {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      backgroundImage {          asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop      }    },    featuredDestinations[]->{      _id,      "title": coalesce(title[$language], title.nl, title.en, title),      "slug": slug.current,      "tagline": coalesce(tagline[$language], tagline.nl, tagline.en, tagline),      region,      featuredImage {          asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop      },      "tripCount": count(*[_type == "itinerary" && references(^._id)])    },    filterSettings,      seo {    "metaTitle": coalesce(metaTitle[$language], metaTitle.nl, metaTitle.en, metaTitle),    "metaDescription": coalesce(metaDescription[$language], metaDescription.nl, metaDescription.en, metaDescription),    shareImage {        asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop    }  },    "allDestinations": *[_type == "destination"] | order(featured desc, title.nl asc, title asc) {      _id,      "title": coalesce(title[$language], title.nl, title.en, title),      "slug": slug.current,      "tagline": coalesce(tagline[$language], tagline.nl, tagline.en, tagline),      region,      featuredImage {          asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop      },      "summary": coalesce(summary[$language], summary.nl, summary.en, summary),      "tripCount": count(*[_type == "itinerary" && references(^._id)])    }  }
 export type DESTINATIONS_PAGE_QUERY_RESULT = {
   _id: string;
-  title: Array<string> | string | null;
+  title:
+    | Array<{
+        _type: "localeString";
+        nl?: string;
+        en?: string;
+      }>
+    | LocaleString
+    | string
+    | null;
   hero: {
     badge:
       | Array<{
@@ -1055,8 +1071,24 @@ export type DESTINATIONS_PAGE_QUERY_RESULT = {
     defaultView?: "bento" | "grid";
   } | null;
   seo: {
-    metaTitle: Array<string> | string | null;
-    metaDescription: Array<string> | string | null;
+    metaTitle:
+      | Array<{
+          _type: "localeString";
+          nl?: string;
+          en?: string;
+        }>
+      | LocaleString
+      | string
+      | null;
+    metaDescription:
+      | Array<{
+          _type: "localeText";
+          nl?: string;
+          en?: string;
+        }>
+      | LocaleText
+      | string
+      | null;
     shareImage: {
       asset: {
         _id: string;
@@ -1139,7 +1171,7 @@ export type DESTINATIONS_PAGE_QUERY_RESULT = {
 
 // Source: ../web/src/sanity/queries/destination.queries.ts
 // Variable: DESTINATION_DETAIL_QUERY
-// Query: *[_type == "destination" && slug.current == $slug][0] {    _id,    _type,    "title": coalesce(title[$language], title.nl, title.en, title),    "slug": slug.current,    "tagline": coalesce(tagline[$language], tagline.nl, tagline.en, tagline),    region,    featuredImage {        asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop    },    gallery[] {        asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop,      "caption": coalesce(caption[$language], caption.nl, caption.en, caption)    },    "summary": coalesce(summary[$language], summary.nl, summary.en, summary),    "overview": coalesce(overview[$language], overview.nl, overview.en, overview),    travelGuide {      "bestTimeToVisit": coalesce(bestTimeToVisit[$language], bestTimeToVisit.nl, bestTimeToVisit.en, bestTimeToVisit),      "climate": coalesce(climate[$language], climate.nl, climate.en, climate),      "currency": coalesce(currency[$language], currency.nl, currency.en, currency),      "visaInfo": coalesce(visaInfo[$language], visaInfo.nl, visaInfo.en, visaInfo),      "languages": coalesce(languages[$language], languages.nl, languages.en, languages),      "timeZone": coalesce(timeZone[$language], timeZone.nl, timeZone.en, timeZone)    },    "itineraries": *[_type == "itinerary" && references(^._id)] | order(featured desc, _createdAt desc) {        _id,  _type,  "title": coalesce(title[$language], title.nl, title.en, title),  "slug": slug.current,  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),  travelStyle,  featured,  tripSpecs {    durationDays,    durationNights,    difficulty,    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize),    startLocation,    endLocation  },  pricing {    priceFrom,    currency,    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)  },  featuredImage {      asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop  },  destination->{    "title": coalesce(title[$language], title.nl, title.en, title),    "slug": slug.current,    region  }    },      seo {    "metaTitle": coalesce(metaTitle[$language], metaTitle.nl, metaTitle.en, metaTitle),    "metaDescription": coalesce(metaDescription[$language], metaDescription.nl, metaDescription.en, metaDescription),    shareImage {        asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop    }  }  }
+// Query: *[_type == "destination" && slug.current == $slug][0] {    _id,    _type,    "title": coalesce(title[$language], title.nl, title.en, title),    "slug": slug.current,    "tagline": coalesce(tagline[$language], tagline.nl, tagline.en, tagline),    region,    featuredImage {        asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop    },    gallery[] {        asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop,      "caption": coalesce(caption[$language], caption.nl, caption.en, caption)    },    "summary": coalesce(summary[$language], summary.nl, summary.en, summary),    "overview": coalesce(overview[$language], overview.nl, overview.en, overview),    travelGuide {      "bestTimeToVisit": coalesce(bestTimeToVisit[$language], bestTimeToVisit.nl, bestTimeToVisit.en, bestTimeToVisit),      "climate": coalesce(climate[$language], climate.nl, climate.en, climate),      "currency": coalesce(currency[$language], currency.nl, currency.en, currency),      "visaInfo": coalesce(visaInfo[$language], visaInfo.nl, visaInfo.en, visaInfo),      "languages": coalesce(languages[$language], languages.nl, languages.en, languages),      "timeZone": coalesce(timeZone[$language], timeZone.nl, timeZone.en, timeZone)    },    "itineraries": *[_type == "itinerary" && references(^._id)] | order(featured desc, _createdAt desc) {        _id,  _type,  "title": coalesce(title[$language], title.nl, title.en, title),  "slug": slug.current,  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),  travelStyle,  featured,  tripSpecs {    durationDays,    durationNights,    difficulty,    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize)  },  pricing {    priceFrom,    currency,    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)  },  featuredImage {      asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop  },  destination->{    "title": coalesce(title[$language], title.nl, title.en, title),    "slug": slug.current,    region  }    },      seo {    "metaTitle": coalesce(metaTitle[$language], metaTitle.nl, metaTitle.en, metaTitle),    "metaDescription": coalesce(metaDescription[$language], metaDescription.nl, metaDescription.en, metaDescription),    shareImage {        asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop    }  }  }
 export type DESTINATION_DETAIL_QUERY_RESULT = {
   _id: string;
   _type: "destination";
@@ -1326,8 +1358,6 @@ export type DESTINATION_DETAIL_QUERY_RESULT = {
         | LocaleString
         | string
         | null;
-      startLocation: string | null;
-      endLocation: string | null;
     } | null;
     pricing: {
       priceFrom: number | null;
@@ -1431,7 +1461,7 @@ export type ALL_DESTINATIONS_SLUGS_QUERY_RESULT = Array<{
 
 // Source: ../web/src/sanity/queries/itinerary.queries.ts
 // Variable: ITINERARY_DETAIL_QUERY
-// Query: *[_type == "itinerary" && slug.current == $slug][0] {    _id,    _type,    "title": coalesce(title[$language], title.nl, title.en, title),    "slug": slug.current,    "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),    travelStyle,    featured,    tripSpecs {      durationDays,      durationNights,      difficulty,      "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize),      startLocation,      endLocation,      minimumAge    },    pricing {      priceFrom,      currency,      "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)    },    featuredImage {        asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop    },    gallery[] {        asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop,      "caption": coalesce(caption[$language], caption.nl, caption.en, caption)    },    "summary": coalesce(summary[$language], summary.nl, summary.en, summary),    "highlights": highlights[][coalesce(@[$language], @.nl, @.en, @)],    dayByDay[] {      _key,      dayNumber,      "title": coalesce(title[$language], title.nl, title.en, title),      "location": coalesce(location[$language], location.nl, location.en, location),      "description": coalesce(description[$language], description.nl, description.en, description),      meals,      accommodation {        name,        type,        "notes": coalesce(notes[$language], notes.nl, notes.en, notes)      },      "includedActivities": includedActivities[][coalesce(@[$language], @.nl, @.en, @)],      "optionalActivities": optionalActivities[][coalesce(@[$language], @.nl, @.en, @)],      gallery[] {          asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop      }    },    stepByStepGuide[] {      _key,      stepNumber,      "title": coalesce(title[$language], title.nl, title.en, title),      "description": coalesce(description[$language], description.nl, description.en, description),      icon,      image {          asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop      }    },    inclusionsExclusions {      "included": included[][coalesce(@[$language], @.nl, @.en, @)],      "excluded": excluded[][coalesce(@[$language], @.nl, @.en, @)]    },    departures[] {      _key,      startDate,      endDate,      price,      status,      spotsLeft,      guideName    },    faq[] {      _key,      "question": coalesce(question[$language], question.nl, question.en, question),      "answer": coalesce(answer[$language], answer.nl, answer.en, answer)    },    destination->{      _id,      "title": coalesce(title[$language], title.nl, title.en, title),      "slug": slug.current,      region,      featuredImage {          asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop      }    },    "relatedItineraries": *[_type == "itinerary" && destination._ref == ^.destination._ref && _id != ^._id][0...3] {        _id,  _type,  "title": coalesce(title[$language], title.nl, title.en, title),  "slug": slug.current,  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),  travelStyle,  featured,  tripSpecs {    durationDays,    durationNights,    difficulty,    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize),    startLocation,    endLocation  },  pricing {    priceFrom,    currency,    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)  },  featuredImage {      asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop  },  destination->{    "title": coalesce(title[$language], title.nl, title.en, title),    "slug": slug.current,    region  }    },      seo {    "metaTitle": coalesce(metaTitle[$language], metaTitle.nl, metaTitle.en, metaTitle),    "metaDescription": coalesce(metaDescription[$language], metaDescription.nl, metaDescription.en, metaDescription),    shareImage {        asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop    }  }  }
+// Query: *[_type == "itinerary" && slug.current == $slug][0] {    _id,    _type,    "title": coalesce(title[$language], title.nl, title.en, title),    "slug": slug.current,    "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),    travelStyle,    featured,    tripSpecs {      durationDays,      durationNights,      difficulty,      "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize),      minimumAge    },    pricing {      priceFrom,      currency,      "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)    },    featuredImage {        asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop    },    gallery[] {        asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop,      "caption": coalesce(caption[$language], caption.nl, caption.en, caption)    },    "summary": coalesce(summary[$language], summary.nl, summary.en, summary),    "highlights": highlights[] { "val": coalesce(@[$language], nl, en, @) }.val,    dayByDay[] {      _key,      dayNumber,      "title": coalesce(title[$language], title.nl, title.en, title),      "location": coalesce(location[$language], location.nl, location.en, location),      "description": coalesce(description[$language], description.nl, description.en, description),      meals,      accommodation {        name,        type,        "notes": coalesce(notes[$language], notes.nl, notes.en, notes)      },      "includedActivities": includedActivities[] { "val": coalesce(@[$language], nl, en, @) }.val,      "optionalActivities": optionalActivities[] { "val": coalesce(@[$language], nl, en, @) }.val,      gallery[] {          asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop      }    },    stepByStepGuide[] {      _key,      stepNumber,      "title": coalesce(title[$language], title.nl, title.en, title),      "description": coalesce(description[$language], description.nl, description.en, description),      icon,      image {          asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop      }    },    inclusionsExclusions {      "included": included[] { "val": coalesce(@[$language], nl, en, @) }.val,      "excluded": excluded[] { "val": coalesce(@[$language], nl, en, @) }.val    },    departures[] {      _key,      startDate,      endDate,      price,      status,      spotsLeft,      guideName    },    faq[] {      _key,      "question": coalesce(question[$language], question.nl, question.en, question),      "answer": coalesce(answer[$language], answer.nl, answer.en, answer)    },    destination->{      _id,      "title": coalesce(title[$language], title.nl, title.en, title),      "slug": slug.current,      region,      featuredImage {          asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop      }    },    "relatedItineraries": *[_type == "itinerary" && destination._ref == ^.destination._ref && _id != ^._id][0...3] {        _id,  _type,  "title": coalesce(title[$language], title.nl, title.en, title),  "slug": slug.current,  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),  travelStyle,  featured,  tripSpecs {    durationDays,    durationNights,    difficulty,    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize)  },  pricing {    priceFrom,    currency,    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)  },  featuredImage {      asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop  },  destination->{    "title": coalesce(title[$language], title.nl, title.en, title),    "slug": slug.current,    region  }    },      seo {    "metaTitle": coalesce(metaTitle[$language], metaTitle.nl, metaTitle.en, metaTitle),    "metaDescription": coalesce(metaDescription[$language], metaDescription.nl, metaDescription.en, metaDescription),    shareImage {        asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop    }  }  }
 export type ITINERARY_DETAIL_QUERY_RESULT = {
   _id: string;
   _type: "itinerary";
@@ -1469,8 +1499,6 @@ export type ITINERARY_DETAIL_QUERY_RESULT = {
       | LocaleString
       | string
       | null;
-    startLocation: string | null;
-    endLocation: string | null;
     minimumAge: number | null;
   } | null;
   pricing: {
@@ -1539,7 +1567,13 @@ export type ITINERARY_DETAIL_QUERY_RESULT = {
     | LocaleText
     | string
     | null;
-  highlights: Array<never> | null;
+  highlights: Array<
+    Array<
+      {
+        _key: string;
+      } & LocaleString
+    >
+  > | null;
   dayByDay: Array<{
     _key: string;
     dayNumber: string | null;
@@ -1592,8 +1626,20 @@ export type ITINERARY_DETAIL_QUERY_RESULT = {
         | string
         | null;
     } | null;
-    includedActivities: Array<never> | null;
-    optionalActivities: Array<never> | null;
+    includedActivities: Array<
+      Array<
+        {
+          _key: string;
+        } & LocaleString
+      >
+    > | null;
+    optionalActivities: Array<
+      Array<
+        {
+          _key: string;
+        } & LocaleString
+      >
+    > | null;
     gallery: Array<{
       asset: {
         _id: string;
@@ -1655,8 +1701,20 @@ export type ITINERARY_DETAIL_QUERY_RESULT = {
     } | null;
   }> | null;
   inclusionsExclusions: {
-    included: Array<never> | null;
-    excluded: Array<never> | null;
+    included: Array<
+      Array<
+        {
+          _key: string;
+        } & LocaleString
+      >
+    > | null;
+    excluded: Array<
+      Array<
+        {
+          _key: string;
+        } & LocaleString
+      >
+    > | null;
   } | null;
   departures: Array<{
     _key: string;
@@ -1765,8 +1823,6 @@ export type ITINERARY_DETAIL_QUERY_RESULT = {
         | LocaleString
         | string
         | null;
-      startLocation: string | null;
-      endLocation: string | null;
     } | null;
     pricing: {
       priceFrom: number | null;
@@ -1870,7 +1926,7 @@ export type ALL_ITINERARIES_SLUGS_QUERY_RESULT = Array<{
 
 // Source: ../web/src/sanity/queries/itinerary.queries.ts
 // Variable: ALL_GROUP_TRIPS_QUERY
-// Query: *[_type == "itinerary" && (travelStyle == "group" || travelStyle == "both")] | order(featured desc, _createdAt desc) {      _id,  _type,  "title": coalesce(title[$language], title.nl, title.en, title),  "slug": slug.current,  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),  travelStyle,  featured,  tripSpecs {    durationDays,    durationNights,    difficulty,    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize),    startLocation,    endLocation  },  pricing {    priceFrom,    currency,    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)  },  featuredImage {      asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop  },  destination->{    "title": coalesce(title[$language], title.nl, title.en, title),    "slug": slug.current,    region  },    departures[] {      startDate,      endDate,      status,      price    }  }
+// Query: *[_type == "itinerary" && (travelStyle == "group" || travelStyle == "both")] | order(featured desc, _createdAt desc) {      _id,  _type,  "title": coalesce(title[$language], title.nl, title.en, title),  "slug": slug.current,  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),  travelStyle,  featured,  tripSpecs {    durationDays,    durationNights,    difficulty,    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize)  },  pricing {    priceFrom,    currency,    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)  },  featuredImage {      asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop  },  destination->{    "title": coalesce(title[$language], title.nl, title.en, title),    "slug": slug.current,    region  },    departures[] {      startDate,      endDate,      status,      price    }  }
 export type ALL_GROUP_TRIPS_QUERY_RESULT = Array<{
   _id: string;
   _type: "itinerary";
@@ -1908,8 +1964,6 @@ export type ALL_GROUP_TRIPS_QUERY_RESULT = Array<{
       | LocaleString
       | string
       | null;
-    startLocation: string | null;
-    endLocation: string | null;
   } | null;
   pricing: {
     priceFrom: number | null;
@@ -1973,1079 +2027,17 @@ export type ALL_GROUP_TRIPS_QUERY_RESULT = Array<{
 
 // Source: ../web/src/sanity/queries/pages.queries.ts
 // Variable: HOME_PAGE_QUERY
-// Query: *[_type == "homePage"][0] {    _id,    "title": coalesce(title[$language], title.nl, title.en, title),      pageBuilder[] {    _key,    _type,    // Hero Block    _type == "hero" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      backgroundImage {          asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop      },      videoUrl,      primaryCta {        "label": coalesce(label[$language], label.nl, label.en, label),        url      },      secondaryCta {        "label": coalesce(label[$language], label.nl, label.en, label),        url      },      layoutStyle    },    // Features & USPs Bar Block    _type == "featuresBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      layoutStyle,      backgroundColor,      items[] {        _key,        "title": coalesce(title[$language], title.nl, title.en, title),        "description": coalesce(description[$language], description.nl, description.en, description),        iconType,        icon,        image {            asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop        },        link      }    },    // Itinerary Grid Block    _type == "itineraryGrid" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      displayMode,      layout,      viewAllLink,      displayMode == "manual" => {        selectedItineraries[]->{            _id,  _type,  "title": coalesce(title[$language], title.nl, title.en, title),  "slug": slug.current,  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),  travelStyle,  featured,  tripSpecs {    durationDays,    durationNights,    difficulty,    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize),    startLocation,    endLocation  },  pricing {    priceFrom,    currency,    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)  },  featuredImage {      asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop  },  destination->{    "title": coalesce(title[$language], title.nl, title.en, title),    "slug": slug.current,    region  }        }      },      displayMode == "group" => {        "itineraries": *[_type == "itinerary" && (travelStyle == "group" || travelStyle == "both")] | order(featured desc, _createdAt desc)[0...6] {            _id,  _type,  "title": coalesce(title[$language], title.nl, title.en, title),  "slug": slug.current,  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),  travelStyle,  featured,  tripSpecs {    durationDays,    durationNights,    difficulty,    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize),    startLocation,    endLocation  },  pricing {    priceFrom,    currency,    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)  },  featuredImage {      asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop  },  destination->{    "title": coalesce(title[$language], title.nl, title.en, title),    "slug": slug.current,    region  }        }      },      displayMode == "on-demand" => {        "itineraries": *[_type == "itinerary" && (travelStyle == "on-demand" || travelStyle == "both")] | order(featured desc, _createdAt desc)[0...6] {            _id,  _type,  "title": coalesce(title[$language], title.nl, title.en, title),  "slug": slug.current,  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),  travelStyle,  featured,  tripSpecs {    durationDays,    durationNights,    difficulty,    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize),    startLocation,    endLocation  },  pricing {    priceFrom,    currency,    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)  },  featuredImage {      asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop  },  destination->{    "title": coalesce(title[$language], title.nl, title.en, title),    "slug": slug.current,    region  }        }      },      displayMode == "by-destination" => {        "itineraries": *[_type == "itinerary" && destination._ref == ^.filterDestination._ref] | order(featured desc, _createdAt desc)[0...6] {            _id,  _type,  "title": coalesce(title[$language], title.nl, title.en, title),  "slug": slug.current,  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),  travelStyle,  featured,  tripSpecs {    durationDays,    durationNights,    difficulty,    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize),    startLocation,    endLocation  },  pricing {    priceFrom,    currency,    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)  },  featuredImage {      asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop  },  destination->{    "title": coalesce(title[$language], title.nl, title.en, title),    "slug": slug.current,    region  }        }      }    },    // Destination Grid Block    _type == "destinationGrid" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      layout,      defined(destinations) => {        destinations[]->{          _id,          "title": coalesce(title[$language], title.nl, title.en, title),          "slug": slug.current,          "tagline": coalesce(tagline[$language], tagline.nl, tagline.en, tagline),          region,          featuredImage {              asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop          },          "tripCount": count(*[_type == "itinerary" && references(^._id)])        }      },      !defined(destinations) => {        "destinations": *[_type == "destination"] | order(featured desc, title.nl asc, title asc) {          _id,          "title": coalesce(title[$language], title.nl, title.en, title),          "slug": slug.current,          "tagline": coalesce(tagline[$language], tagline.nl, tagline.en, tagline),          region,          featuredImage {              asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop          },          "tripCount": count(*[_type == "itinerary" && references(^._id)])        }      }    },    // Process Steps Block    _type == "processStepsBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      steps[] {        stepNumber,        "title": coalesce(title[$language], title.nl, title.en, title),        "description": coalesce(description[$language], description.nl, description.en, description),        icon,        image {            asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop        }      },      cta    },    // Rich Text Block    _type == "richTextBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "content": coalesce(content[$language], content.nl, content.en, content),      maxWidth,      align    },    // Gallery Block    _type == "galleryBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      layout,      images[] {          asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop,        location      }    },    // FAQ Block    _type == "faqBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      items[] {        "question": coalesce(question[$language], question.nl, question.en, question),        "answer": coalesce(answer[$language], answer.nl, answer.en, answer)      }    },    // Testimonials Block    _type == "testimonialsBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      testimonials[] {        author,        location,        tripTaken,        rating,        "quote": coalesce(quote[$language], quote.nl, quote.en, quote),        avatar {            asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop        }      }    },    // CTA Block    _type == "ctaBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "description": coalesce(description[$language], description.nl, description.en, description),      backgroundImage {          asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop      },      primaryButton {        "label": coalesce(label[$language], label.nl, label.en, label),        url      },      secondaryButton {        "label": coalesce(label[$language], label.nl, label.en, label),        url      },      theme    }  },      seo {    "metaTitle": coalesce(metaTitle[$language], metaTitle.nl, metaTitle.en, metaTitle),    "metaDescription": coalesce(metaDescription[$language], metaDescription.nl, metaDescription.en, metaDescription),    shareImage {        asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop    }  }  }
+// Query: *[_type == "homePage"][0] {    _id,    "title": coalesce(title[$language], title.nl, title.en, title),      pageBuilder[] {    _key,    _type,    // Hero Block    _type == "hero" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      backgroundImage {          asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop      },      videoUrl,      primaryCta {        "label": coalesce(label[$language], label.nl, label.en, label),        url      },      secondaryCta {        "label": coalesce(label[$language], label.nl, label.en, label),        url      },      layoutStyle    },    // Features & USPs Bar Block    _type == "featuresBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      layoutStyle,      backgroundColor,      items[] {        _key,        "title": coalesce(title[$language], title.nl, title.en, title),        "description": coalesce(description[$language], description.nl, description.en, description),        iconType,        icon,        image {            asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop        },        link      }    },    // Itinerary Grid Block    _type == "itineraryGrid" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      displayMode,      layout,      viewAllLink {        "label": coalesce(label[$language], label.nl, label.en, label),        url      },      displayMode == "manual" => {        selectedItineraries[]->{            _id,  _type,  "title": coalesce(title[$language], title.nl, title.en, title),  "slug": slug.current,  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),  travelStyle,  featured,  tripSpecs {    durationDays,    durationNights,    difficulty,    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize)  },  pricing {    priceFrom,    currency,    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)  },  featuredImage {      asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop  },  destination->{    "title": coalesce(title[$language], title.nl, title.en, title),    "slug": slug.current,    region  }        }      },      displayMode == "group" => {        "itineraries": *[_type == "itinerary" && (travelStyle == "group" || travelStyle == "both")] | order(featured desc, _createdAt desc)[0...6] {            _id,  _type,  "title": coalesce(title[$language], title.nl, title.en, title),  "slug": slug.current,  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),  travelStyle,  featured,  tripSpecs {    durationDays,    durationNights,    difficulty,    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize)  },  pricing {    priceFrom,    currency,    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)  },  featuredImage {      asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop  },  destination->{    "title": coalesce(title[$language], title.nl, title.en, title),    "slug": slug.current,    region  }        }      },      displayMode == "on-demand" => {        "itineraries": *[_type == "itinerary" && (travelStyle == "on-demand" || travelStyle == "both")] | order(featured desc, _createdAt desc)[0...6] {            _id,  _type,  "title": coalesce(title[$language], title.nl, title.en, title),  "slug": slug.current,  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),  travelStyle,  featured,  tripSpecs {    durationDays,    durationNights,    difficulty,    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize)  },  pricing {    priceFrom,    currency,    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)  },  featuredImage {      asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop  },  destination->{    "title": coalesce(title[$language], title.nl, title.en, title),    "slug": slug.current,    region  }        }      },      displayMode == "by-destination" => {        "itineraries": *[_type == "itinerary" && destination._ref == ^.filterDestination._ref] | order(featured desc, _createdAt desc)[0...6] {            _id,  _type,  "title": coalesce(title[$language], title.nl, title.en, title),  "slug": slug.current,  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),  travelStyle,  featured,  tripSpecs {    durationDays,    durationNights,    difficulty,    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize)  },  pricing {    priceFrom,    currency,    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)  },  featuredImage {      asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop  },  destination->{    "title": coalesce(title[$language], title.nl, title.en, title),    "slug": slug.current,    region  }        }      }    },    // Destination Grid Block    _type == "destinationGrid" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      layout,      defined(destinations) => {        destinations[]->{          _id,          "title": coalesce(title[$language], title.nl, title.en, title),          "slug": slug.current,          "tagline": coalesce(tagline[$language], tagline.nl, tagline.en, tagline),          region,          featuredImage {              asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop          },          "tripCount": count(*[_type == "itinerary" && references(^._id)])        }      },      !defined(destinations) => {        "destinations": *[_type == "destination"] | order(featured desc, title.nl asc, title asc) {          _id,          "title": coalesce(title[$language], title.nl, title.en, title),          "slug": slug.current,          "tagline": coalesce(tagline[$language], tagline.nl, tagline.en, tagline),          region,          featuredImage {              asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop          },          "tripCount": count(*[_type == "itinerary" && references(^._id)])        }      }    },    // Process Steps Block    _type == "processStepsBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      steps[] {        stepNumber,        "title": coalesce(title[$language], title.nl, title.en, title),        "description": coalesce(description[$language], description.nl, description.en, description),        icon,        image {            asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop        }      },      cta {        "label": coalesce(label[$language], label.nl, label.en, label),        url      }    },    // Rich Text Block    _type == "richTextBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "content": coalesce(content[$language], content.nl, content.en, content),      maxWidth,      align    },    // Gallery Block    _type == "galleryBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      layout,      images[] {          asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop,        location,        "caption": coalesce(caption[$language], caption.nl, caption.en, caption)      }    },    // FAQ Block    _type == "faqBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      items[] {        "question": coalesce(question[$language], question.nl, question.en, question),        "answer": coalesce(answer[$language], answer.nl, answer.en, answer)      }    },    // Testimonials Block    _type == "testimonialsBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      testimonials[] {        author,        location,        "tripTaken": coalesce(tripTaken[$language], tripTaken.nl, tripTaken.en, tripTaken),        rating,        "quote": coalesce(quote[$language], quote.nl, quote.en, quote),        avatar {            asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop        }      }    },    // CTA Block    _type == "ctaBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "description": coalesce(description[$language], description.nl, description.en, description),      backgroundImage {          asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop      },      primaryButton {        "label": coalesce(label[$language], label.nl, label.en, label),        url      },      secondaryButton {        "label": coalesce(label[$language], label.nl, label.en, label),        url      },      theme    }  },      seo {    "metaTitle": coalesce(metaTitle[$language], metaTitle.nl, metaTitle.en, metaTitle),    "metaDescription": coalesce(metaDescription[$language], metaDescription.nl, metaDescription.en, metaDescription),    shareImage {        asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop    }  }  }
 export type HOME_PAGE_QUERY_RESULT = {
   _id: string;
-  title: Array<string> | string | null;
-  pageBuilder: Array<
-    | {
-        _key: string;
-        _type: "ctaBlock";
-        badge:
-          | Array<{
-              _type: "localeString";
-              nl?: string;
-              en?: string;
-            }>
-          | LocaleString
-          | string
-          | null;
-        heading:
-          | Array<{
-              _type: "localeString";
-              nl?: string;
-              en?: string;
-            }>
-          | LocaleString
-          | string
-          | null;
-        description:
-          | Array<{
-              _type: "localeText";
-              nl?: string;
-              en?: string;
-            }>
-          | LocaleText
-          | string
-          | null;
-        backgroundImage: {
-          asset: {
-            _id: string;
-            url: string | null;
-            metadata: {
-              lqip: string | null;
-              dimensions: {
-                width: number | null;
-                height: number | null;
-                aspectRatio: number | null;
-              } | null;
-            } | null;
-          } | null;
-          alt: null;
-          caption: null;
-          hotspot: SanityImageHotspot | null;
-          crop: SanityImageCrop | null;
-        } | null;
-        primaryButton: {
-          label:
-            | Array<{
-                _type: "localeString";
-                nl?: string;
-                en?: string;
-              }>
-            | LocaleString
-            | string
-            | null;
-          url: string | null;
-        } | null;
-        secondaryButton: {
-          label:
-            | Array<{
-                _type: "localeString";
-                nl?: string;
-                en?: string;
-              }>
-            | LocaleString
-            | string
-            | null;
-          url: string | null;
-        } | null;
-        theme: "accent" | "dark" | "light" | null;
-      }
-    | {
-        _key: string;
-        _type: "destinationGrid";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
-        subheading: Array<string> | string | null;
-        layout: "bento" | "carousel" | "grid-3" | null;
-        destinations: Array<{
-          _id: string;
-          title:
-            | Array<{
-                _type: "localeString";
-                nl?: string;
-                en?: string;
-              }>
-            | LocaleString
-            | string
-            | null;
-          slug: string | null;
-          tagline:
-            | Array<{
-                _type: "localeString";
-                nl?: string;
-                en?: string;
-              }>
-            | LocaleString
-            | string
-            | null;
-          region:
-            | "africa"
-            | "asia"
-            | "central-america"
-            | "europe-arctic"
-            | "middle-east"
-            | "oceania"
-            | "south-america"
-            | null;
-          featuredImage: {
-            asset: {
-              _id: string;
-              url: string | null;
-              metadata: {
-                lqip: string | null;
-                dimensions: {
-                  width: number | null;
-                  height: number | null;
-                  aspectRatio: number | null;
-                } | null;
-              } | null;
-            } | null;
-            alt: null;
-            caption: null;
-            hotspot: SanityImageHotspot | null;
-            crop: SanityImageCrop | null;
-          } | null;
-          tripCount: number;
-        }>;
-      }
-    | {
-        _key: string;
-        _type: "destinationGrid";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
-        subheading: Array<string> | string | null;
-        layout: "bento" | "carousel" | "grid-3" | null;
-        destinations: Array<{
-          _id: string;
-          title:
-            | Array<{
-                _type: "localeString";
-                nl?: string;
-                en?: string;
-              }>
-            | LocaleString
-            | string
-            | null;
-          slug: string | null;
-          tagline:
-            | Array<{
-                _type: "localeString";
-                nl?: string;
-                en?: string;
-              }>
-            | LocaleString
-            | string
-            | null;
-          region:
-            | "africa"
-            | "asia"
-            | "central-america"
-            | "europe-arctic"
-            | "middle-east"
-            | "oceania"
-            | "south-america"
-            | null;
-          featuredImage: {
-            asset: {
-              _id: string;
-              url: string | null;
-              metadata: {
-                lqip: string | null;
-                dimensions: {
-                  width: number | null;
-                  height: number | null;
-                  aspectRatio: number | null;
-                } | null;
-              } | null;
-            } | null;
-            alt: null;
-            caption: null;
-            hotspot: SanityImageHotspot | null;
-            crop: SanityImageCrop | null;
-          } | null;
-          tripCount: number;
-        }> | null;
-      }
-    | {
-        _key: string;
-        _type: "destinationGrid";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
-        subheading: Array<string> | string | null;
-        layout: "bento" | "carousel" | "grid-3" | null;
-      }
-    | {
-        _key: string;
-        _type: "faqBlock";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
-        subheading: Array<string> | string | null;
-        items: Array<{
-          question: Array<string> | string | null;
-          answer:
-            | Array<
-                | {
-                    children?: Array<{
-                      marks?: Array<string>;
-                      text?: string;
-                      _type: "span";
-                      _key: string;
-                    }>;
-                    style?: "blockquote" | "h2" | "h3" | "h4" | "normal";
-                    listItem?: "bullet" | "number";
-                    markDefs?: Array<{
-                      href?: string;
-                      blank?: boolean;
-                      _type: "link";
-                      _key: string;
-                    }>;
-                    level?: number;
-                    _type: "block";
-                    _key: string;
-                  }
-                | {
-                    asset?: SanityImageAssetReference;
-                    media?: unknown;
-                    hotspot?: SanityImageHotspot;
-                    crop?: SanityImageCrop;
-                    alt?: string;
-                    caption?: string;
-                    _type: "image";
-                    _key: string;
-                  }
-              >
-            | PortableText
-            | null;
-        }> | null;
-      }
-    | {
-        _key: string;
-        _type: "featuresBlock";
-        badge:
-          | Array<{
-              _type: "localeString";
-              nl?: string;
-              en?: string;
-            }>
-          | LocaleString
-          | string
-          | null;
-        heading:
-          | Array<{
-              _type: "localeString";
-              nl?: string;
-              en?: string;
-            }>
-          | LocaleString
-          | string
-          | null;
-        subheading:
-          | Array<{
-              _type: "localeText";
-              nl?: string;
-              en?: string;
-            }>
-          | LocaleText
-          | string
-          | null;
-        layoutStyle: "bar" | "grid" | null;
-        backgroundColor: "card" | "dark" | "subtle" | "transparent" | null;
-        items: Array<{
-          _key: string;
-          title:
-            | Array<{
-                _type: "localeString";
-                nl?: string;
-                en?: string;
-              }>
-            | LocaleString
-            | string
-            | null;
-          description:
-            | Array<{
-                _type: "localeString";
-                nl?: string;
-                en?: string;
-              }>
-            | LocaleString
-            | string
-            | null;
-          iconType: "icon" | "image" | null;
-          icon:
-            | "award"
-            | "binoculars"
-            | "calendar"
-            | "camera"
-            | "clock"
-            | "compass"
-            | "footprints"
-            | "globe"
-            | "heartHandshake"
-            | "leaf"
-            | "mapPin"
-            | "mountain"
-            | "plane"
-            | "shield"
-            | "sparkles"
-            | "tent"
-            | "users"
-            | null;
-          image: {
-            asset: {
-              _id: string;
-              url: string | null;
-              metadata: {
-                lqip: string | null;
-                dimensions: {
-                  width: number | null;
-                  height: number | null;
-                  aspectRatio: number | null;
-                } | null;
-              } | null;
-            } | null;
-            alt: null;
-            caption: null;
-            hotspot: SanityImageHotspot | null;
-            crop: SanityImageCrop | null;
-          } | null;
-          link: string | null;
-        }> | null;
-      }
-    | {
-        _key: string;
-        _type: "galleryBlock";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
-        subheading: Array<string> | string | null;
-        layout: "carousel" | "grid-3" | "masonry" | null;
-        images: Array<{
-          asset: {
-            _id: string;
-            url: string | null;
-            metadata: {
-              lqip: string | null;
-              dimensions: {
-                width: number | null;
-                height: number | null;
-                aspectRatio: number | null;
-              } | null;
-            } | null;
-          } | null;
-          alt: string | null;
-          caption: string | null;
-          hotspot: SanityImageHotspot | null;
-          crop: SanityImageCrop | null;
-          location: string | null;
-        }> | null;
-      }
-    | {
-        _key: string;
-        _type: "hero";
-        badge:
-          | Array<{
-              _type: "localeString";
-              nl?: string;
-              en?: string;
-            }>
-          | LocaleString
-          | string
-          | null;
-        heading:
-          | Array<{
-              _type: "localeString";
-              nl?: string;
-              en?: string;
-            }>
-          | LocaleString
-          | string
-          | null;
-        subheading:
-          | Array<{
-              _type: "localeText";
-              nl?: string;
-              en?: string;
-            }>
-          | LocaleText
-          | string
-          | null;
-        backgroundImage: {
-          asset: {
-            _id: string;
-            url: string | null;
-            metadata: {
-              lqip: string | null;
-              dimensions: {
-                width: number | null;
-                height: number | null;
-                aspectRatio: number | null;
-              } | null;
-            } | null;
-          } | null;
-          alt: null;
-          caption: null;
-          hotspot: SanityImageHotspot | null;
-          crop: SanityImageCrop | null;
-        } | null;
-        videoUrl: string | null;
-        primaryCta: {
-          label:
-            | Array<{
-                _type: "localeString";
-                nl?: string;
-                en?: string;
-              }>
-            | LocaleString
-            | string
-            | null;
-          url: string | null;
-        } | null;
-        secondaryCta: {
-          label:
-            | Array<{
-                _type: "localeString";
-                nl?: string;
-                en?: string;
-              }>
-            | LocaleString
-            | string
-            | null;
-          url: string | null;
-        } | null;
-        layoutStyle: "compact" | "fullscreen" | "split" | null;
-      }
-    | {
-        _key: string;
-        _type: "itineraryGrid";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
-        subheading: Array<string> | string | null;
-        displayMode: "by-destination" | "group" | "manual" | "on-demand" | null;
-        layout: "carousel" | "grid-3" | "grid-4" | null;
-        viewAllLink: ViewAllLink | null;
-        selectedItineraries: Array<{
-          _id: string;
-          _type: "itinerary";
-          title:
-            | Array<{
-                _type: "localeString";
-                nl?: string;
-                en?: string;
-              }>
-            | LocaleString
-            | string
-            | null;
-          slug: string | null;
-          subtitle:
-            | Array<{
-                _type: "localeString";
-                nl?: string;
-                en?: string;
-              }>
-            | LocaleString
-            | string
-            | null;
-          travelStyle: "both" | "group" | "on-demand" | null;
-          featured: boolean | null;
-          tripSpecs: {
-            durationDays: number | null;
-            durationNights: number | null;
-            difficulty: "challenging" | "easy" | "expert" | "moderate" | null;
-            groupSize:
-              | Array<{
-                  _type: "localeString";
-                  nl?: string;
-                  en?: string;
-                }>
-              | LocaleString
-              | string
-              | null;
-            startLocation: string | null;
-            endLocation: string | null;
-          } | null;
-          pricing: {
-            priceFrom: number | null;
-            currency: string | null;
-            priceNote:
-              | Array<{
-                  _type: "localeString";
-                  nl?: string;
-                  en?: string;
-                }>
-              | LocaleString
-              | string
-              | null;
-          } | null;
-          featuredImage: {
-            asset: {
-              _id: string;
-              url: string | null;
-              metadata: {
-                lqip: string | null;
-                dimensions: {
-                  width: number | null;
-                  height: number | null;
-                  aspectRatio: number | null;
-                } | null;
-              } | null;
-            } | null;
-            alt: null;
-            caption: null;
-            hotspot: SanityImageHotspot | null;
-            crop: SanityImageCrop | null;
-          } | null;
-          destination: {
-            title:
-              | Array<{
-                  _type: "localeString";
-                  nl?: string;
-                  en?: string;
-                }>
-              | LocaleString
-              | string
-              | null;
-            slug: string | null;
-            region:
-              | "africa"
-              | "asia"
-              | "central-america"
-              | "europe-arctic"
-              | "middle-east"
-              | "oceania"
-              | "south-america"
-              | null;
-          } | null;
-        }> | null;
-        itineraries: Array<{
-          _id: string;
-          _type: "itinerary";
-          title:
-            | Array<{
-                _type: "localeString";
-                nl?: string;
-                en?: string;
-              }>
-            | LocaleString
-            | string
-            | null;
-          slug: string | null;
-          subtitle:
-            | Array<{
-                _type: "localeString";
-                nl?: string;
-                en?: string;
-              }>
-            | LocaleString
-            | string
-            | null;
-          travelStyle: "both" | "group" | "on-demand" | null;
-          featured: boolean | null;
-          tripSpecs: {
-            durationDays: number | null;
-            durationNights: number | null;
-            difficulty: "challenging" | "easy" | "expert" | "moderate" | null;
-            groupSize:
-              | Array<{
-                  _type: "localeString";
-                  nl?: string;
-                  en?: string;
-                }>
-              | LocaleString
-              | string
-              | null;
-            startLocation: string | null;
-            endLocation: string | null;
-          } | null;
-          pricing: {
-            priceFrom: number | null;
-            currency: string | null;
-            priceNote:
-              | Array<{
-                  _type: "localeString";
-                  nl?: string;
-                  en?: string;
-                }>
-              | LocaleString
-              | string
-              | null;
-          } | null;
-          featuredImage: {
-            asset: {
-              _id: string;
-              url: string | null;
-              metadata: {
-                lqip: string | null;
-                dimensions: {
-                  width: number | null;
-                  height: number | null;
-                  aspectRatio: number | null;
-                } | null;
-              } | null;
-            } | null;
-            alt: null;
-            caption: null;
-            hotspot: SanityImageHotspot | null;
-            crop: SanityImageCrop | null;
-          } | null;
-          destination: {
-            title:
-              | Array<{
-                  _type: "localeString";
-                  nl?: string;
-                  en?: string;
-                }>
-              | LocaleString
-              | string
-              | null;
-            slug: string | null;
-            region:
-              | "africa"
-              | "asia"
-              | "central-america"
-              | "europe-arctic"
-              | "middle-east"
-              | "oceania"
-              | "south-america"
-              | null;
-          } | null;
-        }>;
-      }
-    | {
-        _key: string;
-        _type: "itineraryGrid";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
-        subheading: Array<string> | string | null;
-        displayMode: "by-destination" | "group" | "manual" | "on-demand" | null;
-        layout: "carousel" | "grid-3" | "grid-4" | null;
-        viewAllLink: ViewAllLink | null;
-        itineraries: Array<{
-          _id: string;
-          _type: "itinerary";
-          title:
-            | Array<{
-                _type: "localeString";
-                nl?: string;
-                en?: string;
-              }>
-            | LocaleString
-            | string
-            | null;
-          slug: string | null;
-          subtitle:
-            | Array<{
-                _type: "localeString";
-                nl?: string;
-                en?: string;
-              }>
-            | LocaleString
-            | string
-            | null;
-          travelStyle: "both" | "group" | "on-demand" | null;
-          featured: boolean | null;
-          tripSpecs: {
-            durationDays: number | null;
-            durationNights: number | null;
-            difficulty: "challenging" | "easy" | "expert" | "moderate" | null;
-            groupSize:
-              | Array<{
-                  _type: "localeString";
-                  nl?: string;
-                  en?: string;
-                }>
-              | LocaleString
-              | string
-              | null;
-            startLocation: string | null;
-            endLocation: string | null;
-          } | null;
-          pricing: {
-            priceFrom: number | null;
-            currency: string | null;
-            priceNote:
-              | Array<{
-                  _type: "localeString";
-                  nl?: string;
-                  en?: string;
-                }>
-              | LocaleString
-              | string
-              | null;
-          } | null;
-          featuredImage: {
-            asset: {
-              _id: string;
-              url: string | null;
-              metadata: {
-                lqip: string | null;
-                dimensions: {
-                  width: number | null;
-                  height: number | null;
-                  aspectRatio: number | null;
-                } | null;
-              } | null;
-            } | null;
-            alt: null;
-            caption: null;
-            hotspot: SanityImageHotspot | null;
-            crop: SanityImageCrop | null;
-          } | null;
-          destination: {
-            title:
-              | Array<{
-                  _type: "localeString";
-                  nl?: string;
-                  en?: string;
-                }>
-              | LocaleString
-              | string
-              | null;
-            slug: string | null;
-            region:
-              | "africa"
-              | "asia"
-              | "central-america"
-              | "europe-arctic"
-              | "middle-east"
-              | "oceania"
-              | "south-america"
-              | null;
-          } | null;
-        }>;
-      }
-    | {
-        _key: string;
-        _type: "itineraryGrid";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
-        subheading: Array<string> | string | null;
-        displayMode: "by-destination" | "group" | "manual" | "on-demand" | null;
-        layout: "carousel" | "grid-3" | "grid-4" | null;
-        viewAllLink: ViewAllLink | null;
-        selectedItineraries: Array<{
-          _id: string;
-          _type: "itinerary";
-          title:
-            | Array<{
-                _type: "localeString";
-                nl?: string;
-                en?: string;
-              }>
-            | LocaleString
-            | string
-            | null;
-          slug: string | null;
-          subtitle:
-            | Array<{
-                _type: "localeString";
-                nl?: string;
-                en?: string;
-              }>
-            | LocaleString
-            | string
-            | null;
-          travelStyle: "both" | "group" | "on-demand" | null;
-          featured: boolean | null;
-          tripSpecs: {
-            durationDays: number | null;
-            durationNights: number | null;
-            difficulty: "challenging" | "easy" | "expert" | "moderate" | null;
-            groupSize:
-              | Array<{
-                  _type: "localeString";
-                  nl?: string;
-                  en?: string;
-                }>
-              | LocaleString
-              | string
-              | null;
-            startLocation: string | null;
-            endLocation: string | null;
-          } | null;
-          pricing: {
-            priceFrom: number | null;
-            currency: string | null;
-            priceNote:
-              | Array<{
-                  _type: "localeString";
-                  nl?: string;
-                  en?: string;
-                }>
-              | LocaleString
-              | string
-              | null;
-          } | null;
-          featuredImage: {
-            asset: {
-              _id: string;
-              url: string | null;
-              metadata: {
-                lqip: string | null;
-                dimensions: {
-                  width: number | null;
-                  height: number | null;
-                  aspectRatio: number | null;
-                } | null;
-              } | null;
-            } | null;
-            alt: null;
-            caption: null;
-            hotspot: SanityImageHotspot | null;
-            crop: SanityImageCrop | null;
-          } | null;
-          destination: {
-            title:
-              | Array<{
-                  _type: "localeString";
-                  nl?: string;
-                  en?: string;
-                }>
-              | LocaleString
-              | string
-              | null;
-            slug: string | null;
-            region:
-              | "africa"
-              | "asia"
-              | "central-america"
-              | "europe-arctic"
-              | "middle-east"
-              | "oceania"
-              | "south-america"
-              | null;
-          } | null;
-        }> | null;
-      }
-    | {
-        _key: string;
-        _type: "itineraryGrid";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
-        subheading: Array<string> | string | null;
-        displayMode: "by-destination" | "group" | "manual" | "on-demand" | null;
-        layout: "carousel" | "grid-3" | "grid-4" | null;
-        viewAllLink: ViewAllLink | null;
-      }
-    | {
-        _key: string;
-        _type: "processStepsBlock";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
-        subheading: Array<string> | string | null;
-        steps: Array<{
-          stepNumber: number | null;
-          title:
-            | Array<{
-                _type: "localeString";
-                nl?: string;
-                en?: string;
-              }>
-            | LocaleString
-            | string
-            | null;
-          description:
-            | Array<{
-                _type: "localeText";
-                nl?: string;
-                en?: string;
-              }>
-            | LocaleText
-            | string
-            | null;
-          icon: string | null;
-          image: {
-            asset: {
-              _id: string;
-              url: string | null;
-              metadata: {
-                lqip: string | null;
-                dimensions: {
-                  width: number | null;
-                  height: number | null;
-                  aspectRatio: number | null;
-                } | null;
-              } | null;
-            } | null;
-            alt: null;
-            caption: null;
-            hotspot: SanityImageHotspot | null;
-            crop: SanityImageCrop | null;
-          } | null;
-        }> | null;
-        cta: Cta | null;
-      }
-    | {
-        _key: string;
-        _type: "richTextBlock";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
-        content:
-          | Array<
-              | {
-                  children?: Array<{
-                    marks?: Array<string>;
-                    text?: string;
-                    _type: "span";
-                    _key: string;
-                  }>;
-                  style?: "blockquote" | "h2" | "h3" | "h4" | "normal";
-                  listItem?: "bullet" | "number";
-                  markDefs?: Array<{
-                    href?: string;
-                    blank?: boolean;
-                    _type: "link";
-                    _key: string;
-                  }>;
-                  level?: number;
-                  _type: "block";
-                  _key: string;
-                }
-              | {
-                  asset?: SanityImageAssetReference;
-                  media?: unknown;
-                  hotspot?: SanityImageHotspot;
-                  crop?: SanityImageCrop;
-                  alt?: string;
-                  caption?: string;
-                  _type: "image";
-                  _key: string;
-                }
-            >
-          | PortableText
-          | null;
-        maxWidth: "full" | "prose" | "wide" | null;
-        align: "center" | "left" | null;
-      }
-    | {
-        _key: string;
-        _type: "testimonialsBlock";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
-        subheading: Array<string> | string | null;
-        testimonials: Array<{
-          author: string | null;
-          location: string | null;
-          tripTaken: string | null;
-          rating: number | null;
-          quote: Array<string> | string | null;
-          avatar: {
-            asset: {
-              _id: string;
-              url: string | null;
-              metadata: {
-                lqip: string | null;
-                dimensions: {
-                  width: number | null;
-                  height: number | null;
-                  aspectRatio: number | null;
-                } | null;
-              } | null;
-            } | null;
-            alt: null;
-            caption: null;
-            hotspot: SanityImageHotspot | null;
-            crop: SanityImageCrop | null;
-          } | null;
-        }> | null;
-      }
-  > | null;
-  seo: {
-    metaTitle: Array<string> | string | null;
-    metaDescription: Array<string> | string | null;
-    shareImage: {
-      asset: {
-        _id: string;
-        url: string | null;
-        metadata: {
-          lqip: string | null;
-          dimensions: {
-            width: number | null;
-            height: number | null;
-            aspectRatio: number | null;
-          } | null;
-        } | null;
-      } | null;
-      alt: null;
-      caption: null;
-      hotspot: SanityImageHotspot | null;
-      crop: SanityImageCrop | null;
-    } | null;
-  } | null;
-} | null;
-
-// Source: ../web/src/sanity/queries/pages.queries.ts
-// Variable: GROUP_TRAVEL_PAGE_QUERY
-// Query: *[_type == "groupTravelPage"][0] {    _id,    "title": coalesce(title[$language], title.nl, title.en, title),    hero {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      backgroundImage {   asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop }    },    "introPhilosophy": coalesce(introPhilosophy[$language], introPhilosophy.nl, introPhilosophy.en, introPhilosophy),      pageBuilder[] {    _key,    _type,    // Hero Block    _type == "hero" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      backgroundImage {          asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop      },      videoUrl,      primaryCta {        "label": coalesce(label[$language], label.nl, label.en, label),        url      },      secondaryCta {        "label": coalesce(label[$language], label.nl, label.en, label),        url      },      layoutStyle    },    // Features & USPs Bar Block    _type == "featuresBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      layoutStyle,      backgroundColor,      items[] {        _key,        "title": coalesce(title[$language], title.nl, title.en, title),        "description": coalesce(description[$language], description.nl, description.en, description),        iconType,        icon,        image {            asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop        },        link      }    },    // Itinerary Grid Block    _type == "itineraryGrid" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      displayMode,      layout,      viewAllLink,      displayMode == "manual" => {        selectedItineraries[]->{            _id,  _type,  "title": coalesce(title[$language], title.nl, title.en, title),  "slug": slug.current,  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),  travelStyle,  featured,  tripSpecs {    durationDays,    durationNights,    difficulty,    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize),    startLocation,    endLocation  },  pricing {    priceFrom,    currency,    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)  },  featuredImage {      asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop  },  destination->{    "title": coalesce(title[$language], title.nl, title.en, title),    "slug": slug.current,    region  }        }      },      displayMode == "group" => {        "itineraries": *[_type == "itinerary" && (travelStyle == "group" || travelStyle == "both")] | order(featured desc, _createdAt desc)[0...6] {            _id,  _type,  "title": coalesce(title[$language], title.nl, title.en, title),  "slug": slug.current,  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),  travelStyle,  featured,  tripSpecs {    durationDays,    durationNights,    difficulty,    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize),    startLocation,    endLocation  },  pricing {    priceFrom,    currency,    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)  },  featuredImage {      asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop  },  destination->{    "title": coalesce(title[$language], title.nl, title.en, title),    "slug": slug.current,    region  }        }      },      displayMode == "on-demand" => {        "itineraries": *[_type == "itinerary" && (travelStyle == "on-demand" || travelStyle == "both")] | order(featured desc, _createdAt desc)[0...6] {            _id,  _type,  "title": coalesce(title[$language], title.nl, title.en, title),  "slug": slug.current,  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),  travelStyle,  featured,  tripSpecs {    durationDays,    durationNights,    difficulty,    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize),    startLocation,    endLocation  },  pricing {    priceFrom,    currency,    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)  },  featuredImage {      asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop  },  destination->{    "title": coalesce(title[$language], title.nl, title.en, title),    "slug": slug.current,    region  }        }      },      displayMode == "by-destination" => {        "itineraries": *[_type == "itinerary" && destination._ref == ^.filterDestination._ref] | order(featured desc, _createdAt desc)[0...6] {            _id,  _type,  "title": coalesce(title[$language], title.nl, title.en, title),  "slug": slug.current,  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),  travelStyle,  featured,  tripSpecs {    durationDays,    durationNights,    difficulty,    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize),    startLocation,    endLocation  },  pricing {    priceFrom,    currency,    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)  },  featuredImage {      asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop  },  destination->{    "title": coalesce(title[$language], title.nl, title.en, title),    "slug": slug.current,    region  }        }      }    },    // Destination Grid Block    _type == "destinationGrid" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      layout,      defined(destinations) => {        destinations[]->{          _id,          "title": coalesce(title[$language], title.nl, title.en, title),          "slug": slug.current,          "tagline": coalesce(tagline[$language], tagline.nl, tagline.en, tagline),          region,          featuredImage {              asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop          },          "tripCount": count(*[_type == "itinerary" && references(^._id)])        }      },      !defined(destinations) => {        "destinations": *[_type == "destination"] | order(featured desc, title.nl asc, title asc) {          _id,          "title": coalesce(title[$language], title.nl, title.en, title),          "slug": slug.current,          "tagline": coalesce(tagline[$language], tagline.nl, tagline.en, tagline),          region,          featuredImage {              asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop          },          "tripCount": count(*[_type == "itinerary" && references(^._id)])        }      }    },    // Process Steps Block    _type == "processStepsBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      steps[] {        stepNumber,        "title": coalesce(title[$language], title.nl, title.en, title),        "description": coalesce(description[$language], description.nl, description.en, description),        icon,        image {            asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop        }      },      cta    },    // Rich Text Block    _type == "richTextBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "content": coalesce(content[$language], content.nl, content.en, content),      maxWidth,      align    },    // Gallery Block    _type == "galleryBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      layout,      images[] {          asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop,        location      }    },    // FAQ Block    _type == "faqBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      items[] {        "question": coalesce(question[$language], question.nl, question.en, question),        "answer": coalesce(answer[$language], answer.nl, answer.en, answer)      }    },    // Testimonials Block    _type == "testimonialsBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      testimonials[] {        author,        location,        tripTaken,        rating,        "quote": coalesce(quote[$language], quote.nl, quote.en, quote),        avatar {            asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop        }      }    },    // CTA Block    _type == "ctaBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "description": coalesce(description[$language], description.nl, description.en, description),      backgroundImage {          asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop      },      primaryButton {        "label": coalesce(label[$language], label.nl, label.en, label),        url      },      secondaryButton {        "label": coalesce(label[$language], label.nl, label.en, label),        url      },      theme    }  },      seo {    "metaTitle": coalesce(metaTitle[$language], metaTitle.nl, metaTitle.en, metaTitle),    "metaDescription": coalesce(metaDescription[$language], metaDescription.nl, metaDescription.en, metaDescription),    shareImage {        asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop    }  }  }
-export type GROUP_TRAVEL_PAGE_QUERY_RESULT = {
-  _id: string;
-  title: Array<string> | string | null;
-  hero: {
-    badge:
-      | Array<{
-          _type: "localeString";
-          nl?: string;
-          en?: string;
-        }>
-      | LocaleString
-      | string
-      | null;
-    heading:
-      | Array<{
-          _type: "localeString";
-          nl?: string;
-          en?: string;
-        }>
-      | LocaleString
-      | string
-      | null;
-    subheading:
-      | Array<{
-          _type: "localeText";
-          nl?: string;
-          en?: string;
-        }>
-      | LocaleText
-      | string
-      | null;
-    backgroundImage: {
-      asset: {
-        _id: string;
-        url: string | null;
-        metadata: {
-          lqip: string | null;
-          dimensions: {
-            width: number | null;
-            height: number | null;
-            aspectRatio: number | null;
-          } | null;
-        } | null;
-      } | null;
-      alt: null;
-      caption: null;
-      hotspot: SanityImageHotspot | null;
-      crop: SanityImageCrop | null;
-    } | null;
-  } | null;
-  introPhilosophy:
+  title:
     | Array<{
-        heading?: string;
-        description?: PortableText;
-        benefits?: Array<
-          {
-            _key: string;
-          } & StepItem
-        >;
+        _type: "localeString";
+        nl?: string;
+        en?: string;
       }>
-    | {
-        heading?: string;
-        description?: PortableText;
-        benefits?: Array<
-          {
-            _key: string;
-          } & StepItem
-        >;
-      }
+    | LocaleString
+    | string
     | null;
   pageBuilder: Array<
     | {
@@ -3125,9 +2117,33 @@ export type GROUP_TRAVEL_PAGE_QUERY_RESULT = {
     | {
         _key: string;
         _type: "destinationGrid";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
-        subheading: Array<string> | string | null;
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
         layout: "bento" | "carousel" | "grid-3" | null;
         destinations: Array<{
           _id: string;
@@ -3183,9 +2199,33 @@ export type GROUP_TRAVEL_PAGE_QUERY_RESULT = {
     | {
         _key: string;
         _type: "destinationGrid";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
-        subheading: Array<string> | string | null;
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
         layout: "bento" | "carousel" | "grid-3" | null;
         destinations: Array<{
           _id: string;
@@ -3241,51 +2281,82 @@ export type GROUP_TRAVEL_PAGE_QUERY_RESULT = {
     | {
         _key: string;
         _type: "destinationGrid";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
-        subheading: Array<string> | string | null;
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
         layout: "bento" | "carousel" | "grid-3" | null;
       }
     | {
         _key: string;
         _type: "faqBlock";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
-        subheading: Array<string> | string | null;
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
         items: Array<{
-          question: Array<string> | string | null;
+          question:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
           answer:
-            | Array<
-                | {
-                    children?: Array<{
-                      marks?: Array<string>;
-                      text?: string;
-                      _type: "span";
-                      _key: string;
-                    }>;
-                    style?: "blockquote" | "h2" | "h3" | "h4" | "normal";
-                    listItem?: "bullet" | "number";
-                    markDefs?: Array<{
-                      href?: string;
-                      blank?: boolean;
-                      _type: "link";
-                      _key: string;
-                    }>;
-                    level?: number;
-                    _type: "block";
-                    _key: string;
-                  }
-                | {
-                    asset?: SanityImageAssetReference;
-                    media?: unknown;
-                    hotspot?: SanityImageHotspot;
-                    crop?: SanityImageCrop;
-                    alt?: string;
-                    caption?: string;
-                    _type: "image";
-                    _key: string;
-                  }
-              >
+            | Array<{
+                _type: "localePortableText";
+                nl?: PortableText;
+                en?: PortableText;
+              }>
+            | LocalePortableText
             | PortableText
             | null;
         }> | null;
@@ -3386,9 +2457,33 @@ export type GROUP_TRAVEL_PAGE_QUERY_RESULT = {
     | {
         _key: string;
         _type: "galleryBlock";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
-        subheading: Array<string> | string | null;
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
         layout: "carousel" | "grid-3" | "masonry" | null;
         images: Array<{
           asset: {
@@ -3404,7 +2499,15 @@ export type GROUP_TRAVEL_PAGE_QUERY_RESULT = {
             } | null;
           } | null;
           alt: string | null;
-          caption: string | null;
+          caption:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
           hotspot: SanityImageHotspot | null;
           crop: SanityImageCrop | null;
           location: string | null;
@@ -3488,12 +2591,47 @@ export type GROUP_TRAVEL_PAGE_QUERY_RESULT = {
     | {
         _key: string;
         _type: "itineraryGrid";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
-        subheading: Array<string> | string | null;
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
         displayMode: "by-destination" | "group" | "manual" | "on-demand" | null;
         layout: "carousel" | "grid-3" | "grid-4" | null;
-        viewAllLink: ViewAllLink | null;
+        viewAllLink: {
+          label:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
+          url: string | null;
+        } | null;
         selectedItineraries: Array<{
           _id: string;
           _type: "itinerary";
@@ -3531,8 +2669,6 @@ export type GROUP_TRAVEL_PAGE_QUERY_RESULT = {
               | LocaleString
               | string
               | null;
-            startLocation: string | null;
-            endLocation: string | null;
           } | null;
           pricing: {
             priceFrom: number | null;
@@ -3624,8 +2760,6 @@ export type GROUP_TRAVEL_PAGE_QUERY_RESULT = {
               | LocaleString
               | string
               | null;
-            startLocation: string | null;
-            endLocation: string | null;
           } | null;
           pricing: {
             priceFrom: number | null;
@@ -3684,12 +2818,47 @@ export type GROUP_TRAVEL_PAGE_QUERY_RESULT = {
     | {
         _key: string;
         _type: "itineraryGrid";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
-        subheading: Array<string> | string | null;
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
         displayMode: "by-destination" | "group" | "manual" | "on-demand" | null;
         layout: "carousel" | "grid-3" | "grid-4" | null;
-        viewAllLink: ViewAllLink | null;
+        viewAllLink: {
+          label:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
+          url: string | null;
+        } | null;
         itineraries: Array<{
           _id: string;
           _type: "itinerary";
@@ -3727,8 +2896,6 @@ export type GROUP_TRAVEL_PAGE_QUERY_RESULT = {
               | LocaleString
               | string
               | null;
-            startLocation: string | null;
-            endLocation: string | null;
           } | null;
           pricing: {
             priceFrom: number | null;
@@ -3787,12 +2954,47 @@ export type GROUP_TRAVEL_PAGE_QUERY_RESULT = {
     | {
         _key: string;
         _type: "itineraryGrid";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
-        subheading: Array<string> | string | null;
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
         displayMode: "by-destination" | "group" | "manual" | "on-demand" | null;
         layout: "carousel" | "grid-3" | "grid-4" | null;
-        viewAllLink: ViewAllLink | null;
+        viewAllLink: {
+          label:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
+          url: string | null;
+        } | null;
         selectedItineraries: Array<{
           _id: string;
           _type: "itinerary";
@@ -3830,8 +3032,6 @@ export type GROUP_TRAVEL_PAGE_QUERY_RESULT = {
               | LocaleString
               | string
               | null;
-            startLocation: string | null;
-            endLocation: string | null;
           } | null;
           pricing: {
             priceFrom: number | null;
@@ -3890,19 +3090,78 @@ export type GROUP_TRAVEL_PAGE_QUERY_RESULT = {
     | {
         _key: string;
         _type: "itineraryGrid";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
-        subheading: Array<string> | string | null;
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
         displayMode: "by-destination" | "group" | "manual" | "on-demand" | null;
         layout: "carousel" | "grid-3" | "grid-4" | null;
-        viewAllLink: ViewAllLink | null;
+        viewAllLink: {
+          label:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
+          url: string | null;
+        } | null;
       }
     | {
         _key: string;
         _type: "processStepsBlock";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
-        subheading: Array<string> | string | null;
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
         steps: Array<{
           stepNumber: number | null;
           title:
@@ -3943,45 +3202,47 @@ export type GROUP_TRAVEL_PAGE_QUERY_RESULT = {
             crop: SanityImageCrop | null;
           } | null;
         }> | null;
-        cta: Cta | null;
+        cta: {
+          label:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
+          url: string | null;
+        } | null;
       }
     | {
         _key: string;
         _type: "richTextBlock";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
         content:
-          | Array<
-              | {
-                  children?: Array<{
-                    marks?: Array<string>;
-                    text?: string;
-                    _type: "span";
-                    _key: string;
-                  }>;
-                  style?: "blockquote" | "h2" | "h3" | "h4" | "normal";
-                  listItem?: "bullet" | "number";
-                  markDefs?: Array<{
-                    href?: string;
-                    blank?: boolean;
-                    _type: "link";
-                    _key: string;
-                  }>;
-                  level?: number;
-                  _type: "block";
-                  _key: string;
-                }
-              | {
-                  asset?: SanityImageAssetReference;
-                  media?: unknown;
-                  hotspot?: SanityImageHotspot;
-                  crop?: SanityImageCrop;
-                  alt?: string;
-                  caption?: string;
-                  _type: "image";
-                  _key: string;
-                }
-            >
+          | Array<{
+              _type: "localePortableText";
+              nl?: PortableText;
+              en?: PortableText;
+            }>
+          | LocalePortableText
           | PortableText
           | null;
         maxWidth: "full" | "prose" | "wide" | null;
@@ -3990,15 +3251,55 @@ export type GROUP_TRAVEL_PAGE_QUERY_RESULT = {
     | {
         _key: string;
         _type: "testimonialsBlock";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
-        subheading: Array<string> | string | null;
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
         testimonials: Array<{
           author: string | null;
           location: string | null;
-          tripTaken: string | null;
+          tripTaken:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
           rating: number | null;
-          quote: Array<string> | string | null;
+          quote:
+            | Array<{
+                _type: "localeText";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleText
+            | string
+            | null;
           avatar: {
             asset: {
               _id: string;
@@ -4021,8 +3322,24 @@ export type GROUP_TRAVEL_PAGE_QUERY_RESULT = {
       }
   > | null;
   seo: {
-    metaTitle: Array<string> | string | null;
-    metaDescription: Array<string> | string | null;
+    metaTitle:
+      | Array<{
+          _type: "localeString";
+          nl?: string;
+          en?: string;
+        }>
+      | LocaleString
+      | string
+      | null;
+    metaDescription:
+      | Array<{
+          _type: "localeText";
+          nl?: string;
+          en?: string;
+        }>
+      | LocaleText
+      | string
+      | null;
     shareImage: {
       asset: {
         _id: string;
@@ -4045,11 +3362,19 @@ export type GROUP_TRAVEL_PAGE_QUERY_RESULT = {
 } | null;
 
 // Source: ../web/src/sanity/queries/pages.queries.ts
-// Variable: TRAVEL_ON_DEMAND_PAGE_QUERY
-// Query: *[_type == "travelOnDemandPage"][0] {    _id,    "title": coalesce(title[$language], title.nl, title.en, title),    hero {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      backgroundImage {   asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop }    },    processSection,    themes[] {      "title": coalesce(title[$language], title.nl, title.en, title),      "description": coalesce(description[$language], description.nl, description.en, description),      image {          asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop      }    },    inquiryFormIntro {      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading)    },      pageBuilder[] {    _key,    _type,    // Hero Block    _type == "hero" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      backgroundImage {          asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop      },      videoUrl,      primaryCta {        "label": coalesce(label[$language], label.nl, label.en, label),        url      },      secondaryCta {        "label": coalesce(label[$language], label.nl, label.en, label),        url      },      layoutStyle    },    // Features & USPs Bar Block    _type == "featuresBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      layoutStyle,      backgroundColor,      items[] {        _key,        "title": coalesce(title[$language], title.nl, title.en, title),        "description": coalesce(description[$language], description.nl, description.en, description),        iconType,        icon,        image {            asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop        },        link      }    },    // Itinerary Grid Block    _type == "itineraryGrid" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      displayMode,      layout,      viewAllLink,      displayMode == "manual" => {        selectedItineraries[]->{            _id,  _type,  "title": coalesce(title[$language], title.nl, title.en, title),  "slug": slug.current,  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),  travelStyle,  featured,  tripSpecs {    durationDays,    durationNights,    difficulty,    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize),    startLocation,    endLocation  },  pricing {    priceFrom,    currency,    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)  },  featuredImage {      asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop  },  destination->{    "title": coalesce(title[$language], title.nl, title.en, title),    "slug": slug.current,    region  }        }      },      displayMode == "group" => {        "itineraries": *[_type == "itinerary" && (travelStyle == "group" || travelStyle == "both")] | order(featured desc, _createdAt desc)[0...6] {            _id,  _type,  "title": coalesce(title[$language], title.nl, title.en, title),  "slug": slug.current,  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),  travelStyle,  featured,  tripSpecs {    durationDays,    durationNights,    difficulty,    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize),    startLocation,    endLocation  },  pricing {    priceFrom,    currency,    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)  },  featuredImage {      asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop  },  destination->{    "title": coalesce(title[$language], title.nl, title.en, title),    "slug": slug.current,    region  }        }      },      displayMode == "on-demand" => {        "itineraries": *[_type == "itinerary" && (travelStyle == "on-demand" || travelStyle == "both")] | order(featured desc, _createdAt desc)[0...6] {            _id,  _type,  "title": coalesce(title[$language], title.nl, title.en, title),  "slug": slug.current,  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),  travelStyle,  featured,  tripSpecs {    durationDays,    durationNights,    difficulty,    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize),    startLocation,    endLocation  },  pricing {    priceFrom,    currency,    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)  },  featuredImage {      asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop  },  destination->{    "title": coalesce(title[$language], title.nl, title.en, title),    "slug": slug.current,    region  }        }      },      displayMode == "by-destination" => {        "itineraries": *[_type == "itinerary" && destination._ref == ^.filterDestination._ref] | order(featured desc, _createdAt desc)[0...6] {            _id,  _type,  "title": coalesce(title[$language], title.nl, title.en, title),  "slug": slug.current,  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),  travelStyle,  featured,  tripSpecs {    durationDays,    durationNights,    difficulty,    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize),    startLocation,    endLocation  },  pricing {    priceFrom,    currency,    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)  },  featuredImage {      asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop  },  destination->{    "title": coalesce(title[$language], title.nl, title.en, title),    "slug": slug.current,    region  }        }      }    },    // Destination Grid Block    _type == "destinationGrid" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      layout,      defined(destinations) => {        destinations[]->{          _id,          "title": coalesce(title[$language], title.nl, title.en, title),          "slug": slug.current,          "tagline": coalesce(tagline[$language], tagline.nl, tagline.en, tagline),          region,          featuredImage {              asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop          },          "tripCount": count(*[_type == "itinerary" && references(^._id)])        }      },      !defined(destinations) => {        "destinations": *[_type == "destination"] | order(featured desc, title.nl asc, title asc) {          _id,          "title": coalesce(title[$language], title.nl, title.en, title),          "slug": slug.current,          "tagline": coalesce(tagline[$language], tagline.nl, tagline.en, tagline),          region,          featuredImage {              asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop          },          "tripCount": count(*[_type == "itinerary" && references(^._id)])        }      }    },    // Process Steps Block    _type == "processStepsBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      steps[] {        stepNumber,        "title": coalesce(title[$language], title.nl, title.en, title),        "description": coalesce(description[$language], description.nl, description.en, description),        icon,        image {            asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop        }      },      cta    },    // Rich Text Block    _type == "richTextBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "content": coalesce(content[$language], content.nl, content.en, content),      maxWidth,      align    },    // Gallery Block    _type == "galleryBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      layout,      images[] {          asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop,        location      }    },    // FAQ Block    _type == "faqBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      items[] {        "question": coalesce(question[$language], question.nl, question.en, question),        "answer": coalesce(answer[$language], answer.nl, answer.en, answer)      }    },    // Testimonials Block    _type == "testimonialsBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      testimonials[] {        author,        location,        tripTaken,        rating,        "quote": coalesce(quote[$language], quote.nl, quote.en, quote),        avatar {            asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop        }      }    },    // CTA Block    _type == "ctaBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "description": coalesce(description[$language], description.nl, description.en, description),      backgroundImage {          asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop      },      primaryButton {        "label": coalesce(label[$language], label.nl, label.en, label),        url      },      secondaryButton {        "label": coalesce(label[$language], label.nl, label.en, label),        url      },      theme    }  },      seo {    "metaTitle": coalesce(metaTitle[$language], metaTitle.nl, metaTitle.en, metaTitle),    "metaDescription": coalesce(metaDescription[$language], metaDescription.nl, metaDescription.en, metaDescription),    shareImage {        asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop    }  }  }
-export type TRAVEL_ON_DEMAND_PAGE_QUERY_RESULT = {
+// Variable: GROUP_TRAVEL_PAGE_QUERY
+// Query: *[_type == "groupTravelPage"][0] {    _id,    "title": coalesce(title[$language], title.nl, title.en, title),    hero {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      layoutStyle,      backgroundImage {   asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop },      primaryCta {        "label": coalesce(label[$language], label.nl, label.en, label),        url      },      secondaryCta {        "label": coalesce(label[$language], label.nl, label.en, label),        url      }    },    tripsSection {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading)    },    introPhilosophy {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      description,      benefits[] {        stepNumber,        "title": coalesce(title[$language], title.nl, title.en, title),        "description": coalesce(description[$language], description.nl, description.en, description),        icon,        image {            asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop        }      }    },      pageBuilder[] {    _key,    _type,    // Hero Block    _type == "hero" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      backgroundImage {          asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop      },      videoUrl,      primaryCta {        "label": coalesce(label[$language], label.nl, label.en, label),        url      },      secondaryCta {        "label": coalesce(label[$language], label.nl, label.en, label),        url      },      layoutStyle    },    // Features & USPs Bar Block    _type == "featuresBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      layoutStyle,      backgroundColor,      items[] {        _key,        "title": coalesce(title[$language], title.nl, title.en, title),        "description": coalesce(description[$language], description.nl, description.en, description),        iconType,        icon,        image {            asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop        },        link      }    },    // Itinerary Grid Block    _type == "itineraryGrid" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      displayMode,      layout,      viewAllLink {        "label": coalesce(label[$language], label.nl, label.en, label),        url      },      displayMode == "manual" => {        selectedItineraries[]->{            _id,  _type,  "title": coalesce(title[$language], title.nl, title.en, title),  "slug": slug.current,  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),  travelStyle,  featured,  tripSpecs {    durationDays,    durationNights,    difficulty,    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize)  },  pricing {    priceFrom,    currency,    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)  },  featuredImage {      asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop  },  destination->{    "title": coalesce(title[$language], title.nl, title.en, title),    "slug": slug.current,    region  }        }      },      displayMode == "group" => {        "itineraries": *[_type == "itinerary" && (travelStyle == "group" || travelStyle == "both")] | order(featured desc, _createdAt desc)[0...6] {            _id,  _type,  "title": coalesce(title[$language], title.nl, title.en, title),  "slug": slug.current,  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),  travelStyle,  featured,  tripSpecs {    durationDays,    durationNights,    difficulty,    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize)  },  pricing {    priceFrom,    currency,    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)  },  featuredImage {      asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop  },  destination->{    "title": coalesce(title[$language], title.nl, title.en, title),    "slug": slug.current,    region  }        }      },      displayMode == "on-demand" => {        "itineraries": *[_type == "itinerary" && (travelStyle == "on-demand" || travelStyle == "both")] | order(featured desc, _createdAt desc)[0...6] {            _id,  _type,  "title": coalesce(title[$language], title.nl, title.en, title),  "slug": slug.current,  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),  travelStyle,  featured,  tripSpecs {    durationDays,    durationNights,    difficulty,    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize)  },  pricing {    priceFrom,    currency,    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)  },  featuredImage {      asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop  },  destination->{    "title": coalesce(title[$language], title.nl, title.en, title),    "slug": slug.current,    region  }        }      },      displayMode == "by-destination" => {        "itineraries": *[_type == "itinerary" && destination._ref == ^.filterDestination._ref] | order(featured desc, _createdAt desc)[0...6] {            _id,  _type,  "title": coalesce(title[$language], title.nl, title.en, title),  "slug": slug.current,  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),  travelStyle,  featured,  tripSpecs {    durationDays,    durationNights,    difficulty,    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize)  },  pricing {    priceFrom,    currency,    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)  },  featuredImage {      asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop  },  destination->{    "title": coalesce(title[$language], title.nl, title.en, title),    "slug": slug.current,    region  }        }      }    },    // Destination Grid Block    _type == "destinationGrid" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      layout,      defined(destinations) => {        destinations[]->{          _id,          "title": coalesce(title[$language], title.nl, title.en, title),          "slug": slug.current,          "tagline": coalesce(tagline[$language], tagline.nl, tagline.en, tagline),          region,          featuredImage {              asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop          },          "tripCount": count(*[_type == "itinerary" && references(^._id)])        }      },      !defined(destinations) => {        "destinations": *[_type == "destination"] | order(featured desc, title.nl asc, title asc) {          _id,          "title": coalesce(title[$language], title.nl, title.en, title),          "slug": slug.current,          "tagline": coalesce(tagline[$language], tagline.nl, tagline.en, tagline),          region,          featuredImage {              asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop          },          "tripCount": count(*[_type == "itinerary" && references(^._id)])        }      }    },    // Process Steps Block    _type == "processStepsBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      steps[] {        stepNumber,        "title": coalesce(title[$language], title.nl, title.en, title),        "description": coalesce(description[$language], description.nl, description.en, description),        icon,        image {            asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop        }      },      cta {        "label": coalesce(label[$language], label.nl, label.en, label),        url      }    },    // Rich Text Block    _type == "richTextBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "content": coalesce(content[$language], content.nl, content.en, content),      maxWidth,      align    },    // Gallery Block    _type == "galleryBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      layout,      images[] {          asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop,        location,        "caption": coalesce(caption[$language], caption.nl, caption.en, caption)      }    },    // FAQ Block    _type == "faqBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      items[] {        "question": coalesce(question[$language], question.nl, question.en, question),        "answer": coalesce(answer[$language], answer.nl, answer.en, answer)      }    },    // Testimonials Block    _type == "testimonialsBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      testimonials[] {        author,        location,        "tripTaken": coalesce(tripTaken[$language], tripTaken.nl, tripTaken.en, tripTaken),        rating,        "quote": coalesce(quote[$language], quote.nl, quote.en, quote),        avatar {            asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop        }      }    },    // CTA Block    _type == "ctaBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "description": coalesce(description[$language], description.nl, description.en, description),      backgroundImage {          asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop      },      primaryButton {        "label": coalesce(label[$language], label.nl, label.en, label),        url      },      secondaryButton {        "label": coalesce(label[$language], label.nl, label.en, label),        url      },      theme    }  },      seo {    "metaTitle": coalesce(metaTitle[$language], metaTitle.nl, metaTitle.en, metaTitle),    "metaDescription": coalesce(metaDescription[$language], metaDescription.nl, metaDescription.en, metaDescription),    shareImage {        asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop    }  }  }
+export type GROUP_TRAVEL_PAGE_QUERY_RESULT = {
   _id: string;
-  title: Array<string> | string | null;
+  title:
+    | Array<{
+        _type: "localeString";
+        nl?: string;
+        en?: string;
+      }>
+    | LocaleString
+    | string
+    | null;
   hero: {
     badge:
       | Array<{
@@ -4078,6 +3403,7 @@ export type TRAVEL_ON_DEMAND_PAGE_QUERY_RESULT = {
       | LocaleText
       | string
       | null;
+    layoutStyle: "compact" | "fullscreen" | "split" | null;
     backgroundImage: {
       asset: {
         _id: string;
@@ -4096,8 +3422,1611 @@ export type TRAVEL_ON_DEMAND_PAGE_QUERY_RESULT = {
       hotspot: SanityImageHotspot | null;
       crop: SanityImageCrop | null;
     } | null;
+    primaryCta: {
+      label:
+        | Array<{
+            _type: "localeString";
+            nl?: string;
+            en?: string;
+          }>
+        | LocaleString
+        | string
+        | null;
+      url: string | null;
+    } | null;
+    secondaryCta: {
+      label:
+        | Array<{
+            _type: "localeString";
+            nl?: string;
+            en?: string;
+          }>
+        | LocaleString
+        | string
+        | null;
+      url: string | null;
+    } | null;
   } | null;
-  processSection: ProcessStepsBlock | null;
+  tripsSection: {
+    badge:
+      | Array<{
+          _type: "localeString";
+          nl?: string;
+          en?: string;
+        }>
+      | LocaleString
+      | string
+      | null;
+    heading:
+      | Array<{
+          _type: "localeString";
+          nl?: string;
+          en?: string;
+        }>
+      | LocaleString
+      | string
+      | null;
+    subheading:
+      | Array<{
+          _type: "localeText";
+          nl?: string;
+          en?: string;
+        }>
+      | LocaleText
+      | string
+      | null;
+  } | null;
+  introPhilosophy: {
+    badge:
+      | Array<{
+          _type: "localeString";
+          nl?: string;
+          en?: string;
+        }>
+      | LocaleString
+      | string
+      | null;
+    heading: Array<string> | string | null;
+    subheading:
+      | Array<{
+          _type: "localeText";
+          nl?: string;
+          en?: string;
+        }>
+      | LocaleText
+      | string
+      | null;
+    description: PortableText | null;
+    benefits: Array<{
+      stepNumber: number | null;
+      title:
+        | Array<{
+            _type: "localeString";
+            nl?: string;
+            en?: string;
+          }>
+        | LocaleString
+        | string
+        | null;
+      description:
+        | Array<{
+            _type: "localeText";
+            nl?: string;
+            en?: string;
+          }>
+        | LocaleText
+        | string
+        | null;
+      icon: string | null;
+      image: {
+        asset: {
+          _id: string;
+          url: string | null;
+          metadata: {
+            lqip: string | null;
+            dimensions: {
+              width: number | null;
+              height: number | null;
+              aspectRatio: number | null;
+            } | null;
+          } | null;
+        } | null;
+        alt: null;
+        caption: null;
+        hotspot: SanityImageHotspot | null;
+        crop: SanityImageCrop | null;
+      } | null;
+    }> | null;
+  } | null;
+  pageBuilder: Array<
+    | {
+        _key: string;
+        _type: "ctaBlock";
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        description:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
+        backgroundImage: {
+          asset: {
+            _id: string;
+            url: string | null;
+            metadata: {
+              lqip: string | null;
+              dimensions: {
+                width: number | null;
+                height: number | null;
+                aspectRatio: number | null;
+              } | null;
+            } | null;
+          } | null;
+          alt: null;
+          caption: null;
+          hotspot: SanityImageHotspot | null;
+          crop: SanityImageCrop | null;
+        } | null;
+        primaryButton: {
+          label:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
+          url: string | null;
+        } | null;
+        secondaryButton: {
+          label:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
+          url: string | null;
+        } | null;
+        theme: "accent" | "dark" | "light" | null;
+      }
+    | {
+        _key: string;
+        _type: "destinationGrid";
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
+        layout: "bento" | "carousel" | "grid-3" | null;
+        destinations: Array<{
+          _id: string;
+          title:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
+          slug: string | null;
+          tagline:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
+          region:
+            | "africa"
+            | "asia"
+            | "central-america"
+            | "europe-arctic"
+            | "middle-east"
+            | "oceania"
+            | "south-america"
+            | null;
+          featuredImage: {
+            asset: {
+              _id: string;
+              url: string | null;
+              metadata: {
+                lqip: string | null;
+                dimensions: {
+                  width: number | null;
+                  height: number | null;
+                  aspectRatio: number | null;
+                } | null;
+              } | null;
+            } | null;
+            alt: null;
+            caption: null;
+            hotspot: SanityImageHotspot | null;
+            crop: SanityImageCrop | null;
+          } | null;
+          tripCount: number;
+        }>;
+      }
+    | {
+        _key: string;
+        _type: "destinationGrid";
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
+        layout: "bento" | "carousel" | "grid-3" | null;
+        destinations: Array<{
+          _id: string;
+          title:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
+          slug: string | null;
+          tagline:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
+          region:
+            | "africa"
+            | "asia"
+            | "central-america"
+            | "europe-arctic"
+            | "middle-east"
+            | "oceania"
+            | "south-america"
+            | null;
+          featuredImage: {
+            asset: {
+              _id: string;
+              url: string | null;
+              metadata: {
+                lqip: string | null;
+                dimensions: {
+                  width: number | null;
+                  height: number | null;
+                  aspectRatio: number | null;
+                } | null;
+              } | null;
+            } | null;
+            alt: null;
+            caption: null;
+            hotspot: SanityImageHotspot | null;
+            crop: SanityImageCrop | null;
+          } | null;
+          tripCount: number;
+        }> | null;
+      }
+    | {
+        _key: string;
+        _type: "destinationGrid";
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
+        layout: "bento" | "carousel" | "grid-3" | null;
+      }
+    | {
+        _key: string;
+        _type: "faqBlock";
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
+        items: Array<{
+          question:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
+          answer:
+            | Array<{
+                _type: "localePortableText";
+                nl?: PortableText;
+                en?: PortableText;
+              }>
+            | LocalePortableText
+            | PortableText
+            | null;
+        }> | null;
+      }
+    | {
+        _key: string;
+        _type: "featuresBlock";
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
+        layoutStyle: "bar" | "grid" | null;
+        backgroundColor: "card" | "dark" | "subtle" | "transparent" | null;
+        items: Array<{
+          _key: string;
+          title:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
+          description:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
+          iconType: "icon" | "image" | null;
+          icon:
+            | "award"
+            | "binoculars"
+            | "calendar"
+            | "camera"
+            | "clock"
+            | "compass"
+            | "footprints"
+            | "globe"
+            | "heartHandshake"
+            | "leaf"
+            | "mapPin"
+            | "mountain"
+            | "plane"
+            | "shield"
+            | "sparkles"
+            | "tent"
+            | "users"
+            | null;
+          image: {
+            asset: {
+              _id: string;
+              url: string | null;
+              metadata: {
+                lqip: string | null;
+                dimensions: {
+                  width: number | null;
+                  height: number | null;
+                  aspectRatio: number | null;
+                } | null;
+              } | null;
+            } | null;
+            alt: null;
+            caption: null;
+            hotspot: SanityImageHotspot | null;
+            crop: SanityImageCrop | null;
+          } | null;
+          link: string | null;
+        }> | null;
+      }
+    | {
+        _key: string;
+        _type: "galleryBlock";
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
+        layout: "carousel" | "grid-3" | "masonry" | null;
+        images: Array<{
+          asset: {
+            _id: string;
+            url: string | null;
+            metadata: {
+              lqip: string | null;
+              dimensions: {
+                width: number | null;
+                height: number | null;
+                aspectRatio: number | null;
+              } | null;
+            } | null;
+          } | null;
+          alt: string | null;
+          caption:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
+          hotspot: SanityImageHotspot | null;
+          crop: SanityImageCrop | null;
+          location: string | null;
+        }> | null;
+      }
+    | {
+        _key: string;
+        _type: "hero";
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
+        backgroundImage: {
+          asset: {
+            _id: string;
+            url: string | null;
+            metadata: {
+              lqip: string | null;
+              dimensions: {
+                width: number | null;
+                height: number | null;
+                aspectRatio: number | null;
+              } | null;
+            } | null;
+          } | null;
+          alt: null;
+          caption: null;
+          hotspot: SanityImageHotspot | null;
+          crop: SanityImageCrop | null;
+        } | null;
+        videoUrl: string | null;
+        primaryCta: {
+          label:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
+          url: string | null;
+        } | null;
+        secondaryCta: {
+          label:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
+          url: string | null;
+        } | null;
+        layoutStyle: "compact" | "fullscreen" | "split" | null;
+      }
+    | {
+        _key: string;
+        _type: "itineraryGrid";
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
+        displayMode: "by-destination" | "group" | "manual" | "on-demand" | null;
+        layout: "carousel" | "grid-3" | "grid-4" | null;
+        viewAllLink: {
+          label:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
+          url: string | null;
+        } | null;
+        selectedItineraries: Array<{
+          _id: string;
+          _type: "itinerary";
+          title:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
+          slug: string | null;
+          subtitle:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
+          travelStyle: "both" | "group" | "on-demand" | null;
+          featured: boolean | null;
+          tripSpecs: {
+            durationDays: number | null;
+            durationNights: number | null;
+            difficulty: "challenging" | "easy" | "expert" | "moderate" | null;
+            groupSize:
+              | Array<{
+                  _type: "localeString";
+                  nl?: string;
+                  en?: string;
+                }>
+              | LocaleString
+              | string
+              | null;
+          } | null;
+          pricing: {
+            priceFrom: number | null;
+            currency: string | null;
+            priceNote:
+              | Array<{
+                  _type: "localeString";
+                  nl?: string;
+                  en?: string;
+                }>
+              | LocaleString
+              | string
+              | null;
+          } | null;
+          featuredImage: {
+            asset: {
+              _id: string;
+              url: string | null;
+              metadata: {
+                lqip: string | null;
+                dimensions: {
+                  width: number | null;
+                  height: number | null;
+                  aspectRatio: number | null;
+                } | null;
+              } | null;
+            } | null;
+            alt: null;
+            caption: null;
+            hotspot: SanityImageHotspot | null;
+            crop: SanityImageCrop | null;
+          } | null;
+          destination: {
+            title:
+              | Array<{
+                  _type: "localeString";
+                  nl?: string;
+                  en?: string;
+                }>
+              | LocaleString
+              | string
+              | null;
+            slug: string | null;
+            region:
+              | "africa"
+              | "asia"
+              | "central-america"
+              | "europe-arctic"
+              | "middle-east"
+              | "oceania"
+              | "south-america"
+              | null;
+          } | null;
+        }> | null;
+        itineraries: Array<{
+          _id: string;
+          _type: "itinerary";
+          title:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
+          slug: string | null;
+          subtitle:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
+          travelStyle: "both" | "group" | "on-demand" | null;
+          featured: boolean | null;
+          tripSpecs: {
+            durationDays: number | null;
+            durationNights: number | null;
+            difficulty: "challenging" | "easy" | "expert" | "moderate" | null;
+            groupSize:
+              | Array<{
+                  _type: "localeString";
+                  nl?: string;
+                  en?: string;
+                }>
+              | LocaleString
+              | string
+              | null;
+          } | null;
+          pricing: {
+            priceFrom: number | null;
+            currency: string | null;
+            priceNote:
+              | Array<{
+                  _type: "localeString";
+                  nl?: string;
+                  en?: string;
+                }>
+              | LocaleString
+              | string
+              | null;
+          } | null;
+          featuredImage: {
+            asset: {
+              _id: string;
+              url: string | null;
+              metadata: {
+                lqip: string | null;
+                dimensions: {
+                  width: number | null;
+                  height: number | null;
+                  aspectRatio: number | null;
+                } | null;
+              } | null;
+            } | null;
+            alt: null;
+            caption: null;
+            hotspot: SanityImageHotspot | null;
+            crop: SanityImageCrop | null;
+          } | null;
+          destination: {
+            title:
+              | Array<{
+                  _type: "localeString";
+                  nl?: string;
+                  en?: string;
+                }>
+              | LocaleString
+              | string
+              | null;
+            slug: string | null;
+            region:
+              | "africa"
+              | "asia"
+              | "central-america"
+              | "europe-arctic"
+              | "middle-east"
+              | "oceania"
+              | "south-america"
+              | null;
+          } | null;
+        }>;
+      }
+    | {
+        _key: string;
+        _type: "itineraryGrid";
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
+        displayMode: "by-destination" | "group" | "manual" | "on-demand" | null;
+        layout: "carousel" | "grid-3" | "grid-4" | null;
+        viewAllLink: {
+          label:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
+          url: string | null;
+        } | null;
+        itineraries: Array<{
+          _id: string;
+          _type: "itinerary";
+          title:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
+          slug: string | null;
+          subtitle:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
+          travelStyle: "both" | "group" | "on-demand" | null;
+          featured: boolean | null;
+          tripSpecs: {
+            durationDays: number | null;
+            durationNights: number | null;
+            difficulty: "challenging" | "easy" | "expert" | "moderate" | null;
+            groupSize:
+              | Array<{
+                  _type: "localeString";
+                  nl?: string;
+                  en?: string;
+                }>
+              | LocaleString
+              | string
+              | null;
+          } | null;
+          pricing: {
+            priceFrom: number | null;
+            currency: string | null;
+            priceNote:
+              | Array<{
+                  _type: "localeString";
+                  nl?: string;
+                  en?: string;
+                }>
+              | LocaleString
+              | string
+              | null;
+          } | null;
+          featuredImage: {
+            asset: {
+              _id: string;
+              url: string | null;
+              metadata: {
+                lqip: string | null;
+                dimensions: {
+                  width: number | null;
+                  height: number | null;
+                  aspectRatio: number | null;
+                } | null;
+              } | null;
+            } | null;
+            alt: null;
+            caption: null;
+            hotspot: SanityImageHotspot | null;
+            crop: SanityImageCrop | null;
+          } | null;
+          destination: {
+            title:
+              | Array<{
+                  _type: "localeString";
+                  nl?: string;
+                  en?: string;
+                }>
+              | LocaleString
+              | string
+              | null;
+            slug: string | null;
+            region:
+              | "africa"
+              | "asia"
+              | "central-america"
+              | "europe-arctic"
+              | "middle-east"
+              | "oceania"
+              | "south-america"
+              | null;
+          } | null;
+        }>;
+      }
+    | {
+        _key: string;
+        _type: "itineraryGrid";
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
+        displayMode: "by-destination" | "group" | "manual" | "on-demand" | null;
+        layout: "carousel" | "grid-3" | "grid-4" | null;
+        viewAllLink: {
+          label:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
+          url: string | null;
+        } | null;
+        selectedItineraries: Array<{
+          _id: string;
+          _type: "itinerary";
+          title:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
+          slug: string | null;
+          subtitle:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
+          travelStyle: "both" | "group" | "on-demand" | null;
+          featured: boolean | null;
+          tripSpecs: {
+            durationDays: number | null;
+            durationNights: number | null;
+            difficulty: "challenging" | "easy" | "expert" | "moderate" | null;
+            groupSize:
+              | Array<{
+                  _type: "localeString";
+                  nl?: string;
+                  en?: string;
+                }>
+              | LocaleString
+              | string
+              | null;
+          } | null;
+          pricing: {
+            priceFrom: number | null;
+            currency: string | null;
+            priceNote:
+              | Array<{
+                  _type: "localeString";
+                  nl?: string;
+                  en?: string;
+                }>
+              | LocaleString
+              | string
+              | null;
+          } | null;
+          featuredImage: {
+            asset: {
+              _id: string;
+              url: string | null;
+              metadata: {
+                lqip: string | null;
+                dimensions: {
+                  width: number | null;
+                  height: number | null;
+                  aspectRatio: number | null;
+                } | null;
+              } | null;
+            } | null;
+            alt: null;
+            caption: null;
+            hotspot: SanityImageHotspot | null;
+            crop: SanityImageCrop | null;
+          } | null;
+          destination: {
+            title:
+              | Array<{
+                  _type: "localeString";
+                  nl?: string;
+                  en?: string;
+                }>
+              | LocaleString
+              | string
+              | null;
+            slug: string | null;
+            region:
+              | "africa"
+              | "asia"
+              | "central-america"
+              | "europe-arctic"
+              | "middle-east"
+              | "oceania"
+              | "south-america"
+              | null;
+          } | null;
+        }> | null;
+      }
+    | {
+        _key: string;
+        _type: "itineraryGrid";
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
+        displayMode: "by-destination" | "group" | "manual" | "on-demand" | null;
+        layout: "carousel" | "grid-3" | "grid-4" | null;
+        viewAllLink: {
+          label:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
+          url: string | null;
+        } | null;
+      }
+    | {
+        _key: string;
+        _type: "processStepsBlock";
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
+        steps: Array<{
+          stepNumber: number | null;
+          title:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
+          description:
+            | Array<{
+                _type: "localeText";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleText
+            | string
+            | null;
+          icon: string | null;
+          image: {
+            asset: {
+              _id: string;
+              url: string | null;
+              metadata: {
+                lqip: string | null;
+                dimensions: {
+                  width: number | null;
+                  height: number | null;
+                  aspectRatio: number | null;
+                } | null;
+              } | null;
+            } | null;
+            alt: null;
+            caption: null;
+            hotspot: SanityImageHotspot | null;
+            crop: SanityImageCrop | null;
+          } | null;
+        }> | null;
+        cta: {
+          label:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
+          url: string | null;
+        } | null;
+      }
+    | {
+        _key: string;
+        _type: "richTextBlock";
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        content:
+          | Array<{
+              _type: "localePortableText";
+              nl?: PortableText;
+              en?: PortableText;
+            }>
+          | LocalePortableText
+          | PortableText
+          | null;
+        maxWidth: "full" | "prose" | "wide" | null;
+        align: "center" | "left" | null;
+      }
+    | {
+        _key: string;
+        _type: "testimonialsBlock";
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
+        testimonials: Array<{
+          author: string | null;
+          location: string | null;
+          tripTaken:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
+          rating: number | null;
+          quote:
+            | Array<{
+                _type: "localeText";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleText
+            | string
+            | null;
+          avatar: {
+            asset: {
+              _id: string;
+              url: string | null;
+              metadata: {
+                lqip: string | null;
+                dimensions: {
+                  width: number | null;
+                  height: number | null;
+                  aspectRatio: number | null;
+                } | null;
+              } | null;
+            } | null;
+            alt: null;
+            caption: null;
+            hotspot: SanityImageHotspot | null;
+            crop: SanityImageCrop | null;
+          } | null;
+        }> | null;
+      }
+  > | null;
+  seo: {
+    metaTitle:
+      | Array<{
+          _type: "localeString";
+          nl?: string;
+          en?: string;
+        }>
+      | LocaleString
+      | string
+      | null;
+    metaDescription:
+      | Array<{
+          _type: "localeText";
+          nl?: string;
+          en?: string;
+        }>
+      | LocaleText
+      | string
+      | null;
+    shareImage: {
+      asset: {
+        _id: string;
+        url: string | null;
+        metadata: {
+          lqip: string | null;
+          dimensions: {
+            width: number | null;
+            height: number | null;
+            aspectRatio: number | null;
+          } | null;
+        } | null;
+      } | null;
+      alt: null;
+      caption: null;
+      hotspot: SanityImageHotspot | null;
+      crop: SanityImageCrop | null;
+    } | null;
+  } | null;
+} | null;
+
+// Source: ../web/src/sanity/queries/pages.queries.ts
+// Variable: TRAVEL_ON_DEMAND_PAGE_QUERY
+// Query: *[_type == "travelOnDemandPage"][0] {    _id,    "title": coalesce(title[$language], title.nl, title.en, title),    hero {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      layoutStyle,      backgroundImage {   asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop },      primaryCta {        "label": coalesce(label[$language], label.nl, label.en, label),        url      },      secondaryCta {        "label": coalesce(label[$language], label.nl, label.en, label),        url      }    },    processSection {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      steps[] {        stepNumber,        "title": coalesce(title[$language], title.nl, title.en, title),        "description": coalesce(description[$language], description.nl, description.en, description),        icon,        image {            asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop        }      },      cta {        "label": coalesce(label[$language], label.nl, label.en, label),        url      }    },    themes[] {      "title": coalesce(title[$language], title.nl, title.en, title),      "description": coalesce(description[$language], description.nl, description.en, description),      image {          asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop      }    },    inquiryFormIntro {      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading)    },      pageBuilder[] {    _key,    _type,    // Hero Block    _type == "hero" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      backgroundImage {          asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop      },      videoUrl,      primaryCta {        "label": coalesce(label[$language], label.nl, label.en, label),        url      },      secondaryCta {        "label": coalesce(label[$language], label.nl, label.en, label),        url      },      layoutStyle    },    // Features & USPs Bar Block    _type == "featuresBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      layoutStyle,      backgroundColor,      items[] {        _key,        "title": coalesce(title[$language], title.nl, title.en, title),        "description": coalesce(description[$language], description.nl, description.en, description),        iconType,        icon,        image {            asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop        },        link      }    },    // Itinerary Grid Block    _type == "itineraryGrid" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      displayMode,      layout,      viewAllLink {        "label": coalesce(label[$language], label.nl, label.en, label),        url      },      displayMode == "manual" => {        selectedItineraries[]->{            _id,  _type,  "title": coalesce(title[$language], title.nl, title.en, title),  "slug": slug.current,  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),  travelStyle,  featured,  tripSpecs {    durationDays,    durationNights,    difficulty,    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize)  },  pricing {    priceFrom,    currency,    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)  },  featuredImage {      asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop  },  destination->{    "title": coalesce(title[$language], title.nl, title.en, title),    "slug": slug.current,    region  }        }      },      displayMode == "group" => {        "itineraries": *[_type == "itinerary" && (travelStyle == "group" || travelStyle == "both")] | order(featured desc, _createdAt desc)[0...6] {            _id,  _type,  "title": coalesce(title[$language], title.nl, title.en, title),  "slug": slug.current,  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),  travelStyle,  featured,  tripSpecs {    durationDays,    durationNights,    difficulty,    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize)  },  pricing {    priceFrom,    currency,    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)  },  featuredImage {      asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop  },  destination->{    "title": coalesce(title[$language], title.nl, title.en, title),    "slug": slug.current,    region  }        }      },      displayMode == "on-demand" => {        "itineraries": *[_type == "itinerary" && (travelStyle == "on-demand" || travelStyle == "both")] | order(featured desc, _createdAt desc)[0...6] {            _id,  _type,  "title": coalesce(title[$language], title.nl, title.en, title),  "slug": slug.current,  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),  travelStyle,  featured,  tripSpecs {    durationDays,    durationNights,    difficulty,    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize)  },  pricing {    priceFrom,    currency,    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)  },  featuredImage {      asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop  },  destination->{    "title": coalesce(title[$language], title.nl, title.en, title),    "slug": slug.current,    region  }        }      },      displayMode == "by-destination" => {        "itineraries": *[_type == "itinerary" && destination._ref == ^.filterDestination._ref] | order(featured desc, _createdAt desc)[0...6] {            _id,  _type,  "title": coalesce(title[$language], title.nl, title.en, title),  "slug": slug.current,  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),  travelStyle,  featured,  tripSpecs {    durationDays,    durationNights,    difficulty,    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize)  },  pricing {    priceFrom,    currency,    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)  },  featuredImage {      asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop  },  destination->{    "title": coalesce(title[$language], title.nl, title.en, title),    "slug": slug.current,    region  }        }      }    },    // Destination Grid Block    _type == "destinationGrid" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      layout,      defined(destinations) => {        destinations[]->{          _id,          "title": coalesce(title[$language], title.nl, title.en, title),          "slug": slug.current,          "tagline": coalesce(tagline[$language], tagline.nl, tagline.en, tagline),          region,          featuredImage {              asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop          },          "tripCount": count(*[_type == "itinerary" && references(^._id)])        }      },      !defined(destinations) => {        "destinations": *[_type == "destination"] | order(featured desc, title.nl asc, title asc) {          _id,          "title": coalesce(title[$language], title.nl, title.en, title),          "slug": slug.current,          "tagline": coalesce(tagline[$language], tagline.nl, tagline.en, tagline),          region,          featuredImage {              asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop          },          "tripCount": count(*[_type == "itinerary" && references(^._id)])        }      }    },    // Process Steps Block    _type == "processStepsBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      steps[] {        stepNumber,        "title": coalesce(title[$language], title.nl, title.en, title),        "description": coalesce(description[$language], description.nl, description.en, description),        icon,        image {            asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop        }      },      cta {        "label": coalesce(label[$language], label.nl, label.en, label),        url      }    },    // Rich Text Block    _type == "richTextBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "content": coalesce(content[$language], content.nl, content.en, content),      maxWidth,      align    },    // Gallery Block    _type == "galleryBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      layout,      images[] {          asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop,        location,        "caption": coalesce(caption[$language], caption.nl, caption.en, caption)      }    },    // FAQ Block    _type == "faqBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      items[] {        "question": coalesce(question[$language], question.nl, question.en, question),        "answer": coalesce(answer[$language], answer.nl, answer.en, answer)      }    },    // Testimonials Block    _type == "testimonialsBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      testimonials[] {        author,        location,        "tripTaken": coalesce(tripTaken[$language], tripTaken.nl, tripTaken.en, tripTaken),        rating,        "quote": coalesce(quote[$language], quote.nl, quote.en, quote),        avatar {            asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop        }      }    },    // CTA Block    _type == "ctaBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "description": coalesce(description[$language], description.nl, description.en, description),      backgroundImage {          asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop      },      primaryButton {        "label": coalesce(label[$language], label.nl, label.en, label),        url      },      secondaryButton {        "label": coalesce(label[$language], label.nl, label.en, label),        url      },      theme    }  },      seo {    "metaTitle": coalesce(metaTitle[$language], metaTitle.nl, metaTitle.en, metaTitle),    "metaDescription": coalesce(metaDescription[$language], metaDescription.nl, metaDescription.en, metaDescription),    shareImage {        asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop    }  }  }
+export type TRAVEL_ON_DEMAND_PAGE_QUERY_RESULT = {
+  _id: string;
+  title:
+    | Array<{
+        _type: "localeString";
+        nl?: string;
+        en?: string;
+      }>
+    | LocaleString
+    | string
+    | null;
+  hero: {
+    badge:
+      | Array<{
+          _type: "localeString";
+          nl?: string;
+          en?: string;
+        }>
+      | LocaleString
+      | string
+      | null;
+    heading:
+      | Array<{
+          _type: "localeString";
+          nl?: string;
+          en?: string;
+        }>
+      | LocaleString
+      | string
+      | null;
+    subheading:
+      | Array<{
+          _type: "localeText";
+          nl?: string;
+          en?: string;
+        }>
+      | LocaleText
+      | string
+      | null;
+    layoutStyle: "compact" | "fullscreen" | "split" | null;
+    backgroundImage: {
+      asset: {
+        _id: string;
+        url: string | null;
+        metadata: {
+          lqip: string | null;
+          dimensions: {
+            width: number | null;
+            height: number | null;
+            aspectRatio: number | null;
+          } | null;
+        } | null;
+      } | null;
+      alt: null;
+      caption: null;
+      hotspot: SanityImageHotspot | null;
+      crop: SanityImageCrop | null;
+    } | null;
+    primaryCta: {
+      label:
+        | Array<{
+            _type: "localeString";
+            nl?: string;
+            en?: string;
+          }>
+        | LocaleString
+        | string
+        | null;
+      url: string | null;
+    } | null;
+    secondaryCta: {
+      label:
+        | Array<{
+            _type: "localeString";
+            nl?: string;
+            en?: string;
+          }>
+        | LocaleString
+        | string
+        | null;
+      url: string | null;
+    } | null;
+  } | null;
+  processSection: {
+    badge:
+      | Array<{
+          _type: "localeString";
+          nl?: string;
+          en?: string;
+        }>
+      | LocaleString
+      | string
+      | null;
+    heading:
+      | Array<{
+          _type: "localeString";
+          nl?: string;
+          en?: string;
+        }>
+      | LocaleString
+      | string
+      | null;
+    subheading:
+      | Array<{
+          _type: "localeText";
+          nl?: string;
+          en?: string;
+        }>
+      | LocaleText
+      | string
+      | null;
+    steps: Array<{
+      stepNumber: number | null;
+      title:
+        | Array<{
+            _type: "localeString";
+            nl?: string;
+            en?: string;
+          }>
+        | LocaleString
+        | string
+        | null;
+      description:
+        | Array<{
+            _type: "localeText";
+            nl?: string;
+            en?: string;
+          }>
+        | LocaleText
+        | string
+        | null;
+      icon: string | null;
+      image: {
+        asset: {
+          _id: string;
+          url: string | null;
+          metadata: {
+            lqip: string | null;
+            dimensions: {
+              width: number | null;
+              height: number | null;
+              aspectRatio: number | null;
+            } | null;
+          } | null;
+        } | null;
+        alt: null;
+        caption: null;
+        hotspot: SanityImageHotspot | null;
+        crop: SanityImageCrop | null;
+      } | null;
+    }> | null;
+    cta: {
+      label:
+        | Array<{
+            _type: "localeString";
+            nl?: string;
+            en?: string;
+          }>
+        | LocaleString
+        | string
+        | null;
+      url: string | null;
+    } | null;
+  } | null;
   themes: Array<{
     title: Array<string> | string | null;
     description: Array<string> | string | null;
@@ -4202,9 +5131,33 @@ export type TRAVEL_ON_DEMAND_PAGE_QUERY_RESULT = {
     | {
         _key: string;
         _type: "destinationGrid";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
-        subheading: Array<string> | string | null;
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
         layout: "bento" | "carousel" | "grid-3" | null;
         destinations: Array<{
           _id: string;
@@ -4260,9 +5213,33 @@ export type TRAVEL_ON_DEMAND_PAGE_QUERY_RESULT = {
     | {
         _key: string;
         _type: "destinationGrid";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
-        subheading: Array<string> | string | null;
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
         layout: "bento" | "carousel" | "grid-3" | null;
         destinations: Array<{
           _id: string;
@@ -4318,51 +5295,82 @@ export type TRAVEL_ON_DEMAND_PAGE_QUERY_RESULT = {
     | {
         _key: string;
         _type: "destinationGrid";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
-        subheading: Array<string> | string | null;
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
         layout: "bento" | "carousel" | "grid-3" | null;
       }
     | {
         _key: string;
         _type: "faqBlock";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
-        subheading: Array<string> | string | null;
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
         items: Array<{
-          question: Array<string> | string | null;
+          question:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
           answer:
-            | Array<
-                | {
-                    children?: Array<{
-                      marks?: Array<string>;
-                      text?: string;
-                      _type: "span";
-                      _key: string;
-                    }>;
-                    style?: "blockquote" | "h2" | "h3" | "h4" | "normal";
-                    listItem?: "bullet" | "number";
-                    markDefs?: Array<{
-                      href?: string;
-                      blank?: boolean;
-                      _type: "link";
-                      _key: string;
-                    }>;
-                    level?: number;
-                    _type: "block";
-                    _key: string;
-                  }
-                | {
-                    asset?: SanityImageAssetReference;
-                    media?: unknown;
-                    hotspot?: SanityImageHotspot;
-                    crop?: SanityImageCrop;
-                    alt?: string;
-                    caption?: string;
-                    _type: "image";
-                    _key: string;
-                  }
-              >
+            | Array<{
+                _type: "localePortableText";
+                nl?: PortableText;
+                en?: PortableText;
+              }>
+            | LocalePortableText
             | PortableText
             | null;
         }> | null;
@@ -4463,9 +5471,33 @@ export type TRAVEL_ON_DEMAND_PAGE_QUERY_RESULT = {
     | {
         _key: string;
         _type: "galleryBlock";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
-        subheading: Array<string> | string | null;
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
         layout: "carousel" | "grid-3" | "masonry" | null;
         images: Array<{
           asset: {
@@ -4481,7 +5513,15 @@ export type TRAVEL_ON_DEMAND_PAGE_QUERY_RESULT = {
             } | null;
           } | null;
           alt: string | null;
-          caption: string | null;
+          caption:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
           hotspot: SanityImageHotspot | null;
           crop: SanityImageCrop | null;
           location: string | null;
@@ -4565,12 +5605,47 @@ export type TRAVEL_ON_DEMAND_PAGE_QUERY_RESULT = {
     | {
         _key: string;
         _type: "itineraryGrid";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
-        subheading: Array<string> | string | null;
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
         displayMode: "by-destination" | "group" | "manual" | "on-demand" | null;
         layout: "carousel" | "grid-3" | "grid-4" | null;
-        viewAllLink: ViewAllLink | null;
+        viewAllLink: {
+          label:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
+          url: string | null;
+        } | null;
         selectedItineraries: Array<{
           _id: string;
           _type: "itinerary";
@@ -4608,8 +5683,6 @@ export type TRAVEL_ON_DEMAND_PAGE_QUERY_RESULT = {
               | LocaleString
               | string
               | null;
-            startLocation: string | null;
-            endLocation: string | null;
           } | null;
           pricing: {
             priceFrom: number | null;
@@ -4701,8 +5774,6 @@ export type TRAVEL_ON_DEMAND_PAGE_QUERY_RESULT = {
               | LocaleString
               | string
               | null;
-            startLocation: string | null;
-            endLocation: string | null;
           } | null;
           pricing: {
             priceFrom: number | null;
@@ -4761,12 +5832,47 @@ export type TRAVEL_ON_DEMAND_PAGE_QUERY_RESULT = {
     | {
         _key: string;
         _type: "itineraryGrid";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
-        subheading: Array<string> | string | null;
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
         displayMode: "by-destination" | "group" | "manual" | "on-demand" | null;
         layout: "carousel" | "grid-3" | "grid-4" | null;
-        viewAllLink: ViewAllLink | null;
+        viewAllLink: {
+          label:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
+          url: string | null;
+        } | null;
         itineraries: Array<{
           _id: string;
           _type: "itinerary";
@@ -4804,8 +5910,6 @@ export type TRAVEL_ON_DEMAND_PAGE_QUERY_RESULT = {
               | LocaleString
               | string
               | null;
-            startLocation: string | null;
-            endLocation: string | null;
           } | null;
           pricing: {
             priceFrom: number | null;
@@ -4864,12 +5968,47 @@ export type TRAVEL_ON_DEMAND_PAGE_QUERY_RESULT = {
     | {
         _key: string;
         _type: "itineraryGrid";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
-        subheading: Array<string> | string | null;
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
         displayMode: "by-destination" | "group" | "manual" | "on-demand" | null;
         layout: "carousel" | "grid-3" | "grid-4" | null;
-        viewAllLink: ViewAllLink | null;
+        viewAllLink: {
+          label:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
+          url: string | null;
+        } | null;
         selectedItineraries: Array<{
           _id: string;
           _type: "itinerary";
@@ -4907,8 +6046,6 @@ export type TRAVEL_ON_DEMAND_PAGE_QUERY_RESULT = {
               | LocaleString
               | string
               | null;
-            startLocation: string | null;
-            endLocation: string | null;
           } | null;
           pricing: {
             priceFrom: number | null;
@@ -4967,19 +6104,78 @@ export type TRAVEL_ON_DEMAND_PAGE_QUERY_RESULT = {
     | {
         _key: string;
         _type: "itineraryGrid";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
-        subheading: Array<string> | string | null;
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
         displayMode: "by-destination" | "group" | "manual" | "on-demand" | null;
         layout: "carousel" | "grid-3" | "grid-4" | null;
-        viewAllLink: ViewAllLink | null;
+        viewAllLink: {
+          label:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
+          url: string | null;
+        } | null;
       }
     | {
         _key: string;
         _type: "processStepsBlock";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
-        subheading: Array<string> | string | null;
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
         steps: Array<{
           stepNumber: number | null;
           title:
@@ -5020,45 +6216,47 @@ export type TRAVEL_ON_DEMAND_PAGE_QUERY_RESULT = {
             crop: SanityImageCrop | null;
           } | null;
         }> | null;
-        cta: Cta | null;
+        cta: {
+          label:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
+          url: string | null;
+        } | null;
       }
     | {
         _key: string;
         _type: "richTextBlock";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
         content:
-          | Array<
-              | {
-                  children?: Array<{
-                    marks?: Array<string>;
-                    text?: string;
-                    _type: "span";
-                    _key: string;
-                  }>;
-                  style?: "blockquote" | "h2" | "h3" | "h4" | "normal";
-                  listItem?: "bullet" | "number";
-                  markDefs?: Array<{
-                    href?: string;
-                    blank?: boolean;
-                    _type: "link";
-                    _key: string;
-                  }>;
-                  level?: number;
-                  _type: "block";
-                  _key: string;
-                }
-              | {
-                  asset?: SanityImageAssetReference;
-                  media?: unknown;
-                  hotspot?: SanityImageHotspot;
-                  crop?: SanityImageCrop;
-                  alt?: string;
-                  caption?: string;
-                  _type: "image";
-                  _key: string;
-                }
-            >
+          | Array<{
+              _type: "localePortableText";
+              nl?: PortableText;
+              en?: PortableText;
+            }>
+          | LocalePortableText
           | PortableText
           | null;
         maxWidth: "full" | "prose" | "wide" | null;
@@ -5067,15 +6265,55 @@ export type TRAVEL_ON_DEMAND_PAGE_QUERY_RESULT = {
     | {
         _key: string;
         _type: "testimonialsBlock";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
-        subheading: Array<string> | string | null;
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
         testimonials: Array<{
           author: string | null;
           location: string | null;
-          tripTaken: string | null;
+          tripTaken:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
           rating: number | null;
-          quote: Array<string> | string | null;
+          quote:
+            | Array<{
+                _type: "localeText";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleText
+            | string
+            | null;
           avatar: {
             asset: {
               _id: string;
@@ -5098,8 +6336,24 @@ export type TRAVEL_ON_DEMAND_PAGE_QUERY_RESULT = {
       }
   > | null;
   seo: {
-    metaTitle: Array<string> | string | null;
-    metaDescription: Array<string> | string | null;
+    metaTitle:
+      | Array<{
+          _type: "localeString";
+          nl?: string;
+          en?: string;
+        }>
+      | LocaleString
+      | string
+      | null;
+    metaDescription:
+      | Array<{
+          _type: "localeText";
+          nl?: string;
+          en?: string;
+        }>
+      | LocaleText
+      | string
+      | null;
     shareImage: {
       asset: {
         _id: string;
@@ -5123,10 +6377,18 @@ export type TRAVEL_ON_DEMAND_PAGE_QUERY_RESULT = {
 
 // Source: ../web/src/sanity/queries/pages.queries.ts
 // Variable: CUSTOM_PAGE_QUERY
-// Query: *[_type == "page" && slug.current == $slug][0] {    _id,    "title": coalesce(title[$language], title.nl, title.en, title),    "slug": slug.current,      pageBuilder[] {    _key,    _type,    // Hero Block    _type == "hero" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      backgroundImage {          asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop      },      videoUrl,      primaryCta {        "label": coalesce(label[$language], label.nl, label.en, label),        url      },      secondaryCta {        "label": coalesce(label[$language], label.nl, label.en, label),        url      },      layoutStyle    },    // Features & USPs Bar Block    _type == "featuresBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      layoutStyle,      backgroundColor,      items[] {        _key,        "title": coalesce(title[$language], title.nl, title.en, title),        "description": coalesce(description[$language], description.nl, description.en, description),        iconType,        icon,        image {            asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop        },        link      }    },    // Itinerary Grid Block    _type == "itineraryGrid" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      displayMode,      layout,      viewAllLink,      displayMode == "manual" => {        selectedItineraries[]->{            _id,  _type,  "title": coalesce(title[$language], title.nl, title.en, title),  "slug": slug.current,  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),  travelStyle,  featured,  tripSpecs {    durationDays,    durationNights,    difficulty,    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize),    startLocation,    endLocation  },  pricing {    priceFrom,    currency,    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)  },  featuredImage {      asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop  },  destination->{    "title": coalesce(title[$language], title.nl, title.en, title),    "slug": slug.current,    region  }        }      },      displayMode == "group" => {        "itineraries": *[_type == "itinerary" && (travelStyle == "group" || travelStyle == "both")] | order(featured desc, _createdAt desc)[0...6] {            _id,  _type,  "title": coalesce(title[$language], title.nl, title.en, title),  "slug": slug.current,  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),  travelStyle,  featured,  tripSpecs {    durationDays,    durationNights,    difficulty,    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize),    startLocation,    endLocation  },  pricing {    priceFrom,    currency,    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)  },  featuredImage {      asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop  },  destination->{    "title": coalesce(title[$language], title.nl, title.en, title),    "slug": slug.current,    region  }        }      },      displayMode == "on-demand" => {        "itineraries": *[_type == "itinerary" && (travelStyle == "on-demand" || travelStyle == "both")] | order(featured desc, _createdAt desc)[0...6] {            _id,  _type,  "title": coalesce(title[$language], title.nl, title.en, title),  "slug": slug.current,  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),  travelStyle,  featured,  tripSpecs {    durationDays,    durationNights,    difficulty,    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize),    startLocation,    endLocation  },  pricing {    priceFrom,    currency,    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)  },  featuredImage {      asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop  },  destination->{    "title": coalesce(title[$language], title.nl, title.en, title),    "slug": slug.current,    region  }        }      },      displayMode == "by-destination" => {        "itineraries": *[_type == "itinerary" && destination._ref == ^.filterDestination._ref] | order(featured desc, _createdAt desc)[0...6] {            _id,  _type,  "title": coalesce(title[$language], title.nl, title.en, title),  "slug": slug.current,  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),  travelStyle,  featured,  tripSpecs {    durationDays,    durationNights,    difficulty,    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize),    startLocation,    endLocation  },  pricing {    priceFrom,    currency,    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)  },  featuredImage {      asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop  },  destination->{    "title": coalesce(title[$language], title.nl, title.en, title),    "slug": slug.current,    region  }        }      }    },    // Destination Grid Block    _type == "destinationGrid" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      layout,      defined(destinations) => {        destinations[]->{          _id,          "title": coalesce(title[$language], title.nl, title.en, title),          "slug": slug.current,          "tagline": coalesce(tagline[$language], tagline.nl, tagline.en, tagline),          region,          featuredImage {              asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop          },          "tripCount": count(*[_type == "itinerary" && references(^._id)])        }      },      !defined(destinations) => {        "destinations": *[_type == "destination"] | order(featured desc, title.nl asc, title asc) {          _id,          "title": coalesce(title[$language], title.nl, title.en, title),          "slug": slug.current,          "tagline": coalesce(tagline[$language], tagline.nl, tagline.en, tagline),          region,          featuredImage {              asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop          },          "tripCount": count(*[_type == "itinerary" && references(^._id)])        }      }    },    // Process Steps Block    _type == "processStepsBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      steps[] {        stepNumber,        "title": coalesce(title[$language], title.nl, title.en, title),        "description": coalesce(description[$language], description.nl, description.en, description),        icon,        image {            asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop        }      },      cta    },    // Rich Text Block    _type == "richTextBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "content": coalesce(content[$language], content.nl, content.en, content),      maxWidth,      align    },    // Gallery Block    _type == "galleryBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      layout,      images[] {          asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop,        location      }    },    // FAQ Block    _type == "faqBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      items[] {        "question": coalesce(question[$language], question.nl, question.en, question),        "answer": coalesce(answer[$language], answer.nl, answer.en, answer)      }    },    // Testimonials Block    _type == "testimonialsBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      testimonials[] {        author,        location,        tripTaken,        rating,        "quote": coalesce(quote[$language], quote.nl, quote.en, quote),        avatar {            asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop        }      }    },    // CTA Block    _type == "ctaBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "description": coalesce(description[$language], description.nl, description.en, description),      backgroundImage {          asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop      },      primaryButton {        "label": coalesce(label[$language], label.nl, label.en, label),        url      },      secondaryButton {        "label": coalesce(label[$language], label.nl, label.en, label),        url      },      theme    }  },      seo {    "metaTitle": coalesce(metaTitle[$language], metaTitle.nl, metaTitle.en, metaTitle),    "metaDescription": coalesce(metaDescription[$language], metaDescription.nl, metaDescription.en, metaDescription),    shareImage {        asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop    }  }  }
+// Query: *[_type == "page" && slug.current == $slug][0] {    _id,    "title": coalesce(title[$language], title.nl, title.en, title),    "slug": slug.current,      pageBuilder[] {    _key,    _type,    // Hero Block    _type == "hero" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      backgroundImage {          asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop      },      videoUrl,      primaryCta {        "label": coalesce(label[$language], label.nl, label.en, label),        url      },      secondaryCta {        "label": coalesce(label[$language], label.nl, label.en, label),        url      },      layoutStyle    },    // Features & USPs Bar Block    _type == "featuresBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      layoutStyle,      backgroundColor,      items[] {        _key,        "title": coalesce(title[$language], title.nl, title.en, title),        "description": coalesce(description[$language], description.nl, description.en, description),        iconType,        icon,        image {            asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop        },        link      }    },    // Itinerary Grid Block    _type == "itineraryGrid" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      displayMode,      layout,      viewAllLink {        "label": coalesce(label[$language], label.nl, label.en, label),        url      },      displayMode == "manual" => {        selectedItineraries[]->{            _id,  _type,  "title": coalesce(title[$language], title.nl, title.en, title),  "slug": slug.current,  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),  travelStyle,  featured,  tripSpecs {    durationDays,    durationNights,    difficulty,    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize)  },  pricing {    priceFrom,    currency,    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)  },  featuredImage {      asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop  },  destination->{    "title": coalesce(title[$language], title.nl, title.en, title),    "slug": slug.current,    region  }        }      },      displayMode == "group" => {        "itineraries": *[_type == "itinerary" && (travelStyle == "group" || travelStyle == "both")] | order(featured desc, _createdAt desc)[0...6] {            _id,  _type,  "title": coalesce(title[$language], title.nl, title.en, title),  "slug": slug.current,  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),  travelStyle,  featured,  tripSpecs {    durationDays,    durationNights,    difficulty,    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize)  },  pricing {    priceFrom,    currency,    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)  },  featuredImage {      asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop  },  destination->{    "title": coalesce(title[$language], title.nl, title.en, title),    "slug": slug.current,    region  }        }      },      displayMode == "on-demand" => {        "itineraries": *[_type == "itinerary" && (travelStyle == "on-demand" || travelStyle == "both")] | order(featured desc, _createdAt desc)[0...6] {            _id,  _type,  "title": coalesce(title[$language], title.nl, title.en, title),  "slug": slug.current,  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),  travelStyle,  featured,  tripSpecs {    durationDays,    durationNights,    difficulty,    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize)  },  pricing {    priceFrom,    currency,    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)  },  featuredImage {      asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop  },  destination->{    "title": coalesce(title[$language], title.nl, title.en, title),    "slug": slug.current,    region  }        }      },      displayMode == "by-destination" => {        "itineraries": *[_type == "itinerary" && destination._ref == ^.filterDestination._ref] | order(featured desc, _createdAt desc)[0...6] {            _id,  _type,  "title": coalesce(title[$language], title.nl, title.en, title),  "slug": slug.current,  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),  travelStyle,  featured,  tripSpecs {    durationDays,    durationNights,    difficulty,    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize)  },  pricing {    priceFrom,    currency,    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)  },  featuredImage {      asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop  },  destination->{    "title": coalesce(title[$language], title.nl, title.en, title),    "slug": slug.current,    region  }        }      }    },    // Destination Grid Block    _type == "destinationGrid" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      layout,      defined(destinations) => {        destinations[]->{          _id,          "title": coalesce(title[$language], title.nl, title.en, title),          "slug": slug.current,          "tagline": coalesce(tagline[$language], tagline.nl, tagline.en, tagline),          region,          featuredImage {              asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop          },          "tripCount": count(*[_type == "itinerary" && references(^._id)])        }      },      !defined(destinations) => {        "destinations": *[_type == "destination"] | order(featured desc, title.nl asc, title asc) {          _id,          "title": coalesce(title[$language], title.nl, title.en, title),          "slug": slug.current,          "tagline": coalesce(tagline[$language], tagline.nl, tagline.en, tagline),          region,          featuredImage {              asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop          },          "tripCount": count(*[_type == "itinerary" && references(^._id)])        }      }    },    // Process Steps Block    _type == "processStepsBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      steps[] {        stepNumber,        "title": coalesce(title[$language], title.nl, title.en, title),        "description": coalesce(description[$language], description.nl, description.en, description),        icon,        image {            asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop        }      },      cta {        "label": coalesce(label[$language], label.nl, label.en, label),        url      }    },    // Rich Text Block    _type == "richTextBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "content": coalesce(content[$language], content.nl, content.en, content),      maxWidth,      align    },    // Gallery Block    _type == "galleryBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      layout,      images[] {          asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop,        location,        "caption": coalesce(caption[$language], caption.nl, caption.en, caption)      }    },    // FAQ Block    _type == "faqBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      items[] {        "question": coalesce(question[$language], question.nl, question.en, question),        "answer": coalesce(answer[$language], answer.nl, answer.en, answer)      }    },    // Testimonials Block    _type == "testimonialsBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),      testimonials[] {        author,        location,        "tripTaken": coalesce(tripTaken[$language], tripTaken.nl, tripTaken.en, tripTaken),        rating,        "quote": coalesce(quote[$language], quote.nl, quote.en, quote),        avatar {            asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop        }      }    },    // CTA Block    _type == "ctaBlock" => {      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),      "description": coalesce(description[$language], description.nl, description.en, description),      backgroundImage {          asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop      },      primaryButton {        "label": coalesce(label[$language], label.nl, label.en, label),        url      },      secondaryButton {        "label": coalesce(label[$language], label.nl, label.en, label),        url      },      theme    }  },      seo {    "metaTitle": coalesce(metaTitle[$language], metaTitle.nl, metaTitle.en, metaTitle),    "metaDescription": coalesce(metaDescription[$language], metaDescription.nl, metaDescription.en, metaDescription),    shareImage {        asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop    }  }  }
 export type CUSTOM_PAGE_QUERY_RESULT = {
   _id: string;
-  title: Array<string> | string | null;
+  title:
+    | Array<{
+        _type: "localeString";
+        nl?: string;
+        en?: string;
+      }>
+    | LocaleString
+    | string
+    | null;
   slug: string | null;
   pageBuilder: Array<
     | {
@@ -5206,9 +6468,33 @@ export type CUSTOM_PAGE_QUERY_RESULT = {
     | {
         _key: string;
         _type: "destinationGrid";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
-        subheading: Array<string> | string | null;
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
         layout: "bento" | "carousel" | "grid-3" | null;
         destinations: Array<{
           _id: string;
@@ -5264,9 +6550,33 @@ export type CUSTOM_PAGE_QUERY_RESULT = {
     | {
         _key: string;
         _type: "destinationGrid";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
-        subheading: Array<string> | string | null;
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
         layout: "bento" | "carousel" | "grid-3" | null;
         destinations: Array<{
           _id: string;
@@ -5322,51 +6632,82 @@ export type CUSTOM_PAGE_QUERY_RESULT = {
     | {
         _key: string;
         _type: "destinationGrid";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
-        subheading: Array<string> | string | null;
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
         layout: "bento" | "carousel" | "grid-3" | null;
       }
     | {
         _key: string;
         _type: "faqBlock";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
-        subheading: Array<string> | string | null;
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
         items: Array<{
-          question: Array<string> | string | null;
+          question:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
           answer:
-            | Array<
-                | {
-                    children?: Array<{
-                      marks?: Array<string>;
-                      text?: string;
-                      _type: "span";
-                      _key: string;
-                    }>;
-                    style?: "blockquote" | "h2" | "h3" | "h4" | "normal";
-                    listItem?: "bullet" | "number";
-                    markDefs?: Array<{
-                      href?: string;
-                      blank?: boolean;
-                      _type: "link";
-                      _key: string;
-                    }>;
-                    level?: number;
-                    _type: "block";
-                    _key: string;
-                  }
-                | {
-                    asset?: SanityImageAssetReference;
-                    media?: unknown;
-                    hotspot?: SanityImageHotspot;
-                    crop?: SanityImageCrop;
-                    alt?: string;
-                    caption?: string;
-                    _type: "image";
-                    _key: string;
-                  }
-              >
+            | Array<{
+                _type: "localePortableText";
+                nl?: PortableText;
+                en?: PortableText;
+              }>
+            | LocalePortableText
             | PortableText
             | null;
         }> | null;
@@ -5467,9 +6808,33 @@ export type CUSTOM_PAGE_QUERY_RESULT = {
     | {
         _key: string;
         _type: "galleryBlock";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
-        subheading: Array<string> | string | null;
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
         layout: "carousel" | "grid-3" | "masonry" | null;
         images: Array<{
           asset: {
@@ -5485,7 +6850,15 @@ export type CUSTOM_PAGE_QUERY_RESULT = {
             } | null;
           } | null;
           alt: string | null;
-          caption: string | null;
+          caption:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
           hotspot: SanityImageHotspot | null;
           crop: SanityImageCrop | null;
           location: string | null;
@@ -5569,12 +6942,47 @@ export type CUSTOM_PAGE_QUERY_RESULT = {
     | {
         _key: string;
         _type: "itineraryGrid";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
-        subheading: Array<string> | string | null;
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
         displayMode: "by-destination" | "group" | "manual" | "on-demand" | null;
         layout: "carousel" | "grid-3" | "grid-4" | null;
-        viewAllLink: ViewAllLink | null;
+        viewAllLink: {
+          label:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
+          url: string | null;
+        } | null;
         selectedItineraries: Array<{
           _id: string;
           _type: "itinerary";
@@ -5612,8 +7020,6 @@ export type CUSTOM_PAGE_QUERY_RESULT = {
               | LocaleString
               | string
               | null;
-            startLocation: string | null;
-            endLocation: string | null;
           } | null;
           pricing: {
             priceFrom: number | null;
@@ -5705,8 +7111,6 @@ export type CUSTOM_PAGE_QUERY_RESULT = {
               | LocaleString
               | string
               | null;
-            startLocation: string | null;
-            endLocation: string | null;
           } | null;
           pricing: {
             priceFrom: number | null;
@@ -5765,12 +7169,47 @@ export type CUSTOM_PAGE_QUERY_RESULT = {
     | {
         _key: string;
         _type: "itineraryGrid";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
-        subheading: Array<string> | string | null;
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
         displayMode: "by-destination" | "group" | "manual" | "on-demand" | null;
         layout: "carousel" | "grid-3" | "grid-4" | null;
-        viewAllLink: ViewAllLink | null;
+        viewAllLink: {
+          label:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
+          url: string | null;
+        } | null;
         itineraries: Array<{
           _id: string;
           _type: "itinerary";
@@ -5808,8 +7247,6 @@ export type CUSTOM_PAGE_QUERY_RESULT = {
               | LocaleString
               | string
               | null;
-            startLocation: string | null;
-            endLocation: string | null;
           } | null;
           pricing: {
             priceFrom: number | null;
@@ -5868,12 +7305,47 @@ export type CUSTOM_PAGE_QUERY_RESULT = {
     | {
         _key: string;
         _type: "itineraryGrid";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
-        subheading: Array<string> | string | null;
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
         displayMode: "by-destination" | "group" | "manual" | "on-demand" | null;
         layout: "carousel" | "grid-3" | "grid-4" | null;
-        viewAllLink: ViewAllLink | null;
+        viewAllLink: {
+          label:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
+          url: string | null;
+        } | null;
         selectedItineraries: Array<{
           _id: string;
           _type: "itinerary";
@@ -5911,8 +7383,6 @@ export type CUSTOM_PAGE_QUERY_RESULT = {
               | LocaleString
               | string
               | null;
-            startLocation: string | null;
-            endLocation: string | null;
           } | null;
           pricing: {
             priceFrom: number | null;
@@ -5971,19 +7441,78 @@ export type CUSTOM_PAGE_QUERY_RESULT = {
     | {
         _key: string;
         _type: "itineraryGrid";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
-        subheading: Array<string> | string | null;
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
         displayMode: "by-destination" | "group" | "manual" | "on-demand" | null;
         layout: "carousel" | "grid-3" | "grid-4" | null;
-        viewAllLink: ViewAllLink | null;
+        viewAllLink: {
+          label:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
+          url: string | null;
+        } | null;
       }
     | {
         _key: string;
         _type: "processStepsBlock";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
-        subheading: Array<string> | string | null;
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
         steps: Array<{
           stepNumber: number | null;
           title:
@@ -6024,45 +7553,47 @@ export type CUSTOM_PAGE_QUERY_RESULT = {
             crop: SanityImageCrop | null;
           } | null;
         }> | null;
-        cta: Cta | null;
+        cta: {
+          label:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
+          url: string | null;
+        } | null;
       }
     | {
         _key: string;
         _type: "richTextBlock";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
         content:
-          | Array<
-              | {
-                  children?: Array<{
-                    marks?: Array<string>;
-                    text?: string;
-                    _type: "span";
-                    _key: string;
-                  }>;
-                  style?: "blockquote" | "h2" | "h3" | "h4" | "normal";
-                  listItem?: "bullet" | "number";
-                  markDefs?: Array<{
-                    href?: string;
-                    blank?: boolean;
-                    _type: "link";
-                    _key: string;
-                  }>;
-                  level?: number;
-                  _type: "block";
-                  _key: string;
-                }
-              | {
-                  asset?: SanityImageAssetReference;
-                  media?: unknown;
-                  hotspot?: SanityImageHotspot;
-                  crop?: SanityImageCrop;
-                  alt?: string;
-                  caption?: string;
-                  _type: "image";
-                  _key: string;
-                }
-            >
+          | Array<{
+              _type: "localePortableText";
+              nl?: PortableText;
+              en?: PortableText;
+            }>
+          | LocalePortableText
           | PortableText
           | null;
         maxWidth: "full" | "prose" | "wide" | null;
@@ -6071,15 +7602,55 @@ export type CUSTOM_PAGE_QUERY_RESULT = {
     | {
         _key: string;
         _type: "testimonialsBlock";
-        badge: Array<string> | string | null;
-        heading: Array<string> | string | null;
-        subheading: Array<string> | string | null;
+        badge:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        heading:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
+        subheading:
+          | Array<{
+              _type: "localeText";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleText
+          | string
+          | null;
         testimonials: Array<{
           author: string | null;
           location: string | null;
-          tripTaken: string | null;
+          tripTaken:
+            | Array<{
+                _type: "localeString";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleString
+            | string
+            | null;
           rating: number | null;
-          quote: Array<string> | string | null;
+          quote:
+            | Array<{
+                _type: "localeText";
+                nl?: string;
+                en?: string;
+              }>
+            | LocaleText
+            | string
+            | null;
           avatar: {
             asset: {
               _id: string;
@@ -6102,8 +7673,24 @@ export type CUSTOM_PAGE_QUERY_RESULT = {
       }
   > | null;
   seo: {
-    metaTitle: Array<string> | string | null;
-    metaDescription: Array<string> | string | null;
+    metaTitle:
+      | Array<{
+          _type: "localeString";
+          nl?: string;
+          en?: string;
+        }>
+      | LocaleString
+      | string
+      | null;
+    metaDescription:
+      | Array<{
+          _type: "localeText";
+          nl?: string;
+          en?: string;
+        }>
+      | LocaleText
+      | string
+      | null;
     shareImage: {
       asset: {
         _id: string;
@@ -6134,7 +7721,7 @@ export type ALL_PAGES_SLUGS_QUERY_RESULT = Array<{
 
 // Source: ../web/src/sanity/queries/pages.queries.ts
 // Variable: SITE_SETTINGS_QUERY
-// Query: *[_type == "siteSettings"][0] {    _id,    siteName,    logo {        asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop    },    logoLight {        asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop    },    navigation[] {      "label": coalesce(label[$language], label.nl, label.en, label),      url,      children[] {        "label": coalesce(label[$language], label.nl, label.en, label),        url      }    },    contactInfo,    socialLinks,    footer {      "tagline": coalesce(tagline[$language], tagline.nl, tagline.en, tagline),      "copyrightText": coalesce(copyrightText[$language], copyrightText.nl, copyrightText.en, copyrightText),      columns[] {        "title": coalesce(title[$language], title.nl, title.en, title),        links[] {          "label": coalesce(label[$language], label.nl, label.en, label),          url        }      }    },    defaultSeo {      "metaTitle": coalesce(metaTitle[$language], metaTitle.nl, metaTitle.en, metaTitle),      "metaDescription": coalesce(metaDescription[$language], metaDescription.nl, metaDescription.en, metaDescription),      shareImage {          asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop      }    }  }
+// Query: *[_type == "siteSettings"][0] {    _id,    siteName,    logo {        asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop    },    logoLight {        asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop    },    navigation[] {      "label": coalesce(label[$language], label.nl, label.en, label),      url,      children[] {        "label": coalesce(label[$language], label.nl, label.en, label),        url      }    },    contactInfo,    socialLinks,    footer {      "tagline": coalesce(tagline[$language], tagline.nl, tagline.en, tagline),      "copyrightText": coalesce(copyrightText[$language], copyrightText.nl, copyrightText.en, copyrightText),      columns[] {        "title": coalesce(title[$language], title.nl, title.en, title),        links[] {          "label": coalesce(label[$language], label.nl, label.en, label),          url        }      }    },    defaultSeo {      "metaTitle": coalesce(metaTitle[$language], metaTitle.nl, metaTitle.en, metaTitle),      "metaDescription": coalesce(metaDescription[$language], metaDescription.nl, metaDescription.en, metaDescription),      shareImage {          asset->{    _id,    url,    metadata {      lqip,      dimensions {        width,        height,        aspectRatio      }    }  },  alt,  caption,  hotspot,  crop      }    },    analytics {      googleAnalyticsId    }  }
 export type SITE_SETTINGS_QUERY_RESULT = {
   _id: string;
   siteName: string | null;
@@ -6175,10 +7762,26 @@ export type SITE_SETTINGS_QUERY_RESULT = {
     crop: SanityImageCrop | null;
   } | null;
   navigation: Array<{
-    label: Array<string> | string | null;
+    label:
+      | Array<{
+          _type: "localeString";
+          nl?: string;
+          en?: string;
+        }>
+      | LocaleString
+      | string
+      | null;
     url: string | null;
     children: Array<{
-      label: Array<string> | string | null;
+      label:
+        | Array<{
+            _type: "localeString";
+            nl?: string;
+            en?: string;
+          }>
+        | LocaleString
+        | string
+        | null;
       url: string | null;
     }> | null;
   }> | null;
@@ -6200,19 +7803,67 @@ export type SITE_SETTINGS_QUERY_RESULT = {
     _key: string;
   }> | null;
   footer: {
-    tagline: Array<string> | string | null;
-    copyrightText: Array<string> | string | null;
+    tagline:
+      | Array<{
+          _type: "localeString";
+          nl?: string;
+          en?: string;
+        }>
+      | LocaleString
+      | string
+      | null;
+    copyrightText:
+      | Array<{
+          _type: "localeString";
+          nl?: string;
+          en?: string;
+        }>
+      | LocaleString
+      | string
+      | null;
     columns: Array<{
-      title: Array<string> | string | null;
+      title:
+        | Array<{
+            _type: "localeString";
+            nl?: string;
+            en?: string;
+          }>
+        | LocaleString
+        | string
+        | null;
       links: Array<{
-        label: Array<string> | string | null;
+        label:
+          | Array<{
+              _type: "localeString";
+              nl?: string;
+              en?: string;
+            }>
+          | LocaleString
+          | string
+          | null;
         url: string | null;
       }> | null;
     }> | null;
   } | null;
   defaultSeo: {
-    metaTitle: Array<string> | string | null;
-    metaDescription: Array<string> | string | null;
+    metaTitle:
+      | Array<{
+          _type: "localeString";
+          nl?: string;
+          en?: string;
+        }>
+      | LocaleString
+      | string
+      | null;
+    metaDescription:
+      | Array<{
+          _type: "localeText";
+          nl?: string;
+          en?: string;
+        }>
+      | LocaleText
+      | string
+      | null;
     shareImage: {
       asset: {
         _id: string;
@@ -6232,23 +7883,26 @@ export type SITE_SETTINGS_QUERY_RESULT = {
       crop: SanityImageCrop | null;
     } | null;
   } | null;
+  analytics: {
+    googleAnalyticsId: string | null;
+  } | null;
 } | null;
 
 // Query TypeMap
 declare global {
   interface SanityQueries {
     '\n  *[_type == "destinationsPage"][0] {\n    _id,\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    hero {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      backgroundImage {\n        \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n      }\n    },\n    featuredDestinations[]->{\n      _id,\n      "title": coalesce(title[$language], title.nl, title.en, title),\n      "slug": slug.current,\n      "tagline": coalesce(tagline[$language], tagline.nl, tagline.en, tagline),\n      region,\n      featuredImage {\n        \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n      },\n      "tripCount": count(*[_type == "itinerary" && references(^._id)])\n    },\n    filterSettings,\n    \n  seo {\n    "metaTitle": coalesce(metaTitle[$language], metaTitle.nl, metaTitle.en, metaTitle),\n    "metaDescription": coalesce(metaDescription[$language], metaDescription.nl, metaDescription.en, metaDescription),\n    shareImage {\n      \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n    }\n  }\n,\n    "allDestinations": *[_type == "destination"] | order(featured desc, title.nl asc, title asc) {\n      _id,\n      "title": coalesce(title[$language], title.nl, title.en, title),\n      "slug": slug.current,\n      "tagline": coalesce(tagline[$language], tagline.nl, tagline.en, tagline),\n      region,\n      featuredImage {\n        \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n      },\n      "summary": coalesce(summary[$language], summary.nl, summary.en, summary),\n      "tripCount": count(*[_type == "itinerary" && references(^._id)])\n    }\n  }\n': DESTINATIONS_PAGE_QUERY_RESULT;
-    '\n  *[_type == "destination" && slug.current == $slug][0] {\n    _id,\n    _type,\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    "slug": slug.current,\n    "tagline": coalesce(tagline[$language], tagline.nl, tagline.en, tagline),\n    region,\n    featuredImage {\n      \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n    },\n    gallery[] {\n      \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n,\n      "caption": coalesce(caption[$language], caption.nl, caption.en, caption)\n    },\n    "summary": coalesce(summary[$language], summary.nl, summary.en, summary),\n    "overview": coalesce(overview[$language], overview.nl, overview.en, overview),\n    travelGuide {\n      "bestTimeToVisit": coalesce(bestTimeToVisit[$language], bestTimeToVisit.nl, bestTimeToVisit.en, bestTimeToVisit),\n      "climate": coalesce(climate[$language], climate.nl, climate.en, climate),\n      "currency": coalesce(currency[$language], currency.nl, currency.en, currency),\n      "visaInfo": coalesce(visaInfo[$language], visaInfo.nl, visaInfo.en, visaInfo),\n      "languages": coalesce(languages[$language], languages.nl, languages.en, languages),\n      "timeZone": coalesce(timeZone[$language], timeZone.nl, timeZone.en, timeZone)\n    },\n    "itineraries": *[_type == "itinerary" && references(^._id)] | order(featured desc, _createdAt desc) {\n      \n  _id,\n  _type,\n  "title": coalesce(title[$language], title.nl, title.en, title),\n  "slug": slug.current,\n  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),\n  travelStyle,\n  featured,\n  tripSpecs {\n    durationDays,\n    durationNights,\n    difficulty,\n    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize),\n    startLocation,\n    endLocation\n  },\n  pricing {\n    priceFrom,\n    currency,\n    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)\n  },\n  featuredImage {\n    \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n  },\n  destination->{\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    "slug": slug.current,\n    region\n  }\n\n    },\n    \n  seo {\n    "metaTitle": coalesce(metaTitle[$language], metaTitle.nl, metaTitle.en, metaTitle),\n    "metaDescription": coalesce(metaDescription[$language], metaDescription.nl, metaDescription.en, metaDescription),\n    shareImage {\n      \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n    }\n  }\n\n  }\n': DESTINATION_DETAIL_QUERY_RESULT;
+    '\n  *[_type == "destination" && slug.current == $slug][0] {\n    _id,\n    _type,\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    "slug": slug.current,\n    "tagline": coalesce(tagline[$language], tagline.nl, tagline.en, tagline),\n    region,\n    featuredImage {\n      \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n    },\n    gallery[] {\n      \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n,\n      "caption": coalesce(caption[$language], caption.nl, caption.en, caption)\n    },\n    "summary": coalesce(summary[$language], summary.nl, summary.en, summary),\n    "overview": coalesce(overview[$language], overview.nl, overview.en, overview),\n    travelGuide {\n      "bestTimeToVisit": coalesce(bestTimeToVisit[$language], bestTimeToVisit.nl, bestTimeToVisit.en, bestTimeToVisit),\n      "climate": coalesce(climate[$language], climate.nl, climate.en, climate),\n      "currency": coalesce(currency[$language], currency.nl, currency.en, currency),\n      "visaInfo": coalesce(visaInfo[$language], visaInfo.nl, visaInfo.en, visaInfo),\n      "languages": coalesce(languages[$language], languages.nl, languages.en, languages),\n      "timeZone": coalesce(timeZone[$language], timeZone.nl, timeZone.en, timeZone)\n    },\n    "itineraries": *[_type == "itinerary" && references(^._id)] | order(featured desc, _createdAt desc) {\n      \n  _id,\n  _type,\n  "title": coalesce(title[$language], title.nl, title.en, title),\n  "slug": slug.current,\n  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),\n  travelStyle,\n  featured,\n  tripSpecs {\n    durationDays,\n    durationNights,\n    difficulty,\n    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize)\n  },\n  pricing {\n    priceFrom,\n    currency,\n    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)\n  },\n  featuredImage {\n    \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n  },\n  destination->{\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    "slug": slug.current,\n    region\n  }\n\n    },\n    \n  seo {\n    "metaTitle": coalesce(metaTitle[$language], metaTitle.nl, metaTitle.en, metaTitle),\n    "metaDescription": coalesce(metaDescription[$language], metaDescription.nl, metaDescription.en, metaDescription),\n    shareImage {\n      \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n    }\n  }\n\n  }\n': DESTINATION_DETAIL_QUERY_RESULT;
     '\n  *[_type == "destination" && defined(slug.current)] {\n    "slug": slug.current\n  }\n': ALL_DESTINATIONS_SLUGS_QUERY_RESULT;
-    '\n  *[_type == "itinerary" && slug.current == $slug][0] {\n    _id,\n    _type,\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    "slug": slug.current,\n    "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),\n    travelStyle,\n    featured,\n    tripSpecs {\n      durationDays,\n      durationNights,\n      difficulty,\n      "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize),\n      startLocation,\n      endLocation,\n      minimumAge\n    },\n    pricing {\n      priceFrom,\n      currency,\n      "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)\n    },\n    featuredImage {\n      \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n    },\n    gallery[] {\n      \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n,\n      "caption": coalesce(caption[$language], caption.nl, caption.en, caption)\n    },\n    "summary": coalesce(summary[$language], summary.nl, summary.en, summary),\n    "highlights": highlights[][coalesce(@[$language], @.nl, @.en, @)],\n    dayByDay[] {\n      _key,\n      dayNumber,\n      "title": coalesce(title[$language], title.nl, title.en, title),\n      "location": coalesce(location[$language], location.nl, location.en, location),\n      "description": coalesce(description[$language], description.nl, description.en, description),\n      meals,\n      accommodation {\n        name,\n        type,\n        "notes": coalesce(notes[$language], notes.nl, notes.en, notes)\n      },\n      "includedActivities": includedActivities[][coalesce(@[$language], @.nl, @.en, @)],\n      "optionalActivities": optionalActivities[][coalesce(@[$language], @.nl, @.en, @)],\n      gallery[] {\n        \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n      }\n    },\n    stepByStepGuide[] {\n      _key,\n      stepNumber,\n      "title": coalesce(title[$language], title.nl, title.en, title),\n      "description": coalesce(description[$language], description.nl, description.en, description),\n      icon,\n      image {\n        \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n      }\n    },\n    inclusionsExclusions {\n      "included": included[][coalesce(@[$language], @.nl, @.en, @)],\n      "excluded": excluded[][coalesce(@[$language], @.nl, @.en, @)]\n    },\n    departures[] {\n      _key,\n      startDate,\n      endDate,\n      price,\n      status,\n      spotsLeft,\n      guideName\n    },\n    faq[] {\n      _key,\n      "question": coalesce(question[$language], question.nl, question.en, question),\n      "answer": coalesce(answer[$language], answer.nl, answer.en, answer)\n    },\n    destination->{\n      _id,\n      "title": coalesce(title[$language], title.nl, title.en, title),\n      "slug": slug.current,\n      region,\n      featuredImage {\n        \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n      }\n    },\n    "relatedItineraries": *[_type == "itinerary" && destination._ref == ^.destination._ref && _id != ^._id][0...3] {\n      \n  _id,\n  _type,\n  "title": coalesce(title[$language], title.nl, title.en, title),\n  "slug": slug.current,\n  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),\n  travelStyle,\n  featured,\n  tripSpecs {\n    durationDays,\n    durationNights,\n    difficulty,\n    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize),\n    startLocation,\n    endLocation\n  },\n  pricing {\n    priceFrom,\n    currency,\n    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)\n  },\n  featuredImage {\n    \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n  },\n  destination->{\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    "slug": slug.current,\n    region\n  }\n\n    },\n    \n  seo {\n    "metaTitle": coalesce(metaTitle[$language], metaTitle.nl, metaTitle.en, metaTitle),\n    "metaDescription": coalesce(metaDescription[$language], metaDescription.nl, metaDescription.en, metaDescription),\n    shareImage {\n      \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n    }\n  }\n\n  }\n': ITINERARY_DETAIL_QUERY_RESULT;
+    '\n  *[_type == "itinerary" && slug.current == $slug][0] {\n    _id,\n    _type,\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    "slug": slug.current,\n    "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),\n    travelStyle,\n    featured,\n    tripSpecs {\n      durationDays,\n      durationNights,\n      difficulty,\n      "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize),\n      minimumAge\n    },\n    pricing {\n      priceFrom,\n      currency,\n      "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)\n    },\n    featuredImage {\n      \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n    },\n    gallery[] {\n      \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n,\n      "caption": coalesce(caption[$language], caption.nl, caption.en, caption)\n    },\n    "summary": coalesce(summary[$language], summary.nl, summary.en, summary),\n    "highlights": highlights[] { "val": coalesce(@[$language], nl, en, @) }.val,\n    dayByDay[] {\n      _key,\n      dayNumber,\n      "title": coalesce(title[$language], title.nl, title.en, title),\n      "location": coalesce(location[$language], location.nl, location.en, location),\n      "description": coalesce(description[$language], description.nl, description.en, description),\n      meals,\n      accommodation {\n        name,\n        type,\n        "notes": coalesce(notes[$language], notes.nl, notes.en, notes)\n      },\n      "includedActivities": includedActivities[] { "val": coalesce(@[$language], nl, en, @) }.val,\n      "optionalActivities": optionalActivities[] { "val": coalesce(@[$language], nl, en, @) }.val,\n      gallery[] {\n        \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n      }\n    },\n    stepByStepGuide[] {\n      _key,\n      stepNumber,\n      "title": coalesce(title[$language], title.nl, title.en, title),\n      "description": coalesce(description[$language], description.nl, description.en, description),\n      icon,\n      image {\n        \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n      }\n    },\n    inclusionsExclusions {\n      "included": included[] { "val": coalesce(@[$language], nl, en, @) }.val,\n      "excluded": excluded[] { "val": coalesce(@[$language], nl, en, @) }.val\n    },\n    departures[] {\n      _key,\n      startDate,\n      endDate,\n      price,\n      status,\n      spotsLeft,\n      guideName\n    },\n    faq[] {\n      _key,\n      "question": coalesce(question[$language], question.nl, question.en, question),\n      "answer": coalesce(answer[$language], answer.nl, answer.en, answer)\n    },\n    destination->{\n      _id,\n      "title": coalesce(title[$language], title.nl, title.en, title),\n      "slug": slug.current,\n      region,\n      featuredImage {\n        \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n      }\n    },\n    "relatedItineraries": *[_type == "itinerary" && destination._ref == ^.destination._ref && _id != ^._id][0...3] {\n      \n  _id,\n  _type,\n  "title": coalesce(title[$language], title.nl, title.en, title),\n  "slug": slug.current,\n  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),\n  travelStyle,\n  featured,\n  tripSpecs {\n    durationDays,\n    durationNights,\n    difficulty,\n    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize)\n  },\n  pricing {\n    priceFrom,\n    currency,\n    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)\n  },\n  featuredImage {\n    \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n  },\n  destination->{\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    "slug": slug.current,\n    region\n  }\n\n    },\n    \n  seo {\n    "metaTitle": coalesce(metaTitle[$language], metaTitle.nl, metaTitle.en, metaTitle),\n    "metaDescription": coalesce(metaDescription[$language], metaDescription.nl, metaDescription.en, metaDescription),\n    shareImage {\n      \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n    }\n  }\n\n  }\n': ITINERARY_DETAIL_QUERY_RESULT;
     '\n  *[_type == "itinerary" && defined(slug.current)] {\n    "slug": slug.current\n  }\n': ALL_ITINERARIES_SLUGS_QUERY_RESULT;
-    '\n  *[_type == "itinerary" && (travelStyle == "group" || travelStyle == "both")] | order(featured desc, _createdAt desc) {\n    \n  _id,\n  _type,\n  "title": coalesce(title[$language], title.nl, title.en, title),\n  "slug": slug.current,\n  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),\n  travelStyle,\n  featured,\n  tripSpecs {\n    durationDays,\n    durationNights,\n    difficulty,\n    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize),\n    startLocation,\n    endLocation\n  },\n  pricing {\n    priceFrom,\n    currency,\n    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)\n  },\n  featuredImage {\n    \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n  },\n  destination->{\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    "slug": slug.current,\n    region\n  }\n,\n    departures[] {\n      startDate,\n      endDate,\n      status,\n      price\n    }\n  }\n': ALL_GROUP_TRIPS_QUERY_RESULT;
-    '\n  *[_type == "homePage"][0] {\n    _id,\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    \n  pageBuilder[] {\n    _key,\n    _type,\n    // Hero Block\n    _type == "hero" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      backgroundImage {\n        \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n      },\n      videoUrl,\n      primaryCta {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      },\n      secondaryCta {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      },\n      layoutStyle\n    },\n    // Features & USPs Bar Block\n    _type == "featuresBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      layoutStyle,\n      backgroundColor,\n      items[] {\n        _key,\n        "title": coalesce(title[$language], title.nl, title.en, title),\n        "description": coalesce(description[$language], description.nl, description.en, description),\n        iconType,\n        icon,\n        image {\n          \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n        },\n        link\n      }\n    },\n    // Itinerary Grid Block\n    _type == "itineraryGrid" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      displayMode,\n      layout,\n      viewAllLink,\n      displayMode == "manual" => {\n        selectedItineraries[]->{\n          \n  _id,\n  _type,\n  "title": coalesce(title[$language], title.nl, title.en, title),\n  "slug": slug.current,\n  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),\n  travelStyle,\n  featured,\n  tripSpecs {\n    durationDays,\n    durationNights,\n    difficulty,\n    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize),\n    startLocation,\n    endLocation\n  },\n  pricing {\n    priceFrom,\n    currency,\n    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)\n  },\n  featuredImage {\n    \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n  },\n  destination->{\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    "slug": slug.current,\n    region\n  }\n\n        }\n      },\n      displayMode == "group" => {\n        "itineraries": *[_type == "itinerary" && (travelStyle == "group" || travelStyle == "both")] | order(featured desc, _createdAt desc)[0...6] {\n          \n  _id,\n  _type,\n  "title": coalesce(title[$language], title.nl, title.en, title),\n  "slug": slug.current,\n  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),\n  travelStyle,\n  featured,\n  tripSpecs {\n    durationDays,\n    durationNights,\n    difficulty,\n    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize),\n    startLocation,\n    endLocation\n  },\n  pricing {\n    priceFrom,\n    currency,\n    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)\n  },\n  featuredImage {\n    \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n  },\n  destination->{\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    "slug": slug.current,\n    region\n  }\n\n        }\n      },\n      displayMode == "on-demand" => {\n        "itineraries": *[_type == "itinerary" && (travelStyle == "on-demand" || travelStyle == "both")] | order(featured desc, _createdAt desc)[0...6] {\n          \n  _id,\n  _type,\n  "title": coalesce(title[$language], title.nl, title.en, title),\n  "slug": slug.current,\n  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),\n  travelStyle,\n  featured,\n  tripSpecs {\n    durationDays,\n    durationNights,\n    difficulty,\n    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize),\n    startLocation,\n    endLocation\n  },\n  pricing {\n    priceFrom,\n    currency,\n    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)\n  },\n  featuredImage {\n    \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n  },\n  destination->{\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    "slug": slug.current,\n    region\n  }\n\n        }\n      },\n      displayMode == "by-destination" => {\n        "itineraries": *[_type == "itinerary" && destination._ref == ^.filterDestination._ref] | order(featured desc, _createdAt desc)[0...6] {\n          \n  _id,\n  _type,\n  "title": coalesce(title[$language], title.nl, title.en, title),\n  "slug": slug.current,\n  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),\n  travelStyle,\n  featured,\n  tripSpecs {\n    durationDays,\n    durationNights,\n    difficulty,\n    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize),\n    startLocation,\n    endLocation\n  },\n  pricing {\n    priceFrom,\n    currency,\n    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)\n  },\n  featuredImage {\n    \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n  },\n  destination->{\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    "slug": slug.current,\n    region\n  }\n\n        }\n      }\n    },\n    // Destination Grid Block\n    _type == "destinationGrid" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      layout,\n      defined(destinations) => {\n        destinations[]->{\n          _id,\n          "title": coalesce(title[$language], title.nl, title.en, title),\n          "slug": slug.current,\n          "tagline": coalesce(tagline[$language], tagline.nl, tagline.en, tagline),\n          region,\n          featuredImage {\n            \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n          },\n          "tripCount": count(*[_type == "itinerary" && references(^._id)])\n        }\n      },\n      !defined(destinations) => {\n        "destinations": *[_type == "destination"] | order(featured desc, title.nl asc, title asc) {\n          _id,\n          "title": coalesce(title[$language], title.nl, title.en, title),\n          "slug": slug.current,\n          "tagline": coalesce(tagline[$language], tagline.nl, tagline.en, tagline),\n          region,\n          featuredImage {\n            \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n          },\n          "tripCount": count(*[_type == "itinerary" && references(^._id)])\n        }\n      }\n    },\n    // Process Steps Block\n    _type == "processStepsBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      steps[] {\n        stepNumber,\n        "title": coalesce(title[$language], title.nl, title.en, title),\n        "description": coalesce(description[$language], description.nl, description.en, description),\n        icon,\n        image {\n          \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n        }\n      },\n      cta\n    },\n    // Rich Text Block\n    _type == "richTextBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "content": coalesce(content[$language], content.nl, content.en, content),\n      maxWidth,\n      align\n    },\n    // Gallery Block\n    _type == "galleryBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      layout,\n      images[] {\n        \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n,\n        location\n      }\n    },\n    // FAQ Block\n    _type == "faqBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      items[] {\n        "question": coalesce(question[$language], question.nl, question.en, question),\n        "answer": coalesce(answer[$language], answer.nl, answer.en, answer)\n      }\n    },\n    // Testimonials Block\n    _type == "testimonialsBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      testimonials[] {\n        author,\n        location,\n        tripTaken,\n        rating,\n        "quote": coalesce(quote[$language], quote.nl, quote.en, quote),\n        avatar {\n          \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n        }\n      }\n    },\n    // CTA Block\n    _type == "ctaBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "description": coalesce(description[$language], description.nl, description.en, description),\n      backgroundImage {\n        \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n      },\n      primaryButton {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      },\n      secondaryButton {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      },\n      theme\n    }\n  }\n,\n    \n  seo {\n    "metaTitle": coalesce(metaTitle[$language], metaTitle.nl, metaTitle.en, metaTitle),\n    "metaDescription": coalesce(metaDescription[$language], metaDescription.nl, metaDescription.en, metaDescription),\n    shareImage {\n      \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n    }\n  }\n\n  }\n': HOME_PAGE_QUERY_RESULT;
-    '\n  *[_type == "groupTravelPage"][0] {\n    _id,\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    hero {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      backgroundImage { \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n }\n    },\n    "introPhilosophy": coalesce(introPhilosophy[$language], introPhilosophy.nl, introPhilosophy.en, introPhilosophy),\n    \n  pageBuilder[] {\n    _key,\n    _type,\n    // Hero Block\n    _type == "hero" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      backgroundImage {\n        \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n      },\n      videoUrl,\n      primaryCta {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      },\n      secondaryCta {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      },\n      layoutStyle\n    },\n    // Features & USPs Bar Block\n    _type == "featuresBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      layoutStyle,\n      backgroundColor,\n      items[] {\n        _key,\n        "title": coalesce(title[$language], title.nl, title.en, title),\n        "description": coalesce(description[$language], description.nl, description.en, description),\n        iconType,\n        icon,\n        image {\n          \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n        },\n        link\n      }\n    },\n    // Itinerary Grid Block\n    _type == "itineraryGrid" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      displayMode,\n      layout,\n      viewAllLink,\n      displayMode == "manual" => {\n        selectedItineraries[]->{\n          \n  _id,\n  _type,\n  "title": coalesce(title[$language], title.nl, title.en, title),\n  "slug": slug.current,\n  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),\n  travelStyle,\n  featured,\n  tripSpecs {\n    durationDays,\n    durationNights,\n    difficulty,\n    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize),\n    startLocation,\n    endLocation\n  },\n  pricing {\n    priceFrom,\n    currency,\n    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)\n  },\n  featuredImage {\n    \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n  },\n  destination->{\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    "slug": slug.current,\n    region\n  }\n\n        }\n      },\n      displayMode == "group" => {\n        "itineraries": *[_type == "itinerary" && (travelStyle == "group" || travelStyle == "both")] | order(featured desc, _createdAt desc)[0...6] {\n          \n  _id,\n  _type,\n  "title": coalesce(title[$language], title.nl, title.en, title),\n  "slug": slug.current,\n  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),\n  travelStyle,\n  featured,\n  tripSpecs {\n    durationDays,\n    durationNights,\n    difficulty,\n    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize),\n    startLocation,\n    endLocation\n  },\n  pricing {\n    priceFrom,\n    currency,\n    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)\n  },\n  featuredImage {\n    \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n  },\n  destination->{\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    "slug": slug.current,\n    region\n  }\n\n        }\n      },\n      displayMode == "on-demand" => {\n        "itineraries": *[_type == "itinerary" && (travelStyle == "on-demand" || travelStyle == "both")] | order(featured desc, _createdAt desc)[0...6] {\n          \n  _id,\n  _type,\n  "title": coalesce(title[$language], title.nl, title.en, title),\n  "slug": slug.current,\n  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),\n  travelStyle,\n  featured,\n  tripSpecs {\n    durationDays,\n    durationNights,\n    difficulty,\n    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize),\n    startLocation,\n    endLocation\n  },\n  pricing {\n    priceFrom,\n    currency,\n    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)\n  },\n  featuredImage {\n    \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n  },\n  destination->{\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    "slug": slug.current,\n    region\n  }\n\n        }\n      },\n      displayMode == "by-destination" => {\n        "itineraries": *[_type == "itinerary" && destination._ref == ^.filterDestination._ref] | order(featured desc, _createdAt desc)[0...6] {\n          \n  _id,\n  _type,\n  "title": coalesce(title[$language], title.nl, title.en, title),\n  "slug": slug.current,\n  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),\n  travelStyle,\n  featured,\n  tripSpecs {\n    durationDays,\n    durationNights,\n    difficulty,\n    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize),\n    startLocation,\n    endLocation\n  },\n  pricing {\n    priceFrom,\n    currency,\n    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)\n  },\n  featuredImage {\n    \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n  },\n  destination->{\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    "slug": slug.current,\n    region\n  }\n\n        }\n      }\n    },\n    // Destination Grid Block\n    _type == "destinationGrid" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      layout,\n      defined(destinations) => {\n        destinations[]->{\n          _id,\n          "title": coalesce(title[$language], title.nl, title.en, title),\n          "slug": slug.current,\n          "tagline": coalesce(tagline[$language], tagline.nl, tagline.en, tagline),\n          region,\n          featuredImage {\n            \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n          },\n          "tripCount": count(*[_type == "itinerary" && references(^._id)])\n        }\n      },\n      !defined(destinations) => {\n        "destinations": *[_type == "destination"] | order(featured desc, title.nl asc, title asc) {\n          _id,\n          "title": coalesce(title[$language], title.nl, title.en, title),\n          "slug": slug.current,\n          "tagline": coalesce(tagline[$language], tagline.nl, tagline.en, tagline),\n          region,\n          featuredImage {\n            \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n          },\n          "tripCount": count(*[_type == "itinerary" && references(^._id)])\n        }\n      }\n    },\n    // Process Steps Block\n    _type == "processStepsBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      steps[] {\n        stepNumber,\n        "title": coalesce(title[$language], title.nl, title.en, title),\n        "description": coalesce(description[$language], description.nl, description.en, description),\n        icon,\n        image {\n          \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n        }\n      },\n      cta\n    },\n    // Rich Text Block\n    _type == "richTextBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "content": coalesce(content[$language], content.nl, content.en, content),\n      maxWidth,\n      align\n    },\n    // Gallery Block\n    _type == "galleryBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      layout,\n      images[] {\n        \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n,\n        location\n      }\n    },\n    // FAQ Block\n    _type == "faqBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      items[] {\n        "question": coalesce(question[$language], question.nl, question.en, question),\n        "answer": coalesce(answer[$language], answer.nl, answer.en, answer)\n      }\n    },\n    // Testimonials Block\n    _type == "testimonialsBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      testimonials[] {\n        author,\n        location,\n        tripTaken,\n        rating,\n        "quote": coalesce(quote[$language], quote.nl, quote.en, quote),\n        avatar {\n          \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n        }\n      }\n    },\n    // CTA Block\n    _type == "ctaBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "description": coalesce(description[$language], description.nl, description.en, description),\n      backgroundImage {\n        \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n      },\n      primaryButton {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      },\n      secondaryButton {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      },\n      theme\n    }\n  }\n,\n    \n  seo {\n    "metaTitle": coalesce(metaTitle[$language], metaTitle.nl, metaTitle.en, metaTitle),\n    "metaDescription": coalesce(metaDescription[$language], metaDescription.nl, metaDescription.en, metaDescription),\n    shareImage {\n      \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n    }\n  }\n\n  }\n': GROUP_TRAVEL_PAGE_QUERY_RESULT;
-    '\n  *[_type == "travelOnDemandPage"][0] {\n    _id,\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    hero {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      backgroundImage { \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n }\n    },\n    processSection,\n    themes[] {\n      "title": coalesce(title[$language], title.nl, title.en, title),\n      "description": coalesce(description[$language], description.nl, description.en, description),\n      image {\n        \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n      }\n    },\n    inquiryFormIntro {\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading)\n    },\n    \n  pageBuilder[] {\n    _key,\n    _type,\n    // Hero Block\n    _type == "hero" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      backgroundImage {\n        \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n      },\n      videoUrl,\n      primaryCta {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      },\n      secondaryCta {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      },\n      layoutStyle\n    },\n    // Features & USPs Bar Block\n    _type == "featuresBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      layoutStyle,\n      backgroundColor,\n      items[] {\n        _key,\n        "title": coalesce(title[$language], title.nl, title.en, title),\n        "description": coalesce(description[$language], description.nl, description.en, description),\n        iconType,\n        icon,\n        image {\n          \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n        },\n        link\n      }\n    },\n    // Itinerary Grid Block\n    _type == "itineraryGrid" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      displayMode,\n      layout,\n      viewAllLink,\n      displayMode == "manual" => {\n        selectedItineraries[]->{\n          \n  _id,\n  _type,\n  "title": coalesce(title[$language], title.nl, title.en, title),\n  "slug": slug.current,\n  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),\n  travelStyle,\n  featured,\n  tripSpecs {\n    durationDays,\n    durationNights,\n    difficulty,\n    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize),\n    startLocation,\n    endLocation\n  },\n  pricing {\n    priceFrom,\n    currency,\n    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)\n  },\n  featuredImage {\n    \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n  },\n  destination->{\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    "slug": slug.current,\n    region\n  }\n\n        }\n      },\n      displayMode == "group" => {\n        "itineraries": *[_type == "itinerary" && (travelStyle == "group" || travelStyle == "both")] | order(featured desc, _createdAt desc)[0...6] {\n          \n  _id,\n  _type,\n  "title": coalesce(title[$language], title.nl, title.en, title),\n  "slug": slug.current,\n  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),\n  travelStyle,\n  featured,\n  tripSpecs {\n    durationDays,\n    durationNights,\n    difficulty,\n    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize),\n    startLocation,\n    endLocation\n  },\n  pricing {\n    priceFrom,\n    currency,\n    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)\n  },\n  featuredImage {\n    \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n  },\n  destination->{\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    "slug": slug.current,\n    region\n  }\n\n        }\n      },\n      displayMode == "on-demand" => {\n        "itineraries": *[_type == "itinerary" && (travelStyle == "on-demand" || travelStyle == "both")] | order(featured desc, _createdAt desc)[0...6] {\n          \n  _id,\n  _type,\n  "title": coalesce(title[$language], title.nl, title.en, title),\n  "slug": slug.current,\n  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),\n  travelStyle,\n  featured,\n  tripSpecs {\n    durationDays,\n    durationNights,\n    difficulty,\n    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize),\n    startLocation,\n    endLocation\n  },\n  pricing {\n    priceFrom,\n    currency,\n    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)\n  },\n  featuredImage {\n    \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n  },\n  destination->{\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    "slug": slug.current,\n    region\n  }\n\n        }\n      },\n      displayMode == "by-destination" => {\n        "itineraries": *[_type == "itinerary" && destination._ref == ^.filterDestination._ref] | order(featured desc, _createdAt desc)[0...6] {\n          \n  _id,\n  _type,\n  "title": coalesce(title[$language], title.nl, title.en, title),\n  "slug": slug.current,\n  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),\n  travelStyle,\n  featured,\n  tripSpecs {\n    durationDays,\n    durationNights,\n    difficulty,\n    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize),\n    startLocation,\n    endLocation\n  },\n  pricing {\n    priceFrom,\n    currency,\n    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)\n  },\n  featuredImage {\n    \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n  },\n  destination->{\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    "slug": slug.current,\n    region\n  }\n\n        }\n      }\n    },\n    // Destination Grid Block\n    _type == "destinationGrid" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      layout,\n      defined(destinations) => {\n        destinations[]->{\n          _id,\n          "title": coalesce(title[$language], title.nl, title.en, title),\n          "slug": slug.current,\n          "tagline": coalesce(tagline[$language], tagline.nl, tagline.en, tagline),\n          region,\n          featuredImage {\n            \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n          },\n          "tripCount": count(*[_type == "itinerary" && references(^._id)])\n        }\n      },\n      !defined(destinations) => {\n        "destinations": *[_type == "destination"] | order(featured desc, title.nl asc, title asc) {\n          _id,\n          "title": coalesce(title[$language], title.nl, title.en, title),\n          "slug": slug.current,\n          "tagline": coalesce(tagline[$language], tagline.nl, tagline.en, tagline),\n          region,\n          featuredImage {\n            \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n          },\n          "tripCount": count(*[_type == "itinerary" && references(^._id)])\n        }\n      }\n    },\n    // Process Steps Block\n    _type == "processStepsBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      steps[] {\n        stepNumber,\n        "title": coalesce(title[$language], title.nl, title.en, title),\n        "description": coalesce(description[$language], description.nl, description.en, description),\n        icon,\n        image {\n          \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n        }\n      },\n      cta\n    },\n    // Rich Text Block\n    _type == "richTextBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "content": coalesce(content[$language], content.nl, content.en, content),\n      maxWidth,\n      align\n    },\n    // Gallery Block\n    _type == "galleryBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      layout,\n      images[] {\n        \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n,\n        location\n      }\n    },\n    // FAQ Block\n    _type == "faqBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      items[] {\n        "question": coalesce(question[$language], question.nl, question.en, question),\n        "answer": coalesce(answer[$language], answer.nl, answer.en, answer)\n      }\n    },\n    // Testimonials Block\n    _type == "testimonialsBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      testimonials[] {\n        author,\n        location,\n        tripTaken,\n        rating,\n        "quote": coalesce(quote[$language], quote.nl, quote.en, quote),\n        avatar {\n          \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n        }\n      }\n    },\n    // CTA Block\n    _type == "ctaBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "description": coalesce(description[$language], description.nl, description.en, description),\n      backgroundImage {\n        \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n      },\n      primaryButton {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      },\n      secondaryButton {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      },\n      theme\n    }\n  }\n,\n    \n  seo {\n    "metaTitle": coalesce(metaTitle[$language], metaTitle.nl, metaTitle.en, metaTitle),\n    "metaDescription": coalesce(metaDescription[$language], metaDescription.nl, metaDescription.en, metaDescription),\n    shareImage {\n      \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n    }\n  }\n\n  }\n': TRAVEL_ON_DEMAND_PAGE_QUERY_RESULT;
-    '\n  *[_type == "page" && slug.current == $slug][0] {\n    _id,\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    "slug": slug.current,\n    \n  pageBuilder[] {\n    _key,\n    _type,\n    // Hero Block\n    _type == "hero" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      backgroundImage {\n        \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n      },\n      videoUrl,\n      primaryCta {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      },\n      secondaryCta {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      },\n      layoutStyle\n    },\n    // Features & USPs Bar Block\n    _type == "featuresBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      layoutStyle,\n      backgroundColor,\n      items[] {\n        _key,\n        "title": coalesce(title[$language], title.nl, title.en, title),\n        "description": coalesce(description[$language], description.nl, description.en, description),\n        iconType,\n        icon,\n        image {\n          \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n        },\n        link\n      }\n    },\n    // Itinerary Grid Block\n    _type == "itineraryGrid" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      displayMode,\n      layout,\n      viewAllLink,\n      displayMode == "manual" => {\n        selectedItineraries[]->{\n          \n  _id,\n  _type,\n  "title": coalesce(title[$language], title.nl, title.en, title),\n  "slug": slug.current,\n  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),\n  travelStyle,\n  featured,\n  tripSpecs {\n    durationDays,\n    durationNights,\n    difficulty,\n    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize),\n    startLocation,\n    endLocation\n  },\n  pricing {\n    priceFrom,\n    currency,\n    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)\n  },\n  featuredImage {\n    \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n  },\n  destination->{\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    "slug": slug.current,\n    region\n  }\n\n        }\n      },\n      displayMode == "group" => {\n        "itineraries": *[_type == "itinerary" && (travelStyle == "group" || travelStyle == "both")] | order(featured desc, _createdAt desc)[0...6] {\n          \n  _id,\n  _type,\n  "title": coalesce(title[$language], title.nl, title.en, title),\n  "slug": slug.current,\n  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),\n  travelStyle,\n  featured,\n  tripSpecs {\n    durationDays,\n    durationNights,\n    difficulty,\n    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize),\n    startLocation,\n    endLocation\n  },\n  pricing {\n    priceFrom,\n    currency,\n    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)\n  },\n  featuredImage {\n    \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n  },\n  destination->{\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    "slug": slug.current,\n    region\n  }\n\n        }\n      },\n      displayMode == "on-demand" => {\n        "itineraries": *[_type == "itinerary" && (travelStyle == "on-demand" || travelStyle == "both")] | order(featured desc, _createdAt desc)[0...6] {\n          \n  _id,\n  _type,\n  "title": coalesce(title[$language], title.nl, title.en, title),\n  "slug": slug.current,\n  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),\n  travelStyle,\n  featured,\n  tripSpecs {\n    durationDays,\n    durationNights,\n    difficulty,\n    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize),\n    startLocation,\n    endLocation\n  },\n  pricing {\n    priceFrom,\n    currency,\n    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)\n  },\n  featuredImage {\n    \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n  },\n  destination->{\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    "slug": slug.current,\n    region\n  }\n\n        }\n      },\n      displayMode == "by-destination" => {\n        "itineraries": *[_type == "itinerary" && destination._ref == ^.filterDestination._ref] | order(featured desc, _createdAt desc)[0...6] {\n          \n  _id,\n  _type,\n  "title": coalesce(title[$language], title.nl, title.en, title),\n  "slug": slug.current,\n  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),\n  travelStyle,\n  featured,\n  tripSpecs {\n    durationDays,\n    durationNights,\n    difficulty,\n    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize),\n    startLocation,\n    endLocation\n  },\n  pricing {\n    priceFrom,\n    currency,\n    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)\n  },\n  featuredImage {\n    \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n  },\n  destination->{\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    "slug": slug.current,\n    region\n  }\n\n        }\n      }\n    },\n    // Destination Grid Block\n    _type == "destinationGrid" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      layout,\n      defined(destinations) => {\n        destinations[]->{\n          _id,\n          "title": coalesce(title[$language], title.nl, title.en, title),\n          "slug": slug.current,\n          "tagline": coalesce(tagline[$language], tagline.nl, tagline.en, tagline),\n          region,\n          featuredImage {\n            \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n          },\n          "tripCount": count(*[_type == "itinerary" && references(^._id)])\n        }\n      },\n      !defined(destinations) => {\n        "destinations": *[_type == "destination"] | order(featured desc, title.nl asc, title asc) {\n          _id,\n          "title": coalesce(title[$language], title.nl, title.en, title),\n          "slug": slug.current,\n          "tagline": coalesce(tagline[$language], tagline.nl, tagline.en, tagline),\n          region,\n          featuredImage {\n            \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n          },\n          "tripCount": count(*[_type == "itinerary" && references(^._id)])\n        }\n      }\n    },\n    // Process Steps Block\n    _type == "processStepsBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      steps[] {\n        stepNumber,\n        "title": coalesce(title[$language], title.nl, title.en, title),\n        "description": coalesce(description[$language], description.nl, description.en, description),\n        icon,\n        image {\n          \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n        }\n      },\n      cta\n    },\n    // Rich Text Block\n    _type == "richTextBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "content": coalesce(content[$language], content.nl, content.en, content),\n      maxWidth,\n      align\n    },\n    // Gallery Block\n    _type == "galleryBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      layout,\n      images[] {\n        \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n,\n        location\n      }\n    },\n    // FAQ Block\n    _type == "faqBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      items[] {\n        "question": coalesce(question[$language], question.nl, question.en, question),\n        "answer": coalesce(answer[$language], answer.nl, answer.en, answer)\n      }\n    },\n    // Testimonials Block\n    _type == "testimonialsBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      testimonials[] {\n        author,\n        location,\n        tripTaken,\n        rating,\n        "quote": coalesce(quote[$language], quote.nl, quote.en, quote),\n        avatar {\n          \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n        }\n      }\n    },\n    // CTA Block\n    _type == "ctaBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "description": coalesce(description[$language], description.nl, description.en, description),\n      backgroundImage {\n        \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n      },\n      primaryButton {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      },\n      secondaryButton {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      },\n      theme\n    }\n  }\n,\n    \n  seo {\n    "metaTitle": coalesce(metaTitle[$language], metaTitle.nl, metaTitle.en, metaTitle),\n    "metaDescription": coalesce(metaDescription[$language], metaDescription.nl, metaDescription.en, metaDescription),\n    shareImage {\n      \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n    }\n  }\n\n  }\n': CUSTOM_PAGE_QUERY_RESULT;
+    '\n  *[_type == "itinerary" && (travelStyle == "group" || travelStyle == "both")] | order(featured desc, _createdAt desc) {\n    \n  _id,\n  _type,\n  "title": coalesce(title[$language], title.nl, title.en, title),\n  "slug": slug.current,\n  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),\n  travelStyle,\n  featured,\n  tripSpecs {\n    durationDays,\n    durationNights,\n    difficulty,\n    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize)\n  },\n  pricing {\n    priceFrom,\n    currency,\n    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)\n  },\n  featuredImage {\n    \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n  },\n  destination->{\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    "slug": slug.current,\n    region\n  }\n,\n    departures[] {\n      startDate,\n      endDate,\n      status,\n      price\n    }\n  }\n': ALL_GROUP_TRIPS_QUERY_RESULT;
+    '\n  *[_type == "homePage"][0] {\n    _id,\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    \n  pageBuilder[] {\n    _key,\n    _type,\n    // Hero Block\n    _type == "hero" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      backgroundImage {\n        \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n      },\n      videoUrl,\n      primaryCta {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      },\n      secondaryCta {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      },\n      layoutStyle\n    },\n    // Features & USPs Bar Block\n    _type == "featuresBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      layoutStyle,\n      backgroundColor,\n      items[] {\n        _key,\n        "title": coalesce(title[$language], title.nl, title.en, title),\n        "description": coalesce(description[$language], description.nl, description.en, description),\n        iconType,\n        icon,\n        image {\n          \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n        },\n        link\n      }\n    },\n    // Itinerary Grid Block\n    _type == "itineraryGrid" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      displayMode,\n      layout,\n      viewAllLink {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      },\n      displayMode == "manual" => {\n        selectedItineraries[]->{\n          \n  _id,\n  _type,\n  "title": coalesce(title[$language], title.nl, title.en, title),\n  "slug": slug.current,\n  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),\n  travelStyle,\n  featured,\n  tripSpecs {\n    durationDays,\n    durationNights,\n    difficulty,\n    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize)\n  },\n  pricing {\n    priceFrom,\n    currency,\n    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)\n  },\n  featuredImage {\n    \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n  },\n  destination->{\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    "slug": slug.current,\n    region\n  }\n\n        }\n      },\n      displayMode == "group" => {\n        "itineraries": *[_type == "itinerary" && (travelStyle == "group" || travelStyle == "both")] | order(featured desc, _createdAt desc)[0...6] {\n          \n  _id,\n  _type,\n  "title": coalesce(title[$language], title.nl, title.en, title),\n  "slug": slug.current,\n  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),\n  travelStyle,\n  featured,\n  tripSpecs {\n    durationDays,\n    durationNights,\n    difficulty,\n    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize)\n  },\n  pricing {\n    priceFrom,\n    currency,\n    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)\n  },\n  featuredImage {\n    \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n  },\n  destination->{\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    "slug": slug.current,\n    region\n  }\n\n        }\n      },\n      displayMode == "on-demand" => {\n        "itineraries": *[_type == "itinerary" && (travelStyle == "on-demand" || travelStyle == "both")] | order(featured desc, _createdAt desc)[0...6] {\n          \n  _id,\n  _type,\n  "title": coalesce(title[$language], title.nl, title.en, title),\n  "slug": slug.current,\n  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),\n  travelStyle,\n  featured,\n  tripSpecs {\n    durationDays,\n    durationNights,\n    difficulty,\n    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize)\n  },\n  pricing {\n    priceFrom,\n    currency,\n    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)\n  },\n  featuredImage {\n    \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n  },\n  destination->{\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    "slug": slug.current,\n    region\n  }\n\n        }\n      },\n      displayMode == "by-destination" => {\n        "itineraries": *[_type == "itinerary" && destination._ref == ^.filterDestination._ref] | order(featured desc, _createdAt desc)[0...6] {\n          \n  _id,\n  _type,\n  "title": coalesce(title[$language], title.nl, title.en, title),\n  "slug": slug.current,\n  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),\n  travelStyle,\n  featured,\n  tripSpecs {\n    durationDays,\n    durationNights,\n    difficulty,\n    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize)\n  },\n  pricing {\n    priceFrom,\n    currency,\n    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)\n  },\n  featuredImage {\n    \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n  },\n  destination->{\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    "slug": slug.current,\n    region\n  }\n\n        }\n      }\n    },\n    // Destination Grid Block\n    _type == "destinationGrid" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      layout,\n      defined(destinations) => {\n        destinations[]->{\n          _id,\n          "title": coalesce(title[$language], title.nl, title.en, title),\n          "slug": slug.current,\n          "tagline": coalesce(tagline[$language], tagline.nl, tagline.en, tagline),\n          region,\n          featuredImage {\n            \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n          },\n          "tripCount": count(*[_type == "itinerary" && references(^._id)])\n        }\n      },\n      !defined(destinations) => {\n        "destinations": *[_type == "destination"] | order(featured desc, title.nl asc, title asc) {\n          _id,\n          "title": coalesce(title[$language], title.nl, title.en, title),\n          "slug": slug.current,\n          "tagline": coalesce(tagline[$language], tagline.nl, tagline.en, tagline),\n          region,\n          featuredImage {\n            \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n          },\n          "tripCount": count(*[_type == "itinerary" && references(^._id)])\n        }\n      }\n    },\n    // Process Steps Block\n    _type == "processStepsBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      steps[] {\n        stepNumber,\n        "title": coalesce(title[$language], title.nl, title.en, title),\n        "description": coalesce(description[$language], description.nl, description.en, description),\n        icon,\n        image {\n          \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n        }\n      },\n      cta {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      }\n    },\n    // Rich Text Block\n    _type == "richTextBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "content": coalesce(content[$language], content.nl, content.en, content),\n      maxWidth,\n      align\n    },\n    // Gallery Block\n    _type == "galleryBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      layout,\n      images[] {\n        \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n,\n        location,\n        "caption": coalesce(caption[$language], caption.nl, caption.en, caption)\n      }\n    },\n    // FAQ Block\n    _type == "faqBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      items[] {\n        "question": coalesce(question[$language], question.nl, question.en, question),\n        "answer": coalesce(answer[$language], answer.nl, answer.en, answer)\n      }\n    },\n    // Testimonials Block\n    _type == "testimonialsBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      testimonials[] {\n        author,\n        location,\n        "tripTaken": coalesce(tripTaken[$language], tripTaken.nl, tripTaken.en, tripTaken),\n        rating,\n        "quote": coalesce(quote[$language], quote.nl, quote.en, quote),\n        avatar {\n          \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n        }\n      }\n    },\n    // CTA Block\n    _type == "ctaBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "description": coalesce(description[$language], description.nl, description.en, description),\n      backgroundImage {\n        \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n      },\n      primaryButton {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      },\n      secondaryButton {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      },\n      theme\n    }\n  }\n,\n    \n  seo {\n    "metaTitle": coalesce(metaTitle[$language], metaTitle.nl, metaTitle.en, metaTitle),\n    "metaDescription": coalesce(metaDescription[$language], metaDescription.nl, metaDescription.en, metaDescription),\n    shareImage {\n      \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n    }\n  }\n\n  }\n': HOME_PAGE_QUERY_RESULT;
+    '\n  *[_type == "groupTravelPage"][0] {\n    _id,\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    hero {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      layoutStyle,\n      backgroundImage { \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n },\n      primaryCta {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      },\n      secondaryCta {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      }\n    },\n    tripsSection {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading)\n    },\n    introPhilosophy {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      description,\n      benefits[] {\n        stepNumber,\n        "title": coalesce(title[$language], title.nl, title.en, title),\n        "description": coalesce(description[$language], description.nl, description.en, description),\n        icon,\n        image {\n          \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n        }\n      }\n    },\n    \n  pageBuilder[] {\n    _key,\n    _type,\n    // Hero Block\n    _type == "hero" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      backgroundImage {\n        \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n      },\n      videoUrl,\n      primaryCta {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      },\n      secondaryCta {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      },\n      layoutStyle\n    },\n    // Features & USPs Bar Block\n    _type == "featuresBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      layoutStyle,\n      backgroundColor,\n      items[] {\n        _key,\n        "title": coalesce(title[$language], title.nl, title.en, title),\n        "description": coalesce(description[$language], description.nl, description.en, description),\n        iconType,\n        icon,\n        image {\n          \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n        },\n        link\n      }\n    },\n    // Itinerary Grid Block\n    _type == "itineraryGrid" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      displayMode,\n      layout,\n      viewAllLink {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      },\n      displayMode == "manual" => {\n        selectedItineraries[]->{\n          \n  _id,\n  _type,\n  "title": coalesce(title[$language], title.nl, title.en, title),\n  "slug": slug.current,\n  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),\n  travelStyle,\n  featured,\n  tripSpecs {\n    durationDays,\n    durationNights,\n    difficulty,\n    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize)\n  },\n  pricing {\n    priceFrom,\n    currency,\n    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)\n  },\n  featuredImage {\n    \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n  },\n  destination->{\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    "slug": slug.current,\n    region\n  }\n\n        }\n      },\n      displayMode == "group" => {\n        "itineraries": *[_type == "itinerary" && (travelStyle == "group" || travelStyle == "both")] | order(featured desc, _createdAt desc)[0...6] {\n          \n  _id,\n  _type,\n  "title": coalesce(title[$language], title.nl, title.en, title),\n  "slug": slug.current,\n  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),\n  travelStyle,\n  featured,\n  tripSpecs {\n    durationDays,\n    durationNights,\n    difficulty,\n    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize)\n  },\n  pricing {\n    priceFrom,\n    currency,\n    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)\n  },\n  featuredImage {\n    \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n  },\n  destination->{\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    "slug": slug.current,\n    region\n  }\n\n        }\n      },\n      displayMode == "on-demand" => {\n        "itineraries": *[_type == "itinerary" && (travelStyle == "on-demand" || travelStyle == "both")] | order(featured desc, _createdAt desc)[0...6] {\n          \n  _id,\n  _type,\n  "title": coalesce(title[$language], title.nl, title.en, title),\n  "slug": slug.current,\n  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),\n  travelStyle,\n  featured,\n  tripSpecs {\n    durationDays,\n    durationNights,\n    difficulty,\n    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize)\n  },\n  pricing {\n    priceFrom,\n    currency,\n    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)\n  },\n  featuredImage {\n    \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n  },\n  destination->{\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    "slug": slug.current,\n    region\n  }\n\n        }\n      },\n      displayMode == "by-destination" => {\n        "itineraries": *[_type == "itinerary" && destination._ref == ^.filterDestination._ref] | order(featured desc, _createdAt desc)[0...6] {\n          \n  _id,\n  _type,\n  "title": coalesce(title[$language], title.nl, title.en, title),\n  "slug": slug.current,\n  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),\n  travelStyle,\n  featured,\n  tripSpecs {\n    durationDays,\n    durationNights,\n    difficulty,\n    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize)\n  },\n  pricing {\n    priceFrom,\n    currency,\n    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)\n  },\n  featuredImage {\n    \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n  },\n  destination->{\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    "slug": slug.current,\n    region\n  }\n\n        }\n      }\n    },\n    // Destination Grid Block\n    _type == "destinationGrid" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      layout,\n      defined(destinations) => {\n        destinations[]->{\n          _id,\n          "title": coalesce(title[$language], title.nl, title.en, title),\n          "slug": slug.current,\n          "tagline": coalesce(tagline[$language], tagline.nl, tagline.en, tagline),\n          region,\n          featuredImage {\n            \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n          },\n          "tripCount": count(*[_type == "itinerary" && references(^._id)])\n        }\n      },\n      !defined(destinations) => {\n        "destinations": *[_type == "destination"] | order(featured desc, title.nl asc, title asc) {\n          _id,\n          "title": coalesce(title[$language], title.nl, title.en, title),\n          "slug": slug.current,\n          "tagline": coalesce(tagline[$language], tagline.nl, tagline.en, tagline),\n          region,\n          featuredImage {\n            \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n          },\n          "tripCount": count(*[_type == "itinerary" && references(^._id)])\n        }\n      }\n    },\n    // Process Steps Block\n    _type == "processStepsBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      steps[] {\n        stepNumber,\n        "title": coalesce(title[$language], title.nl, title.en, title),\n        "description": coalesce(description[$language], description.nl, description.en, description),\n        icon,\n        image {\n          \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n        }\n      },\n      cta {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      }\n    },\n    // Rich Text Block\n    _type == "richTextBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "content": coalesce(content[$language], content.nl, content.en, content),\n      maxWidth,\n      align\n    },\n    // Gallery Block\n    _type == "galleryBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      layout,\n      images[] {\n        \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n,\n        location,\n        "caption": coalesce(caption[$language], caption.nl, caption.en, caption)\n      }\n    },\n    // FAQ Block\n    _type == "faqBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      items[] {\n        "question": coalesce(question[$language], question.nl, question.en, question),\n        "answer": coalesce(answer[$language], answer.nl, answer.en, answer)\n      }\n    },\n    // Testimonials Block\n    _type == "testimonialsBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      testimonials[] {\n        author,\n        location,\n        "tripTaken": coalesce(tripTaken[$language], tripTaken.nl, tripTaken.en, tripTaken),\n        rating,\n        "quote": coalesce(quote[$language], quote.nl, quote.en, quote),\n        avatar {\n          \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n        }\n      }\n    },\n    // CTA Block\n    _type == "ctaBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "description": coalesce(description[$language], description.nl, description.en, description),\n      backgroundImage {\n        \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n      },\n      primaryButton {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      },\n      secondaryButton {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      },\n      theme\n    }\n  }\n,\n    \n  seo {\n    "metaTitle": coalesce(metaTitle[$language], metaTitle.nl, metaTitle.en, metaTitle),\n    "metaDescription": coalesce(metaDescription[$language], metaDescription.nl, metaDescription.en, metaDescription),\n    shareImage {\n      \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n    }\n  }\n\n  }\n': GROUP_TRAVEL_PAGE_QUERY_RESULT;
+    '\n  *[_type == "travelOnDemandPage"][0] {\n    _id,\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    hero {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      layoutStyle,\n      backgroundImage { \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n },\n      primaryCta {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      },\n      secondaryCta {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      }\n    },\n    processSection {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      steps[] {\n        stepNumber,\n        "title": coalesce(title[$language], title.nl, title.en, title),\n        "description": coalesce(description[$language], description.nl, description.en, description),\n        icon,\n        image {\n          \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n        }\n      },\n      cta {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      }\n    },\n    themes[] {\n      "title": coalesce(title[$language], title.nl, title.en, title),\n      "description": coalesce(description[$language], description.nl, description.en, description),\n      image {\n        \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n      }\n    },\n    inquiryFormIntro {\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading)\n    },\n    \n  pageBuilder[] {\n    _key,\n    _type,\n    // Hero Block\n    _type == "hero" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      backgroundImage {\n        \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n      },\n      videoUrl,\n      primaryCta {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      },\n      secondaryCta {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      },\n      layoutStyle\n    },\n    // Features & USPs Bar Block\n    _type == "featuresBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      layoutStyle,\n      backgroundColor,\n      items[] {\n        _key,\n        "title": coalesce(title[$language], title.nl, title.en, title),\n        "description": coalesce(description[$language], description.nl, description.en, description),\n        iconType,\n        icon,\n        image {\n          \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n        },\n        link\n      }\n    },\n    // Itinerary Grid Block\n    _type == "itineraryGrid" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      displayMode,\n      layout,\n      viewAllLink {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      },\n      displayMode == "manual" => {\n        selectedItineraries[]->{\n          \n  _id,\n  _type,\n  "title": coalesce(title[$language], title.nl, title.en, title),\n  "slug": slug.current,\n  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),\n  travelStyle,\n  featured,\n  tripSpecs {\n    durationDays,\n    durationNights,\n    difficulty,\n    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize)\n  },\n  pricing {\n    priceFrom,\n    currency,\n    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)\n  },\n  featuredImage {\n    \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n  },\n  destination->{\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    "slug": slug.current,\n    region\n  }\n\n        }\n      },\n      displayMode == "group" => {\n        "itineraries": *[_type == "itinerary" && (travelStyle == "group" || travelStyle == "both")] | order(featured desc, _createdAt desc)[0...6] {\n          \n  _id,\n  _type,\n  "title": coalesce(title[$language], title.nl, title.en, title),\n  "slug": slug.current,\n  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),\n  travelStyle,\n  featured,\n  tripSpecs {\n    durationDays,\n    durationNights,\n    difficulty,\n    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize)\n  },\n  pricing {\n    priceFrom,\n    currency,\n    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)\n  },\n  featuredImage {\n    \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n  },\n  destination->{\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    "slug": slug.current,\n    region\n  }\n\n        }\n      },\n      displayMode == "on-demand" => {\n        "itineraries": *[_type == "itinerary" && (travelStyle == "on-demand" || travelStyle == "both")] | order(featured desc, _createdAt desc)[0...6] {\n          \n  _id,\n  _type,\n  "title": coalesce(title[$language], title.nl, title.en, title),\n  "slug": slug.current,\n  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),\n  travelStyle,\n  featured,\n  tripSpecs {\n    durationDays,\n    durationNights,\n    difficulty,\n    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize)\n  },\n  pricing {\n    priceFrom,\n    currency,\n    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)\n  },\n  featuredImage {\n    \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n  },\n  destination->{\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    "slug": slug.current,\n    region\n  }\n\n        }\n      },\n      displayMode == "by-destination" => {\n        "itineraries": *[_type == "itinerary" && destination._ref == ^.filterDestination._ref] | order(featured desc, _createdAt desc)[0...6] {\n          \n  _id,\n  _type,\n  "title": coalesce(title[$language], title.nl, title.en, title),\n  "slug": slug.current,\n  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),\n  travelStyle,\n  featured,\n  tripSpecs {\n    durationDays,\n    durationNights,\n    difficulty,\n    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize)\n  },\n  pricing {\n    priceFrom,\n    currency,\n    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)\n  },\n  featuredImage {\n    \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n  },\n  destination->{\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    "slug": slug.current,\n    region\n  }\n\n        }\n      }\n    },\n    // Destination Grid Block\n    _type == "destinationGrid" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      layout,\n      defined(destinations) => {\n        destinations[]->{\n          _id,\n          "title": coalesce(title[$language], title.nl, title.en, title),\n          "slug": slug.current,\n          "tagline": coalesce(tagline[$language], tagline.nl, tagline.en, tagline),\n          region,\n          featuredImage {\n            \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n          },\n          "tripCount": count(*[_type == "itinerary" && references(^._id)])\n        }\n      },\n      !defined(destinations) => {\n        "destinations": *[_type == "destination"] | order(featured desc, title.nl asc, title asc) {\n          _id,\n          "title": coalesce(title[$language], title.nl, title.en, title),\n          "slug": slug.current,\n          "tagline": coalesce(tagline[$language], tagline.nl, tagline.en, tagline),\n          region,\n          featuredImage {\n            \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n          },\n          "tripCount": count(*[_type == "itinerary" && references(^._id)])\n        }\n      }\n    },\n    // Process Steps Block\n    _type == "processStepsBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      steps[] {\n        stepNumber,\n        "title": coalesce(title[$language], title.nl, title.en, title),\n        "description": coalesce(description[$language], description.nl, description.en, description),\n        icon,\n        image {\n          \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n        }\n      },\n      cta {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      }\n    },\n    // Rich Text Block\n    _type == "richTextBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "content": coalesce(content[$language], content.nl, content.en, content),\n      maxWidth,\n      align\n    },\n    // Gallery Block\n    _type == "galleryBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      layout,\n      images[] {\n        \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n,\n        location,\n        "caption": coalesce(caption[$language], caption.nl, caption.en, caption)\n      }\n    },\n    // FAQ Block\n    _type == "faqBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      items[] {\n        "question": coalesce(question[$language], question.nl, question.en, question),\n        "answer": coalesce(answer[$language], answer.nl, answer.en, answer)\n      }\n    },\n    // Testimonials Block\n    _type == "testimonialsBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      testimonials[] {\n        author,\n        location,\n        "tripTaken": coalesce(tripTaken[$language], tripTaken.nl, tripTaken.en, tripTaken),\n        rating,\n        "quote": coalesce(quote[$language], quote.nl, quote.en, quote),\n        avatar {\n          \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n        }\n      }\n    },\n    // CTA Block\n    _type == "ctaBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "description": coalesce(description[$language], description.nl, description.en, description),\n      backgroundImage {\n        \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n      },\n      primaryButton {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      },\n      secondaryButton {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      },\n      theme\n    }\n  }\n,\n    \n  seo {\n    "metaTitle": coalesce(metaTitle[$language], metaTitle.nl, metaTitle.en, metaTitle),\n    "metaDescription": coalesce(metaDescription[$language], metaDescription.nl, metaDescription.en, metaDescription),\n    shareImage {\n      \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n    }\n  }\n\n  }\n': TRAVEL_ON_DEMAND_PAGE_QUERY_RESULT;
+    '\n  *[_type == "page" && slug.current == $slug][0] {\n    _id,\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    "slug": slug.current,\n    \n  pageBuilder[] {\n    _key,\n    _type,\n    // Hero Block\n    _type == "hero" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      backgroundImage {\n        \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n      },\n      videoUrl,\n      primaryCta {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      },\n      secondaryCta {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      },\n      layoutStyle\n    },\n    // Features & USPs Bar Block\n    _type == "featuresBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      layoutStyle,\n      backgroundColor,\n      items[] {\n        _key,\n        "title": coalesce(title[$language], title.nl, title.en, title),\n        "description": coalesce(description[$language], description.nl, description.en, description),\n        iconType,\n        icon,\n        image {\n          \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n        },\n        link\n      }\n    },\n    // Itinerary Grid Block\n    _type == "itineraryGrid" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      displayMode,\n      layout,\n      viewAllLink {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      },\n      displayMode == "manual" => {\n        selectedItineraries[]->{\n          \n  _id,\n  _type,\n  "title": coalesce(title[$language], title.nl, title.en, title),\n  "slug": slug.current,\n  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),\n  travelStyle,\n  featured,\n  tripSpecs {\n    durationDays,\n    durationNights,\n    difficulty,\n    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize)\n  },\n  pricing {\n    priceFrom,\n    currency,\n    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)\n  },\n  featuredImage {\n    \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n  },\n  destination->{\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    "slug": slug.current,\n    region\n  }\n\n        }\n      },\n      displayMode == "group" => {\n        "itineraries": *[_type == "itinerary" && (travelStyle == "group" || travelStyle == "both")] | order(featured desc, _createdAt desc)[0...6] {\n          \n  _id,\n  _type,\n  "title": coalesce(title[$language], title.nl, title.en, title),\n  "slug": slug.current,\n  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),\n  travelStyle,\n  featured,\n  tripSpecs {\n    durationDays,\n    durationNights,\n    difficulty,\n    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize)\n  },\n  pricing {\n    priceFrom,\n    currency,\n    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)\n  },\n  featuredImage {\n    \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n  },\n  destination->{\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    "slug": slug.current,\n    region\n  }\n\n        }\n      },\n      displayMode == "on-demand" => {\n        "itineraries": *[_type == "itinerary" && (travelStyle == "on-demand" || travelStyle == "both")] | order(featured desc, _createdAt desc)[0...6] {\n          \n  _id,\n  _type,\n  "title": coalesce(title[$language], title.nl, title.en, title),\n  "slug": slug.current,\n  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),\n  travelStyle,\n  featured,\n  tripSpecs {\n    durationDays,\n    durationNights,\n    difficulty,\n    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize)\n  },\n  pricing {\n    priceFrom,\n    currency,\n    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)\n  },\n  featuredImage {\n    \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n  },\n  destination->{\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    "slug": slug.current,\n    region\n  }\n\n        }\n      },\n      displayMode == "by-destination" => {\n        "itineraries": *[_type == "itinerary" && destination._ref == ^.filterDestination._ref] | order(featured desc, _createdAt desc)[0...6] {\n          \n  _id,\n  _type,\n  "title": coalesce(title[$language], title.nl, title.en, title),\n  "slug": slug.current,\n  "subtitle": coalesce(subtitle[$language], subtitle.nl, subtitle.en, subtitle),\n  travelStyle,\n  featured,\n  tripSpecs {\n    durationDays,\n    durationNights,\n    difficulty,\n    "groupSize": coalesce(groupSize[$language], groupSize.nl, groupSize.en, groupSize)\n  },\n  pricing {\n    priceFrom,\n    currency,\n    "priceNote": coalesce(priceNote[$language], priceNote.nl, priceNote.en, priceNote)\n  },\n  featuredImage {\n    \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n  },\n  destination->{\n    "title": coalesce(title[$language], title.nl, title.en, title),\n    "slug": slug.current,\n    region\n  }\n\n        }\n      }\n    },\n    // Destination Grid Block\n    _type == "destinationGrid" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      layout,\n      defined(destinations) => {\n        destinations[]->{\n          _id,\n          "title": coalesce(title[$language], title.nl, title.en, title),\n          "slug": slug.current,\n          "tagline": coalesce(tagline[$language], tagline.nl, tagline.en, tagline),\n          region,\n          featuredImage {\n            \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n          },\n          "tripCount": count(*[_type == "itinerary" && references(^._id)])\n        }\n      },\n      !defined(destinations) => {\n        "destinations": *[_type == "destination"] | order(featured desc, title.nl asc, title asc) {\n          _id,\n          "title": coalesce(title[$language], title.nl, title.en, title),\n          "slug": slug.current,\n          "tagline": coalesce(tagline[$language], tagline.nl, tagline.en, tagline),\n          region,\n          featuredImage {\n            \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n          },\n          "tripCount": count(*[_type == "itinerary" && references(^._id)])\n        }\n      }\n    },\n    // Process Steps Block\n    _type == "processStepsBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      steps[] {\n        stepNumber,\n        "title": coalesce(title[$language], title.nl, title.en, title),\n        "description": coalesce(description[$language], description.nl, description.en, description),\n        icon,\n        image {\n          \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n        }\n      },\n      cta {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      }\n    },\n    // Rich Text Block\n    _type == "richTextBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "content": coalesce(content[$language], content.nl, content.en, content),\n      maxWidth,\n      align\n    },\n    // Gallery Block\n    _type == "galleryBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      layout,\n      images[] {\n        \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n,\n        location,\n        "caption": coalesce(caption[$language], caption.nl, caption.en, caption)\n      }\n    },\n    // FAQ Block\n    _type == "faqBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      items[] {\n        "question": coalesce(question[$language], question.nl, question.en, question),\n        "answer": coalesce(answer[$language], answer.nl, answer.en, answer)\n      }\n    },\n    // Testimonials Block\n    _type == "testimonialsBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "subheading": coalesce(subheading[$language], subheading.nl, subheading.en, subheading),\n      testimonials[] {\n        author,\n        location,\n        "tripTaken": coalesce(tripTaken[$language], tripTaken.nl, tripTaken.en, tripTaken),\n        rating,\n        "quote": coalesce(quote[$language], quote.nl, quote.en, quote),\n        avatar {\n          \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n        }\n      }\n    },\n    // CTA Block\n    _type == "ctaBlock" => {\n      "badge": coalesce(badge[$language], badge.nl, badge.en, badge),\n      "heading": coalesce(heading[$language], heading.nl, heading.en, heading),\n      "description": coalesce(description[$language], description.nl, description.en, description),\n      backgroundImage {\n        \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n      },\n      primaryButton {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      },\n      secondaryButton {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      },\n      theme\n    }\n  }\n,\n    \n  seo {\n    "metaTitle": coalesce(metaTitle[$language], metaTitle.nl, metaTitle.en, metaTitle),\n    "metaDescription": coalesce(metaDescription[$language], metaDescription.nl, metaDescription.en, metaDescription),\n    shareImage {\n      \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n    }\n  }\n\n  }\n': CUSTOM_PAGE_QUERY_RESULT;
     '\n  *[_type == "page" && defined(slug.current)] {\n    "slug": slug.current\n  }\n': ALL_PAGES_SLUGS_QUERY_RESULT;
-    '\n  *[_type == "siteSettings"][0] {\n    _id,\n    siteName,\n    logo {\n      \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n    },\n    logoLight {\n      \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n    },\n    navigation[] {\n      "label": coalesce(label[$language], label.nl, label.en, label),\n      url,\n      children[] {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      }\n    },\n    contactInfo,\n    socialLinks,\n    footer {\n      "tagline": coalesce(tagline[$language], tagline.nl, tagline.en, tagline),\n      "copyrightText": coalesce(copyrightText[$language], copyrightText.nl, copyrightText.en, copyrightText),\n      columns[] {\n        "title": coalesce(title[$language], title.nl, title.en, title),\n        links[] {\n          "label": coalesce(label[$language], label.nl, label.en, label),\n          url\n        }\n      }\n    },\n    defaultSeo {\n      "metaTitle": coalesce(metaTitle[$language], metaTitle.nl, metaTitle.en, metaTitle),\n      "metaDescription": coalesce(metaDescription[$language], metaDescription.nl, metaDescription.en, metaDescription),\n      shareImage {\n        \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n      }\n    }\n  }\n': SITE_SETTINGS_QUERY_RESULT;
+    '\n  *[_type == "siteSettings"][0] {\n    _id,\n    siteName,\n    logo {\n      \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n    },\n    logoLight {\n      \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n    },\n    navigation[] {\n      "label": coalesce(label[$language], label.nl, label.en, label),\n      url,\n      children[] {\n        "label": coalesce(label[$language], label.nl, label.en, label),\n        url\n      }\n    },\n    contactInfo,\n    socialLinks,\n    footer {\n      "tagline": coalesce(tagline[$language], tagline.nl, tagline.en, tagline),\n      "copyrightText": coalesce(copyrightText[$language], copyrightText.nl, copyrightText.en, copyrightText),\n      columns[] {\n        "title": coalesce(title[$language], title.nl, title.en, title),\n        links[] {\n          "label": coalesce(label[$language], label.nl, label.en, label),\n          url\n        }\n      }\n    },\n    defaultSeo {\n      "metaTitle": coalesce(metaTitle[$language], metaTitle.nl, metaTitle.en, metaTitle),\n      "metaDescription": coalesce(metaDescription[$language], metaDescription.nl, metaDescription.en, metaDescription),\n      shareImage {\n        \n  asset->{\n    _id,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n        aspectRatio\n      }\n    }\n  },\n  alt,\n  caption,\n  hotspot,\n  crop\n\n      }\n    },\n    analytics {\n      googleAnalyticsId\n    }\n  }\n': SITE_SETTINGS_QUERY_RESULT;
   }
 }
 // Lets @sanity/client releases that predate the global registry read it too

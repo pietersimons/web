@@ -164,6 +164,9 @@ export const SITE_SETTINGS_QUERY = defineQuery(`
       shareImage {
         ${IMAGE_PROJECTION}
       }
+    },
+    analytics {
+      googleAnalyticsId
     }
   }
 `);

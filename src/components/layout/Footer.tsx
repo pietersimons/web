@@ -5,6 +5,7 @@ import { LanguageSwitcher } from "./LanguageSwitcher";
 import { Locale, defaultLocale } from "@/lib/i18n/config";
 import { localizePath } from "@/lib/i18n/navigation";
 import { getDictionary } from "@/lib/i18n/dictionaries";
+import { CookieSettingsButton } from "@/components/cookies";
 
 interface FooterProps {
   siteName?: string;
@@ -169,7 +170,7 @@ export function Footer({
             &copy; {currentYear} {siteName}. {dict.footer.allRightsReserved}
           </p>
 
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-6 flex-wrap justify-center sm:justify-end">
             <LanguageSwitcher currentLocale={currentLocale} variant="footer" />
             <Link href={localizePath("/brand", currentLocale)} className="hover:text-accent font-medium transition-colors">
               {currentLocale === "nl" ? "Merkboek" : "Brand Guide"}
@@ -180,6 +181,7 @@ export function Footer({
             <Link href={localizePath("/terms", currentLocale)} className="hover:text-white transition-colors">
               Terms & Conditions
             </Link>
+            <CookieSettingsButton currentLocale={currentLocale} />
           </div>
         </div>
       </div>
