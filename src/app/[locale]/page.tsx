@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { client } from "@/sanity/client";
+import { sanityFetch } from "@/sanity/live";
 import { HOME_PAGE_QUERY } from "@/sanity/queries/pages.queries";
 import { PageBuilder } from "@/components/page-builder";
 import { HeroBlock } from "@/components/blocks/HeroBlock";
@@ -24,7 +24,12 @@ export async function generateMetadata({
 
   let homeData: any = null;
   try {
-    homeData = await client.fetch(HOME_PAGE_QUERY, { language: activeLocale });
+    const res = await sanityFetch({
+      query: HOME_PAGE_QUERY,
+      params: { language: activeLocale },
+      stega: false,
+    });
+    homeData = res.data;
   } catch {
     // fallback
   }
@@ -65,7 +70,11 @@ export default async function HomePage({
 
   let homeData = null;
   try {
-    homeData = await client.fetch(HOME_PAGE_QUERY, { language: activeLocale });
+    const res = await sanityFetch({
+      query: HOME_PAGE_QUERY,
+      params: { language: activeLocale },
+    });
+    homeData = res.data;
   } catch (error) {
     console.error("Failed to fetch home page data:", error);
   }

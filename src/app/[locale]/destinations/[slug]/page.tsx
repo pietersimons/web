@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { client } from "@/sanity/client";
+import { sanityFetch } from "@/sanity/live";
 import {
   DESTINATION_DETAIL_QUERY,
   ALL_DESTINATIONS_SLUGS_QUERY,
@@ -41,7 +42,11 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale, slug } = await params;
   const activeLocale = isValidLocale(locale) ? locale : defaultLocale;
-  const dest: any = await client.fetch(DESTINATION_DETAIL_QUERY, { slug, language: activeLocale });
+  const { data: dest }: { data: any } = await sanityFetch({
+    query: DESTINATION_DETAIL_QUERY,
+    params: { slug, language: activeLocale },
+    stega: false,
+  });
 
   if (!dest) {
     return { title: "Destination Not Found" };
@@ -75,7 +80,10 @@ export default async function DestinationDetailPage({
   const activeLocale: Locale = isValidLocale(locale) ? locale : defaultLocale;
   const isNl = activeLocale === "nl";
 
-  const dest: any = await client.fetch(DESTINATION_DETAIL_QUERY, { slug, language: activeLocale });
+  const { data: dest }: { data: any } = await sanityFetch({
+    query: DESTINATION_DETAIL_QUERY,
+    params: { slug, language: activeLocale },
+  });
 
   if (!dest) {
     notFound();

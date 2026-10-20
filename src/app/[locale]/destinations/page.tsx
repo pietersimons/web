@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { client } from "@/sanity/client";
+import { sanityFetch } from "@/sanity/live";
 import { DESTINATIONS_PAGE_QUERY } from "@/sanity/queries/destination.queries";
 import { HeroBlock } from "@/components/blocks/HeroBlock";
 import { DestinationsClientView } from "@/components/destination/DestinationsClientView";
@@ -19,7 +19,12 @@ export async function generateMetadata({
 
   let pageData: any = null;
   try {
-    pageData = await client.fetch(DESTINATIONS_PAGE_QUERY, { language: activeLocale });
+    const res = await sanityFetch({
+      query: DESTINATIONS_PAGE_QUERY,
+      params: { language: activeLocale },
+      stega: false,
+    });
+    pageData = res.data;
   } catch {
     // fallback
   }
@@ -60,7 +65,11 @@ export default async function DestinationsPage({
 
   let data: any = null;
   try {
-    data = await client.fetch(DESTINATIONS_PAGE_QUERY, { language: activeLocale });
+    const res = await sanityFetch({
+      query: DESTINATIONS_PAGE_QUERY,
+      params: { language: activeLocale },
+    });
+    data = res.data;
   } catch (error) {
     console.error("Failed to fetch destinations page:", error);
   }

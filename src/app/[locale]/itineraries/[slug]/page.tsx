@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { client } from "@/sanity/client";
+import { sanityFetch } from "@/sanity/live";
 import {
   ITINERARY_DETAIL_QUERY,
   ALL_ITINERARIES_SLUGS_QUERY,
@@ -45,7 +46,11 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale, slug } = await params;
   const activeLocale = isValidLocale(locale) ? locale : defaultLocale;
-  const trip: any = await client.fetch(ITINERARY_DETAIL_QUERY, { slug, language: activeLocale });
+  const { data: trip }: { data: any } = await sanityFetch({
+    query: ITINERARY_DETAIL_QUERY,
+    params: { slug, language: activeLocale },
+    stega: false,
+  });
 
   if (!trip) {
     return { title: "Trip Not Found" };
@@ -79,7 +84,10 @@ export default async function ItineraryDetailPage({
   const activeLocale: Locale = isValidLocale(locale) ? locale : defaultLocale;
   const isNl = activeLocale === "nl";
 
-  const trip: any = await client.fetch(ITINERARY_DETAIL_QUERY, { slug, language: activeLocale });
+  const { data: trip }: { data: any } = await sanityFetch({
+    query: ITINERARY_DETAIL_QUERY,
+    params: { slug, language: activeLocale },
+  });
 
   if (!trip) {
     notFound();

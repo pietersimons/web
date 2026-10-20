@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { client } from "@/sanity/client";
+import { sanityFetch } from "@/sanity/live";
 import {
   CUSTOM_PAGE_QUERY,
   ALL_PAGES_SLUGS_QUERY,
@@ -36,7 +37,11 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale, slug } = await params;
   const activeLocale = isValidLocale(locale) ? locale : defaultLocale;
-  const page: any = await client.fetch(CUSTOM_PAGE_QUERY, { slug, language: activeLocale });
+  const { data: page }: { data: any } = await sanityFetch({
+    query: CUSTOM_PAGE_QUERY,
+    params: { slug, language: activeLocale },
+    stega: false,
+  });
 
   if (!page) {
     return { title: "Page Not Found" };
@@ -67,7 +72,10 @@ export default async function GenericCustomPage({
 }) {
   const { locale, slug } = await params;
   const activeLocale: Locale = isValidLocale(locale) ? locale : defaultLocale;
-  const page: any = await client.fetch(CUSTOM_PAGE_QUERY, { slug, language: activeLocale });
+  const { data: page }: { data: any } = await sanityFetch({
+    query: CUSTOM_PAGE_QUERY,
+    params: { slug, language: activeLocale },
+  });
 
   if (!page) {
     notFound();

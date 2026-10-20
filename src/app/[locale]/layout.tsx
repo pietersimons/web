@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import { draftMode } from "next/headers";
+import { VisualEditing } from "next-sanity/visual-editing";
 import { Bebas_Neue, Plus_Jakarta_Sans, Cinzel } from "next/font/google";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { client } from "@/sanity/client";
+import { sanityFetch, SanityLive } from "@/sanity/live";
 import { SITE_SETTINGS_QUERY } from "@/sanity/queries/pages.queries";
 import { locales, defaultLocale, Locale, isValidLocale } from "@/lib/i18n/config";
 import { GoogleConsentMode } from "@/components/analytics/GoogleConsentMode";
@@ -88,10 +90,15 @@ export default async function LocaleLayout({
 }) {
   const { locale } = await params;
   const activeLocale: Locale = isValidLocale(locale) ? locale : defaultLocale;
+  const { isEnabled: isDraftMode } = await draftMode();
 
   let settings: any = null;
   try {
-    settings = await client.fetch(SITE_SETTINGS_QUERY, { language: activeLocale });
+    const res = await sanityFetch({
+      query: SITE_SETTINGS_QUERY,
+      params: { language: activeLocale },
+    });
+    settings = res.data;
   } catch (error) {
     console.error("Failed to load site settings:", error);
   }
@@ -124,6 +131,8 @@ export default async function LocaleLayout({
           <CookiePreferencesDialog />
           <CookieConsentTrigger />
         </CookieConsentProvider>
+        <SanityLive />
+        {isDraftMode && <VisualEditing />}
       </body>
     </html>
   );

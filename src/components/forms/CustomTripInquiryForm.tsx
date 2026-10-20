@@ -7,7 +7,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import {
-  Compass,
   ArrowRight,
   ArrowLeft,
   CheckCircle2,
@@ -15,49 +14,206 @@ import {
   Users,
   MapPin,
   Sparkles,
+  AlertCircle,
 } from "lucide-react";
+import { Locale, defaultLocale } from "@/lib/i18n/config";
+import { CustomTripFormConfig } from "@/lib/forms.types";
+import {
+  DynamicFormFields,
+  areRequiredCustomFieldsValid,
+  formatAdditionalFieldsForSubmission,
+} from "./DynamicFormFields";
 
 interface CustomTripInquiryFormProps {
   heading?: string;
   subheading?: string;
+  locale?: Locale;
+  formConfig?: CustomTripFormConfig | null;
 }
 
 export function CustomTripInquiryForm({
-  heading = "Start Designing Your Tailor-Made Adventure",
-  subheading = "Tell us about your dream expedition. Our destination specialists will craft a customized itinerary just for you.",
+  heading,
+  subheading,
+  locale = defaultLocale,
+  formConfig,
 }: CustomTripInquiryFormProps) {
+  const isNl = locale === "nl";
+
+  // Section Header (page-level prop overrides central formConfig, which overrides fallback)
+  const resolvedBadge =
+    formConfig?.badge ||
+    (isNl ? "Maatwerk Reisaanvraag" : "Custom Travel Inquiry");
+  const resolvedHeading =
+    heading ||
+    formConfig?.heading ||
+    (isNl
+      ? "Ontwerp Jouw Maatwerk Avontuur"
+      : "Start Designing Your Tailor-Made Adventure");
+  const resolvedSubheading =
+    subheading ||
+    formConfig?.subheading ||
+    (isNl
+      ? "Vertel ons over jouw droomreis. Onze bestemmingsspecialisten stellen een persoonlijk reisvoorstel op maat voor je samen."
+      : "Tell us about your dream expedition. Our destination specialists will craft a customized itinerary just for you.");
+
+  // Configurable options with safe defaults
+  const travelStyleOptions =
+    formConfig?.travelStyleOptions && formConfig.travelStyleOptions.length > 0
+      ? formConfig.travelStyleOptions
+      : [
+          { id: "wildlife", label: isNl ? "Wildlife & Safari" : "Wildlife & Safari" },
+          { id: "active", label: isNl ? "Actief & Trekking" : "Active Trekking" },
+          { id: "comfort", label: isNl ? "Eco-Lodge Comfort" : "Eco-Lodge Comfort" },
+          { id: "coastal", label: isNl ? "Jungle & Oceaan" : "Jungle & Ocean" },
+        ];
+
+  const durationOptions =
+    formConfig?.durationOptions && formConfig.durationOptions.length > 0
+      ? formConfig.durationOptions
+      : [
+          { id: "7-10", label: isNl ? "7 – 10 Dagen" : "7 – 10 Days" },
+          { id: "10-14", label: isNl ? "10 – 14 Dagen" : "10 – 14 Days" },
+          { id: "15+", label: isNl ? "15+ Dagen" : "15+ Days" },
+        ];
+
+  // Step Titles
+  const step1Title =
+    formConfig?.step1Title ||
+    (isNl ? "Bestemming & Reisstijl" : "Destination & Style");
+  const step2Title =
+    formConfig?.step2Title ||
+    (isNl ? "Reisperiode & Groep" : "Dates & Group");
+  const step3Title =
+    formConfig?.step3Title ||
+    (isNl ? "Contactgegevens" : "Contact Details");
+
+  const phoneRequired = formConfig?.phoneRequired ?? true;
+
+  // Dynamic Custom Questions per step
+  const allCustomFields = formConfig?.customFields || [];
+  const step1CustomFields = allCustomFields.filter((f) => f.step === 1);
+  const step2CustomFields = allCustomFields.filter((f) => !f.step || f.step === 2);
+  const step3CustomFields = allCustomFields.filter((f) => f.step === 3);
+
   const [step, setStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  // Form State
+  // Core Form State
   const [formData, setFormData] = useState({
     destination: "",
-    travelStyle: "wildlife",
-    duration: "10-14",
+    travelStyle: travelStyleOptions[0]?.id || "wildlife",
+    duration: durationOptions[1]?.id || durationOptions[0]?.id || "10-14",
     travelers: "2",
     departureMonth: "",
-    budget: "standard",
     fullName: "",
     email: "",
     phone: "",
     notes: "",
+    _gotcha: "",
+  });
+
+  // Dynamic Custom Fields State
+  const [customValues, setCustomValues] = useState<Record<string, string>>(() => {
+    const initial: Record<string, string> = {};
+    for (const f of allCustomFields) {
+      const key = f.fieldKey || f._key;
+      if (key && f.fieldType === "select" && f.options && f.options.length > 0) {
+        initial[key] = f.options[0].value;
+      }
+    }
+    return initial;
   });
 
   const updateField = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
+  const updateCustomField = (fieldKey: string, value: string) => {
+    setCustomValues((prev) => ({ ...prev, [fieldKey]: value }));
+  };
+
   const handleNext = () => setStep((s) => s + 1);
   const handleBack = () => setStep((s) => s - 1);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const canAdvanceStep1 =
+    Boolean(formData.destination.trim()) &&
+    areRequiredCustomFieldsValid(step1CustomFields, customValues);
+
+  const canAdvanceStep2 = areRequiredCustomFieldsValid(
+    step2CustomFields,
+    customValues
+  );
+
+  const canSubmitStep3 =
+    Boolean(formData.fullName.trim()) &&
+    Boolean(formData.email.trim()) &&
+    (!phoneRequired || Boolean(formData.phone.trim())) &&
+    areRequiredCustomFieldsValid(step3CustomFields, customValues);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
+    setErrorMessage(null);
+
+    const selectedStyleLabel =
+      travelStyleOptions.find((s) => s.id === formData.travelStyle)?.label ||
+      formData.travelStyle;
+    const selectedDurationLabel =
+      durationOptions.find((d) => d.id === formData.duration)?.label ||
+      formData.duration;
+
+    const additionalFields = formatAdditionalFieldsForSubmission(
+      allCustomFields,
+      customValues
+    );
+
+    try {
+      const response = await fetch("/api/inquiries", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          inquiryType: "custom_trip",
+          locale,
+          fullName: formData.fullName,
+          email: formData.email,
+          phone: formData.phone,
+          travelers: Number(formData.travelers) || 2,
+          message: formData.notes,
+          customTripDetails: {
+            destination: formData.destination,
+            travelStyle: selectedStyleLabel,
+            duration: selectedDurationLabel,
+            departureMonth: formData.departureMonth,
+          },
+          additionalFields,
+          _gotcha: formData._gotcha,
+        }),
+      });
+
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({}));
+        throw new Error(
+          data.error ||
+            (isNl
+              ? "Er ging iets mis bij het versturen. Probeer het opnieuw."
+              : "Something went wrong while sending your request. Please try again.")
+        );
+      }
+
       setSubmitted(true);
-    }, 900);
+    } catch (err) {
+      setErrorMessage(
+        err instanceof Error
+          ? err.message
+          : isNl
+            ? "Versturen mislukt. Probeer het opnieuw."
+            : "Submission failed. Please try again."
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -65,14 +221,14 @@ export function CustomTripInquiryForm({
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="text-center mb-12">
           <Badge variant="accent" className="mb-3">
-            Custom Travel Inquiry
+            {resolvedBadge}
           </Badge>
           <h2 className="font-hero text-3xl sm:text-5xl font-bold uppercase tracking-wide text-foreground">
-            {heading}
+            {resolvedHeading}
           </h2>
-          {subheading && (
+          {resolvedSubheading && (
             <p className="mt-3 text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              {subheading}
+              {resolvedSubheading}
             </p>
           )}
         </div>
@@ -82,13 +238,13 @@ export function CustomTripInquiryForm({
           {!submitted && (
             <div className="mb-8">
               <div className="flex items-center justify-between text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2">
-                <span>Step {step} of 3</span>
+                <span>{isNl ? `Stap ${step} van 3` : `Step ${step} of 3`}</span>
                 <span>
                   {step === 1
-                    ? "Destination & Style"
+                    ? step1Title
                     : step === 2
-                      ? "Dates & Group"
-                      : "Contact Details"}
+                      ? step2Title
+                      : step3Title}
                 </span>
               </div>
               <div className="h-2 w-full bg-muted rounded-full overflow-hidden">
@@ -104,10 +260,23 @@ export function CustomTripInquiryForm({
             <div className="py-12 text-center space-y-4">
               <CheckCircle2 className="h-16 w-16 text-emerald-600 mx-auto animate-in zoom-in-75 duration-300" />
               <h3 className="font-hero text-3xl font-bold uppercase tracking-wide text-foreground">
-                Adventure Proposal Requested!
+                {formConfig?.successHeading ||
+                  (isNl
+                    ? "Maatwerk Aanvraag Ontvangen!"
+                    : "Adventure Proposal Requested!")}
               </h3>
               <p className="text-base text-muted-foreground max-w-md mx-auto leading-relaxed">
-                Thank you, <strong className="text-foreground">{formData.fullName}</strong>. Your custom trip details have been assigned to a Travelwild destination expert. We will send you an initial itinerary outline within 24–48 hours.
+                {formConfig?.successMessage ? (
+                  formConfig.successMessage
+                ) : isNl ? (
+                  <>
+                    Bedankt, <strong className="text-foreground">{formData.fullName}</strong>. Je reiswensen zijn gekoppeld aan een Travelwild bestemmingsspecialist. Binnen 24–48 uur nemen we persoonlijk contact met je op.
+                  </>
+                ) : (
+                  <>
+                    Thank you, <strong className="text-foreground">{formData.fullName}</strong>. Your custom trip details have been assigned to a Travelwild destination expert. We will send you an initial itinerary outline within 24–48 hours.
+                  </>
+                )}
               </p>
               <Button
                 variant="default"
@@ -117,22 +286,48 @@ export function CustomTripInquiryForm({
                 }}
                 className="mt-6"
               >
-                Submit Another Request
+                {isNl ? "Nieuwe Aanvraag Indienen" : "Submit Another Request"}
               </Button>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Honeypot anti-spam field */}
+              <input
+                type="text"
+                name="_gotcha"
+                value={formData._gotcha}
+                onChange={(e) => updateField("_gotcha", e.target.value)}
+                className="hidden"
+                tabIndex={-1}
+                autoComplete="off"
+              />
+
+              {errorMessage && (
+                <div className="p-3 rounded-xl bg-destructive/10 border border-destructive/30 text-destructive text-xs flex items-center gap-2">
+                  <AlertCircle className="h-4 w-4 shrink-0" />
+                  <span>{errorMessage}</span>
+                </div>
+              )}
+
               {/* STEP 1: Destination & Travel Style */}
               {step === 1 && (
                 <div className="space-y-6 animate-in fade-in duration-200">
                   <div className="space-y-2">
                     <label className="text-sm font-bold text-foreground flex items-center gap-1.5">
                       <MapPin className="h-4 w-4 text-accent" />
-                      Where would you like to travel? *
+                      {formConfig?.destinationLabel ||
+                        (isNl
+                          ? "Waar wil je naartoe reizen? *"
+                          : "Where would you like to travel? *")}
                     </label>
                     <Input
                       required
-                      placeholder="e.g. Costa Rica, Namibia, Norway, or 'I need inspiration'"
+                      placeholder={
+                        formConfig?.destinationPlaceholder ||
+                        (isNl
+                          ? "bijv. Costa Rica, Namibië, Noorwegen of 'Ik zoek inspiratie'"
+                          : "e.g. Costa Rica, Namibia, Norway, or 'I need inspiration'")
+                      }
                       value={formData.destination}
                       onChange={(e) => updateField("destination", e.target.value)}
                     />
@@ -141,15 +336,13 @@ export function CustomTripInquiryForm({
                   <div className="space-y-2">
                     <label className="text-sm font-bold text-foreground flex items-center gap-1.5">
                       <Sparkles className="h-4 w-4 text-accent" />
-                      What is your preferred travel style?
+                      {formConfig?.travelStyleLabel ||
+                        (isNl
+                          ? "Wat is je favoriete reisstijl?"
+                          : "What is your preferred travel style?")}
                     </label>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                      {[
-                        { id: "wildlife", label: "Wildlife & Safari" },
-                        { id: "active", label: "Active Trekking" },
-                        { id: "comfort", label: "Eco-Lodge Comfort" },
-                        { id: "coastal", label: "Jungle & Ocean" },
-                      ].map((style) => (
+                      {travelStyleOptions.map((style) => (
                         <button
                           type="button"
                           key={style.id}
@@ -166,15 +359,25 @@ export function CustomTripInquiryForm({
                     </div>
                   </div>
 
+                  {/* Dynamic Custom Fields for Step 1 */}
+                  <DynamicFormFields
+                    fields={step1CustomFields}
+                    values={customValues}
+                    onChange={updateCustomField}
+                  />
+
                   <div className="pt-4 flex justify-end">
                     <Button
                       type="button"
                       variant="accent"
                       size="lg"
                       onClick={handleNext}
-                      disabled={!formData.destination.trim()}
+                      disabled={!canAdvanceStep1}
                     >
-                      Next: Dates & Travelers
+                      {formConfig?.nextButtonStep1 ||
+                        (isNl
+                          ? "Volgende: Reisperiode & Groep"
+                          : "Next: Dates & Travelers")}
                       <ArrowRight className="h-4 w-4 ml-1" />
                     </Button>
                   </div>
@@ -188,10 +391,18 @@ export function CustomTripInquiryForm({
                     <div className="space-y-2">
                       <label className="text-sm font-bold text-foreground flex items-center gap-1.5">
                         <Calendar className="h-4 w-4 text-accent" />
-                        Ideal Travel Month / Year
+                        {formConfig?.departureMonthLabel ||
+                          (isNl
+                            ? "Gewenste Reismaand / Jaar"
+                            : "Ideal Travel Month / Year")}
                       </label>
                       <Input
-                        placeholder="e.g. November 2026, or flexible in Autumn"
+                        placeholder={
+                          formConfig?.departureMonthPlaceholder ||
+                          (isNl
+                            ? "bijv. November 2026, of flexibel in het najaar"
+                            : "e.g. November 2026, or flexible in Autumn")
+                        }
                         value={formData.departureMonth}
                         onChange={(e) => updateField("departureMonth", e.target.value)}
                       />
@@ -200,7 +411,8 @@ export function CustomTripInquiryForm({
                     <div className="space-y-2">
                       <label className="text-sm font-bold text-foreground flex items-center gap-1.5">
                         <Users className="h-4 w-4 text-accent" />
-                        Number of Travelers
+                        {formConfig?.travelersLabel ||
+                          (isNl ? "Aantal Reizigers" : "Number of Travelers")}
                       </label>
                       <Input
                         type="number"
@@ -214,14 +426,13 @@ export function CustomTripInquiryForm({
 
                   <div className="space-y-2">
                     <label className="text-sm font-bold text-foreground">
-                      Desired Trip Duration (Days)
+                      {formConfig?.durationLabel ||
+                        (isNl
+                          ? "Gewenste Reisduur (Dagen)"
+                          : "Desired Trip Duration (Days)")}
                     </label>
                     <div className="grid grid-cols-3 gap-3">
-                      {[
-                        { id: "7-10", label: "7 – 10 Days" },
-                        { id: "10-14", label: "10 – 14 Days" },
-                        { id: "15+", label: "15+ Days" },
-                      ].map((dur) => (
+                      {durationOptions.map((dur) => (
                         <button
                           type="button"
                           key={dur.id}
@@ -238,13 +449,27 @@ export function CustomTripInquiryForm({
                     </div>
                   </div>
 
+                  {/* Dynamic Custom Fields for Step 2 */}
+                  <DynamicFormFields
+                    fields={step2CustomFields}
+                    values={customValues}
+                    onChange={updateCustomField}
+                  />
+
                   <div className="pt-4 flex justify-between">
                     <Button type="button" variant="outline" size="lg" onClick={handleBack}>
                       <ArrowLeft className="h-4 w-4 mr-1" />
-                      Back
+                      {isNl ? "Vorige" : "Back"}
                     </Button>
-                    <Button type="button" variant="accent" size="lg" onClick={handleNext}>
-                      Next: Contact Info
+                    <Button
+                      type="button"
+                      variant="accent"
+                      size="lg"
+                      onClick={handleNext}
+                      disabled={!canAdvanceStep2}
+                    >
+                      {formConfig?.nextButtonStep2 ||
+                        (isNl ? "Volgende: Contactgegevens" : "Next: Contact Info")}
                       <ArrowRight className="h-4 w-4 ml-1" />
                     </Button>
                   </div>
@@ -256,7 +481,10 @@ export function CustomTripInquiryForm({
                 <div className="space-y-6 animate-in fade-in duration-200">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-1.5">
-                      <label className="text-xs font-bold text-foreground">Your Full Name *</label>
+                      <label className="text-xs font-bold text-foreground">
+                        {formConfig?.fullNameLabel ||
+                          (isNl ? "Volledige Naam *" : "Your Full Name *")}
+                      </label>
                       <Input
                         required
                         placeholder="John Doe"
@@ -265,7 +493,10 @@ export function CustomTripInquiryForm({
                       />
                     </div>
                     <div className="space-y-1.5">
-                      <label className="text-xs font-bold text-foreground">Email Address *</label>
+                      <label className="text-xs font-bold text-foreground">
+                        {formConfig?.emailLabel ||
+                          (isNl ? "E-mailadres *" : "Email Address *")}
+                      </label>
                       <Input
                         type="email"
                         required
@@ -277,23 +508,41 @@ export function CustomTripInquiryForm({
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-foreground">Phone / WhatsApp *</label>
+                    <label className="text-xs font-bold text-foreground">
+                      {formConfig?.phoneLabel ||
+                        (isNl ? "Telefoonnummer / WhatsApp *" : "Phone / WhatsApp *")}
+                    </label>
                     <Input
                       type="tel"
-                      required
-                      placeholder="+1 (555) 000-0000"
+                      required={phoneRequired}
+                      placeholder="+31 6 12345678"
                       value={formData.phone}
                       onChange={(e) => updateField("phone", e.target.value)}
                     />
                   </div>
 
+                  {/* Dynamic Custom Fields for Step 3 */}
+                  <DynamicFormFields
+                    fields={step3CustomFields}
+                    values={customValues}
+                    onChange={updateCustomField}
+                  />
+
                   <div className="space-y-1.5">
                     <label className="text-xs font-bold text-foreground">
-                      Tell us more about your ideal journey (Optional)
+                      {formConfig?.notesLabel ||
+                        (isNl
+                          ? "Vertel ons meer over jouw droomreis (Optioneel)"
+                          : "Tell us more about your ideal journey (Optional)")}
                     </label>
                     <Textarea
                       rows={3}
-                      placeholder="Must-see highlights, physical fitness level, accommodation wishes, celebration trips..."
+                      placeholder={
+                        formConfig?.notesPlaceholder ||
+                        (isNl
+                          ? "Hoogtepunten die je niet wilt missen, gewenst comfortniveau, bijzondere gelegenheden..."
+                          : "Must-see highlights, physical fitness level, accommodation wishes, celebration trips...")
+                      }
                       value={formData.notes}
                       onChange={(e) => updateField("notes", e.target.value)}
                     />
@@ -302,16 +551,23 @@ export function CustomTripInquiryForm({
                   <div className="pt-4 flex justify-between">
                     <Button type="button" variant="outline" size="lg" onClick={handleBack}>
                       <ArrowLeft className="h-4 w-4 mr-1" />
-                      Back
+                      {isNl ? "Vorige" : "Back"}
                     </Button>
                     <Button
                       type="submit"
                       variant="accent"
                       size="lg"
-                      disabled={loading || !formData.fullName || !formData.email}
+                      disabled={loading || !canSubmitStep3}
                       className="font-bold"
                     >
-                      {loading ? "Sending..." : "Request Custom Itinerary Proposal"}
+                      {loading
+                        ? isNl
+                          ? "Versturen..."
+                          : "Sending..."
+                        : formConfig?.submitButtonLabel ||
+                          (isNl
+                            ? "Maatwerk Reisvoorstel Aanvragen"
+                            : "Request Custom Itinerary Proposal")}
                     </Button>
                   </div>
                 </div>

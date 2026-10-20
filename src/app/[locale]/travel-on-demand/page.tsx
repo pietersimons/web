@@ -1,6 +1,9 @@
 import { Metadata } from "next";
-import { client } from "@/sanity/client";
-import { TRAVEL_ON_DEMAND_PAGE_QUERY } from "@/sanity/queries/pages.queries";
+import { sanityFetch } from "@/sanity/live";
+import {
+  TRAVEL_ON_DEMAND_PAGE_QUERY,
+  FORMS_CONFIGURATION_QUERY,
+} from "@/sanity/queries/pages.queries";
 import { HeroBlock } from "@/components/blocks/HeroBlock";
 import { ProcessStepsBlock } from "@/components/blocks/ProcessStepsBlock";
 import { CustomTripInquiryForm } from "@/components/forms/CustomTripInquiryForm";
@@ -20,7 +23,12 @@ export async function generateMetadata({
 
   let pageData: any = null;
   try {
-    pageData = await client.fetch(TRAVEL_ON_DEMAND_PAGE_QUERY, { language: activeLocale });
+    const res = await sanityFetch({
+      query: TRAVEL_ON_DEMAND_PAGE_QUERY,
+      params: { language: activeLocale },
+      stega: false,
+    });
+    pageData = res.data;
   } catch {
     // fallback to defaults
   }
@@ -54,9 +62,21 @@ export default async function TravelOnDemandPage({
   const isNl = activeLocale === "nl";
 
   let pageData: any = null;
+  let formsConfig: any = null;
 
   try {
-    pageData = await client.fetch(TRAVEL_ON_DEMAND_PAGE_QUERY, { language: activeLocale });
+    const [pageRes, formsRes] = await Promise.all([
+      sanityFetch({
+        query: TRAVEL_ON_DEMAND_PAGE_QUERY,
+        params: { language: activeLocale },
+      }),
+      sanityFetch({
+        query: FORMS_CONFIGURATION_QUERY,
+        params: { language: activeLocale },
+      }),
+    ]);
+    pageData = pageRes.data;
+    formsConfig = formsRes.data;
   } catch (error) {
     console.error("Failed to load travel on demand page:", error);
   }
@@ -134,6 +154,8 @@ export default async function TravelOnDemandPage({
       <CustomTripInquiryForm
         heading={typeof pageData?.inquiryFormIntro?.heading === "string" ? pageData.inquiryFormIntro.heading : undefined}
         subheading={typeof pageData?.inquiryFormIntro?.subheading === "string" ? pageData.inquiryFormIntro.subheading : undefined}
+        locale={activeLocale}
+        formConfig={formsConfig?.customTripForm}
       />
 
       {pageData?.pageBuilder && <PageBuilder blocks={pageData.pageBuilder} locale={activeLocale} />}

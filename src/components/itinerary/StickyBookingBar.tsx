@@ -80,6 +80,8 @@ export function StickyBookingBar({
       <BookingModalDialog
         open={isModalOpen}
         onOpenChange={setIsModalOpen}
+        mode="booking"
+        locale={locale}
         departure={{
           tripTitle: title,
           price: priceFrom,

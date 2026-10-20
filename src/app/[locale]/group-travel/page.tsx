@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { client } from "@/sanity/client";
+import { sanityFetch } from "@/sanity/live";
 import { GROUP_TRAVEL_PAGE_QUERY } from "@/sanity/queries/pages.queries";
 import { ALL_GROUP_TRIPS_QUERY } from "@/sanity/queries/itinerary.queries";
 import { HeroBlock } from "@/components/blocks/HeroBlock";
@@ -25,7 +25,12 @@ export async function generateMetadata({
 
   let pageData: any = null;
   try {
-    pageData = await client.fetch(GROUP_TRAVEL_PAGE_QUERY, { language: activeLocale });
+    const res = await sanityFetch({
+      query: GROUP_TRAVEL_PAGE_QUERY,
+      params: { language: activeLocale },
+      stega: false,
+    });
+    pageData = res.data;
   } catch {
     // fallback
   }
@@ -63,10 +68,18 @@ export default async function GroupTravelPage({
   let groupTrips: any[] = [];
 
   try {
-    [pageData, groupTrips] = await Promise.all([
-      client.fetch(GROUP_TRAVEL_PAGE_QUERY, { language: activeLocale }),
-      client.fetch(ALL_GROUP_TRIPS_QUERY, { language: activeLocale }),
+    const [pageRes, tripsRes] = await Promise.all([
+      sanityFetch({
+        query: GROUP_TRAVEL_PAGE_QUERY,
+        params: { language: activeLocale },
+      }),
+      sanityFetch({
+        query: ALL_GROUP_TRIPS_QUERY,
+        params: { language: activeLocale },
+      }),
     ]);
+    pageData = pageRes.data;
+    groupTrips = tripsRes.data;
   } catch (error) {
     console.error("Failed to load group travel page:", error);
   }

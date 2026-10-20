@@ -161,6 +161,8 @@ export function DeparturesTable({
       <BookingModalDialog
         open={isModalOpen}
         onOpenChange={setIsModalOpen}
+        mode="booking"
+        locale={locale}
         departure={selectedDeparture}
       />
     </div>

@@ -2,8 +2,18 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { BookingModalDialog } from "@/components/forms/BookingModalDialog";
-import { Check, ShieldCheck, Users, Compass, PhoneCall } from "lucide-react";
+import {
+  BookingModalDialog,
+  type InquiryModalMode,
+} from "@/components/forms/BookingModalDialog";
+import {
+  Check,
+  ShieldCheck,
+  Users,
+  Compass,
+  PhoneCall,
+  MessageCircle,
+} from "lucide-react";
 import { Locale, defaultLocale } from "@/lib/i18n/config";
 
 interface TripBookingSidebarProps {
@@ -32,6 +42,7 @@ export function TripBookingSidebar({
   locale = defaultLocale,
 }: TripBookingSidebarProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMode, setModalMode] = useState<InquiryModalMode>("booking");
   const isNl = locale === "nl";
 
   // Identify next upcoming departure
@@ -82,7 +93,10 @@ export function TripBookingSidebar({
             <Button
               variant="accent"
               size="lg"
-              onClick={() => setIsModalOpen(true)}
+              onClick={() => {
+                setModalMode("booking");
+                setIsModalOpen(true);
+              }}
               className="w-full font-bold text-sm sm:text-base h-12 shadow-sm"
             >
               {isNl ? "Boek deze Reis" : "Book This Expedition"}
@@ -91,10 +105,14 @@ export function TripBookingSidebar({
             <Button
               variant="outline"
               size="default"
-              onClick={() => setIsModalOpen(true)}
-              className="w-full text-xs font-semibold text-foreground/80 hover:text-foreground"
+              onClick={() => {
+                setModalMode("contact");
+                setIsModalOpen(true);
+              }}
+              className="w-full text-xs font-semibold text-foreground/80 hover:text-foreground gap-2"
             >
-              {isNl ? "Vrijblijvend Reisvoorstel" : "Request Custom Quote"}
+              <MessageCircle className="h-3.5 w-3.5 text-accent" />
+              {isNl ? "Contact voor meer informatie" : "Contact for More Information"}
             </Button>
           </div>
 
@@ -148,10 +166,12 @@ export function TripBookingSidebar({
         </div>
       </aside>
 
-      {/* Booking Dialog Modal */}
+      {/* Booking / Contact Dialog Modal */}
       <BookingModalDialog
         open={isModalOpen}
         onOpenChange={setIsModalOpen}
+        mode={modalMode}
+        locale={locale}
         departure={{
           tripTitle,
           price: pricing?.priceFrom,
